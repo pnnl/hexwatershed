@@ -1,0 +1,6 @@
+/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/changliao/workspace/cplus/hexagonhydro/hexagonhydro/src
+-- Could NOT find OpenMP_CXX (missing: OpenMP_CXX_FLAGS OpenMP_CXX_LIB_NAMES) 
+-- Could NOT find OpenMP (missing: OpenMP_CXX_FOUND) 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/changliao/workspace/cplus/hexagonhydro/hexagonhydro/src/cmake-build-debug

@@ -1,0 +1,169 @@
+//50==================================================
+/*!
+  \file   data.cpp
+  \brief
+
+  Deal with data read and write operations.
+
+  \author Chang Liao
+  \date   2017-01-25
+*/
+//50==================================================
+#include "data.h"
+data::data(void)
+{
+}
+data::~data(void)
+{
+}
+
+//50==================================================
+//read binary file (float type)
+//50==================================================
+float * data::read_binary(string sFilename_in)
+{
+	float * pData_out = NULL;
+
+	if (file_test(sFilename_in) == 1)
+	{
+		float dummy;
+		ifstream ifs;
+		ifs.open(sFilename_in.c_str(), ios::in | ios::binary);
+		if (ifs.good())
+		{
+			ifs.seekg(0, ios::end);
+			long lLength1 = long(ifs.tellg());
+			ifs.seekg(0, ios::beg);
+			long lLength2 = lLength1 / sizeof(float);
+			pData_out = new float[lLength2];
+			for (long i = 0; i < lLength2; i++)
+			{
+				ifs.read(reinterpret_cast<char*>(&dummy), sizeof dummy);
+				pData_out[i] = dummy;
+			}
+		}
+		else
+		{
+			std::cout << sError_open_failed << sFilename_in << std::endl;
+		}
+
+
+		ifs.close();
+	}
+	else
+	{
+		//file missing
+		std::cout << sError_file_missing << sFilename_in << std::endl;
+	}
+
+
+	return pData_out;
+}
+
+//50==================================================
+//read binary into a two dimension array pointer
+//50==================================================
+
+float ** data::read_binary(string sFilename_in,
+	long lCol,
+	long lRow
+)
+{
+	float dummy;
+	ifstream ifs;
+	ifs.open(sFilename_in.c_str(), ios::in | ios::binary);
+	float * pdata_dummy = new float[lCol*lRow];
+	for (long i = 0; i < lCol*lRow - 1; ++i)
+	{
+		ifs.read(reinterpret_cast<char*>(&dummy), sizeof dummy);
+		pdata_dummy[i] = dummy;
+	}
+	ifs.close();
+
+	float ** pdata = new float *[lCol];
+	for (long i = 0; i < lCol; ++i)
+	{
+		pdata[i] = pdata_dummy + lRow * i;
+	}
+	return pdata;
+}
+
+//50==================================================
+//read binary and save to a vector
+//50==================================================
+vector<double> data::read_binary_vector(std::string sFilename_in)
+{
+	long lLength1, lLength2;
+	float dummy;
+	std::ifstream ifs;
+	std::vector<double> vData_out;
+
+	ifs.open(sFilename_in.c_str(), ios::in | ios::binary);
+	ifs.seekg(0, ios::end);
+	lLength1 = long(ifs.tellg());
+	ifs.seekg(0, ios::beg);
+	lLength2 = lLength1 / sizeof(float);
+
+	for (long i = 0; i < lLength2; ++i)
+	{
+		ifs.read(reinterpret_cast<char*>(&dummy), sizeof dummy);
+		vData_out.push_back(dummy);
+	}
+	ifs.close();
+	return vData_out;
+}
+
+
+//50==================================================
+//write vector to float binary file
+//50==================================================
+int data::write_binary_vector(std::string sFilename_out, std::vector <double> vData_in)
+{
+	int error_code = 1;
+	float dDummy0,	 dDummy1;
+	//50==================================================
+	//covert from double to float first
+	//50==================================================
+	//the old approach will cause loss data warning
+    //std::vector<float> vData_float(vData_in.begin(), vData_in.end());	
+	//the new approach
+	//in the next developement, I will use template instead of explict conversion
+	std::vector<float> vData_float;
+	std::vector<double>::iterator iIterator_double;
+	std::vector<float>::iterator iIterator_float;
+	std::ofstream ofs;
+	for (iIterator_double = vData_in.begin(); iIterator_double != vData_in.end(); iIterator_double++)
+	{
+		dDummy0 = float(*iIterator_double);
+		vData_float.push_back(dDummy0);
+	}
+	//50==================================================
+	//check the data quality
+	//if all data are missing values, then we don't need it
+	//50==================================================
+	 iIterator_float = std::max_element(vData_float.begin(),
+		vData_float.end());
+
+	dDummy1 = *iIterator_float;
+	if (dDummy1 == -9999.00)  //we define -9999 as the missing value
+	{
+		std::cout << sLog_data_quality << std::endl;
+		error_code = 0;
+	}
+	else
+	{	
+		ofs.open(sFilename_out.c_str(), ios::out | ios::binary);
+		if (ofs.good())
+		{
+			ofs.write(reinterpret_cast<char*>(&vData_float[0]), vData_float.size() * sizeof(float));		
+			error_code = 1;
+		}
+		else
+		{
+			std::cout << sError_open_failed << sFilename_out << std::endl;
+			error_code = 0;
+		}
+     	ofs.close();
+	}
+	return error_code;
+}
