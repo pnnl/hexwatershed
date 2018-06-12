@@ -61,6 +61,7 @@ namespace hexagon
 int check_digital_elevation_model_depression(std::vector<cell> vCell_in);
         int domain_setup();
 
+std::array<long, 2> find_lowest_cell(std::vector<cell> vCell_in);
         int domain_read_data();
 
         int domain_read_configuration_file();
