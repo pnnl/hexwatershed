@@ -1,14 +1,16 @@
-//50==================================================
-/*!
-  \file   data.h
-  \brief
-  The class for data I/O component.
-  \author Chang Liao
-  \date   2017-01-25
-*/
-//50==================================================
+
+/**
+ * @file data.h
+ * @author Chang Liao (chang.liao@pnnl.gov)
+ * @brief The header of data I/O component source code.
+ * @version 0.1
+ * @date 2017-01-25
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
 #pragma once
-//50==================================================
+
 //50==================================================
 //C header
 //50==================================================

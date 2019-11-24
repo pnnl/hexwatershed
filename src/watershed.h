@@ -1,21 +1,27 @@
-//
-// Created by Chang Liao on 4/26/18.
-//
+/**
+ * @file watershed.h
+ * @author Chang Liao (chang.liao@pnnl.gov)
+ * @brief 
+ * @version 0.1
+ * @date 2019-08-02
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
 
-#ifndef HEXAGONHYDRO_WATERSHED_H
-#define HEXAGONHYDRO_WATERSHED_H
+
 
 #include <vector>
-#include "cell.h"
+#include "hexagon.h"
 using namespace std;
 
-namespace hexagon
+namespace hexwatershed
     {
         class watershed
             {
 
-                std::vector<cell> vCell;
+                std::vector<hexagon> vCell;
             };
     }
 
-#endif //HEXAGONHYDRO_WATERSHED_H
+

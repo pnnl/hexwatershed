@@ -1,12 +1,15 @@
-//50==================================================
-/*!
-  \file   global.cpp
-  \brief
-  The source file of the global file.
-  \author Chang Liao
-  \date   2017-01-25
-*/
-//50==================================================
+
+ 
+ /**
+ * @file global.cpp
+ * @author Chang Liao (chang.liao@pnnl.gov)
+ * @brief  The source file of the global file.
+ * @version 0.1
+ * @date 2019-08-02
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
 #include "global.h"
 
 //50==================================================
@@ -19,7 +22,7 @@ const double tiny_value = 1.0E-8; //intermediate
 const double near_zero = 1.0E-12;  //for result
 
 const double pi = 3.141592654;
-const double missing_value = -9999.0;
+//const double missing_value = -9999.0;
 // time
 const double day_2_second = 3600 * 24;
 const double day_2_minute = 60 * 24;

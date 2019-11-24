@@ -1,12 +1,21 @@
+/**
+ * @file system.cpp
+ * @author Chang Liao (chang.liao@pnnl.gov)
+ * @brief file and path operation functions
+ * @version 0.1
+ * @date 2019-08-02
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
 #include "system.h"
-//50==================================================
-//file and path operation functions
-  //50==================================================
 
-  //50==================================================
-//test the existance of a file
-//not the most efficient, but easy to understand for now
-  //50==================================================
+/**
+   * @brief test the existence of a file. not the most efficient, but easy to understand for now
+   * 
+   * @param sFilename_in 
+   * @return int 
+   */
 int file_test(std::string sFilename_in)
 {
 
@@ -44,7 +53,6 @@ int file_test(std::string sFilename_in)
 		else
 		{
 			return 0;
-
 		}
 	}
 	else
@@ -58,7 +66,7 @@ int file_test(std::string sFilename_in)
 #elif TARGET_OS_MAC
 	// Other kinds of Mac OS
 #else
-#   error "Unknown Apple platform"
+#error "Unknown Apple platform"
 #endif
 #elif __linux__
 	// linux
@@ -72,9 +80,7 @@ int file_test(std::string sFilename_in)
 		else
 		{
 			return 0;
-
 		}
-
 	}
 	else
 	{
@@ -85,15 +91,16 @@ int file_test(std::string sFilename_in)
 #elif defined(_POSIX_VERSION)
 	// POSIX
 #else
-#   error "Unknown compiler"
+#error "Unknown compiler"
 #endif
-
 }
 
-
-//50==================================================
-//recursive mkdir when it does not exist
-  //50==================================================
+/**
+   * @brief recursive mkdir when it does not exist
+   * 
+   * @param sDirectory_in 
+   * @return int 
+   */
 int make_directory(std::string sDirectory_in)
 {
 
@@ -124,7 +131,7 @@ int make_directory(std::string sDirectory_in)
 		if (*p == slash)
 		{
 			//50==================================================
-		  // Temporarily truncate
+			// Temporarily truncate
 			//50==================================================
 			*p = 0;
 
@@ -133,13 +140,11 @@ int make_directory(std::string sDirectory_in)
 			{
 
 				dir_err = _mkdir(tmp);
-
 			}
 			//50==================================================
-		  //recover the slash
+			//recover the slash
 			//50==================================================
 			*p = slash;
-
 		}
 	}
 	//50==================================================
@@ -186,7 +191,7 @@ int make_directory(std::string sDirectory_in)
 		if (*p == slash)
 		{
 			//50==================================================
-		  // Temporarily truncate
+			// Temporarily truncate
 			//50==================================================
 			*p = 0;
 
@@ -195,14 +200,11 @@ int make_directory(std::string sDirectory_in)
 			{
 
 				mkdir(tmp, S_IRWXU);
-
-
 			}
 			//50==================================================
-		  //recover the slash
+			//recover the slash
 			//50==================================================
 			*p = slash;
-
 		}
 	}
 	//50==================================================
@@ -227,7 +229,7 @@ int make_directory(std::string sDirectory_in)
 #elif TARGET_OS_MAC
 	// Other kinds of Mac OS
 #else
-#   error "Unknown Apple platform"
+#error "Unknown Apple platform"
 #endif
 #elif __linux__
 	// linux
@@ -253,7 +255,7 @@ int make_directory(std::string sDirectory_in)
 		if (*p == slash)
 		{
 			//50==================================================
-		  // Temporarily truncate
+			// Temporarily truncate
 			//50==================================================
 			*p = 0;
 
@@ -262,14 +264,11 @@ int make_directory(std::string sDirectory_in)
 			{
 
 				mkdir(tmp, S_IRWXU);
-
-
 			}
 			//50==================================================
-		  //recover the slash
+			//recover the slash
 			//50==================================================
 			*p = slash;
-
 		}
 	}
 	//50==================================================
@@ -292,21 +291,16 @@ int make_directory(std::string sDirectory_in)
 #elif defined(_POSIX_VERSION)
 	// POSIX
 #else
-#   error "Unknown compiler"
+#error "Unknown compiler"
 #endif
-
-
-
-
-
 }
 
-
-
-//50==================================================
-//test the existance of a path
-//use the stat header file
-//50==================================================
+/**
+ * @brief test the existence of a path, use the stat header file
+ * 
+ * @param sPath_in 
+ * @return int 
+ */
 int path_test(std::string sPath_in)
 {
 #ifdef _WIN32
@@ -321,9 +315,9 @@ int path_test(std::string sPath_in)
 	}
 	//define something for Windows (32-bit and 64-bit, this part is common)
 #ifdef _WIN64
-  //define something for Windows (64-bit only)
+	//define something for Windows (64-bit only)
 #else
-  //define something for Windows (32-bit only)
+	//define something for Windows (32-bit only)
 #endif
 #elif __APPLE__
 
@@ -350,7 +344,7 @@ int path_test(std::string sPath_in)
 #elif TARGET_OS_MAC
 	// Other kinds of Mac OS
 #else
-#   error "Unknown Apple platform"
+#error "Unknown Apple platform"
 #endif
 #elif __linux__
 	// linux
@@ -375,22 +369,16 @@ int path_test(std::string sPath_in)
 #elif defined(_POSIX_VERSION)
 	// POSIX
 #else
-#   error "Unknown compiler"
+#error "Unknown compiler"
 #endif
-
-
 }
 
-
-//50==================================================
-/*!
-  <long-description>
-
-  \param sCommand_in
-  \return <ReturnValue>
-*/
-//50==================================================
-
+/**
+ * @brief 
+ * 
+ * @param sCommand_in 
+ * @return int 
+ */
 int run_command(std::string sCommand_in)
 {
 	int error_code = 1;
@@ -398,9 +386,9 @@ int run_command(std::string sCommand_in)
 #ifdef _WIN32
 	//define something for Windows (32-bit and 64-bit, this part is common)
 #ifdef _WIN64
-  //define something for Windows (64-bit only)
+	//define something for Windows (64-bit only)
 #else
-  //define something for Windows (32-bit only)
+	//define something for Windows (32-bit only)
 #endif
 #elif __APPLE__
 
@@ -428,7 +416,7 @@ int run_command(std::string sCommand_in)
 #elif TARGET_OS_MAC
 	// Other kinds of Mac OS
 #else
-#   error "Unknown Apple platform"
+#error "Unknown Apple platform"
 #endif
 #elif __linux__
 	// linux
@@ -454,21 +442,18 @@ int run_command(std::string sCommand_in)
 #elif defined(_POSIX_VERSION)
 	// POSIX
 #else
-#   error "Unknown compiler"
+#error "Unknown compiler"
 #endif
-
 
 	return error_code;
 }
 
-//50==================================================
-/*!
-  Get the file size of a filename.
-
-  \param sFilename_in
-  \return <ReturnValue>
-*/
-//50==================================================
+/**
+ * @brief Get the file size object
+ * 
+ * @param sFilename_in 
+ * @return long 
+ */
 long get_file_size(std::string sFilename_in)
 {
 	std::ifstream ifs;
@@ -485,8 +470,7 @@ long get_file_size(std::string sFilename_in)
 	{
 		lfsize = -1;
 	}
-	//close the file 
+	//close the file
 	ifs.close();
 	return lfsize;
-
 }

@@ -1,14 +1,15 @@
-//============================================================== 
-/*!
-  \file   conversion.h
-  \brief  
+/**
+ * @file conversion.h
+ * @author Chang Liao (chang.liao@pnnl.gov)
+ * @brief The header file of the conversion source file
+ * @version 0.1
+ * @date 2019-08-02
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
 
-The class for the conversion component.
 
-  \author 
-  \date   2017-12-25
-*/
-//============================================================== 
 #pragma once
 //50==================================================
 //c++ library
@@ -41,7 +42,7 @@ std::string convert_integer_to_string(int iNumber_in);
 
 std::string convert_integer_to_string(int iNumber_in,
 	int iWidth_in);
-
+std::string convert_double_to_string( double dNumber_in);
 std::string convert_double_to_string(int iPrecision_in,
 	int iWidth_in,
 	double dNumber_in);

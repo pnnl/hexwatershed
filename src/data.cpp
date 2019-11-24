@@ -1,14 +1,13 @@
-//50==================================================
-/*!
-  \file   data.cpp
-  \brief
-
-  Deal with data read and write operations.
-
-  \author Chang Liao
-  \date   2017-01-25
-*/
-//50==================================================
+/**
+ * @file data.cpp
+ * @author Chang Liao (chang.liao@pnnl.gov)
+ * @brief Deal with data read and write operations.
+ * @version 0.1
+ * @date 2017-01-25
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
 #include "data.h"
 data::data()
 {
@@ -18,9 +17,13 @@ data::~data()
 {
 }
 
-//50==================================================
-//read_eco3d binary file (float type)
-//50==================================================
+
+/**
+ * @brief read_eco3d binary file (float type)
+ * 
+ * @param sFilename_in 
+ * @return float* 
+ */
 float * data::read_binary(std::string sFilename_in)
 {
 	float * pData_out = nullptr;
@@ -62,10 +65,15 @@ float * data::read_binary(std::string sFilename_in)
 	return pData_out;
 }
 
-//50==================================================
-//read_eco3d binary into a two dimension array pointer
-//50==================================================
 
+/**
+ * @brief read_eco3d binary into a two dimension array pointer
+ * 
+ * @param sFilename_in 
+ * @param lColumn_in 
+ * @param lRow_in 
+ * @return float** 
+ */
 float ** data::read_binary(string sFilename_in,
 	long lColumn_in,
 	long lRow_in
@@ -109,9 +117,13 @@ float ** data::read_binary(string sFilename_in,
 	return pData_out;
 }
 
-//50==================================================
-//read_eco3d binary and save to a vector
-//50==================================================
+
+/**
+ * @brief read_eco3d binary and save to a vector
+ * 
+ * @param sFilename_in 
+ * @return vector<double> 
+ */
 vector<double> data::read_binary_vector(std::string sFilename_in)
 {
 	long lLength1, lLength2;
@@ -151,9 +163,15 @@ vector<double> data::read_binary_vector(std::string sFilename_in)
 }
 
 
-//50==================================================
-//write vector to float binary file
-//50==================================================
+
+/**
+ * @brief write vector to float binary file
+
+ * 
+ * @param sFilename_out 
+ * @param vData_in 
+ * @return int 
+ */
 int data::write_binary_vector(std::string sFilename_out, std::vector <double> vData_in)
 {
 	int error_code = 1;

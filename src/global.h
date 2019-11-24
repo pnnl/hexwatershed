@@ -1,14 +1,14 @@
-//50================================================== 
-/*!
-  \file   global.h
-  \brief
 
-  <long description>
-
-  \author Chang Liao
-  \date   2017-09-04
-*/
-//50================================================== 
+/**
+ * @file global.h
+ * @author Chang Liao (chang.liao@pnnl.gov)
+ * @brief Header file the global class
+ * @version 0.1
+ * @date 2019-08-02
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
 #pragma once
 #include <string>
 using namespace std;
@@ -27,7 +27,7 @@ extern const double near_zero; //the smallest
 
 //
 extern const double pi;
-extern const double missing_value;
+//extern const double missing_value;
 // time
 extern const double minute_2_second;
 extern const double day_2_second;

@@ -1,0 +1,5 @@
+sWorkspace_data /people/liao313/workspace/cplus/hexwatershed/hexwatershed/resource/data
+sWorkspace_output
+sFilename_hexagon_polygon_shapefile hexgrid100.shp
+sFilename_elevation_raster dem.tif
+case 1
