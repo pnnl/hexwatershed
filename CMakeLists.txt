@@ -30,7 +30,7 @@ add_executable(hexwatershed ${hexwatershed_srcs})
 
 set(default_build_type Debug)
 if(EXISTS "${CMAKE_SOURCE_DIR}/../hexwatershed/.git")
-    set(default_build_type Debug)
+    set(default_build_type Release)
 endif()
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
@@ -44,8 +44,7 @@ endif()
 
 message("build type = ${default_build_type}")
 
-target_compile_options(hexwatershed PUBLIC)
-
+target_compile_options(hexwatershed PUBLIC -std=c++11)
 
 set(INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../hexwatershed/bin)
 install(TARGETS hexwatershed RUNTIME DESTINATION ${INSTALL_DIR})
@@ -57,8 +56,8 @@ if (OPENMP_FOUND)
     set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 endif()
 
-set(GDAL_INCLUDE_DIR "/Library/Frameworks/GDAL.framework/Headers")
-set(GDAL_LIBRARY "/Library/Frameworks/GDAL.framework/unix/lib/libgdal.dylib")
+set(GDAL_INCLUDE_DIR "/share/apps/gdal/2.3.1/include/")
+set(GDAL_LIBRARY "/share/apps/gdal/2.3.1/lib/libgdal.so")
 include_directories(${GDAL_INCLUDE_DIR})
 find_package(GDAL)
 

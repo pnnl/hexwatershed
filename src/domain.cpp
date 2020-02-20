@@ -245,7 +245,7 @@ int domain::domain_retrieve_user_input()
   search = mParameter.find(sKey);
   if (search != mParameter.end())
   {
-    this->sFilename_elevation_raster = sWorkspace_data + slash + "raster" + slash + search->second;
+    this->sFilename_elevation_raster = sWorkspace_data + slash + "raster" + slash + "dem" + slash + search->second;
   }
   sKey = "sFilename_hexagon_point_shapefile";
   search = mParameter.find(sKey);
@@ -418,6 +418,7 @@ int domain::domain_read_all_cell_information(std::string sFilename_hexagon_point
       else
       {
         //out of bound
+        //std::cout<<dX_origin <<", "<< dY_origin<<", "<<dX_dummy <<", "<< dY_dummy<<", "<<lColumn_index<<", "<<lRow_index<<std::endl;
         vCell.at(lRecord).dElevation = missing_value;
         vCell.at(lRecord).iFlag_active = 0;
       }
@@ -2989,7 +2990,7 @@ int domain::find_all_neighbors()
   }
   else
   {
-#pragma omp parallel for private(lIndex_self, vPt1, vPt2, dX, dY, lIndex_search, dX_dummy, dY_dummy)
+#pragma omp parallel for private(lIndex_self, vPt1, vPt2, dX, dY, lIndex_search, dX_dummy, dY_dummy, lIndex_pt1, lIndex_pt2)
 
     for (lIndex_self = 0; lIndex_self < vCell_active.size(); lIndex_self++)
     {
