@@ -382,31 +382,8 @@ int domain::domain_read_all_cell_information(std::string sFilename_hexagon_point
       domain_assign_elevation_to_hexagon();
     }
 
-    //third assign elevation for hexagon vertex
-
-    //fourth get elevation for hexagon center
-//#pragma omp parallel for private(lRecord, dX_dummy, dY_dummy, \
+    //#pragma omp parallel for private(lRecord, dX_dummy, dY_dummy, \
                                  lColumn_index, lRow_index, dDummy1, dDummy2, lIndex)
-    //for (lRecord = 0; lRecord < nRecord_shapefile; lRecord++)
-    //{
-    //  dX_dummy = vCell.at(lRecord).dX;
-    //  dY_dummy = vCell.at(lRecord).dY;
-    //}
-    //setup the local index starting from 0
-    //lIndex = 0;
-    //for (iIterator = vCell.begin(); iIterator != vCell.end(); iIterator++)
-    //{
-    //  if ((*iIterator).iFlag_active == 1)
-    //  {
-    //    (*iIterator).lID = lIndex;
-    //    vCell_active.push_back(*iIterator);
-    //    lIndex = lIndex + 1;
-    //  }
-    //  else
-    //  {
-    //    /* code */
-    //  }
-    //}
   }
   else
   {
@@ -425,7 +402,7 @@ int domain::domain_assign_elevation_to_hexagon()
   int error_code = 1;
   int nPt;
   int i;
-  double dX, dY;
+  double dX, dY, dZ;
   long lLocal_Index = 0;
   std::vector<double> vX;
   std::vector<double> vY;
@@ -442,6 +419,31 @@ int domain::domain_assign_elevation_to_hexagon()
       dY = (*iIterator).vPtVertex.at(i).dY;
       vX.push_back(dX);
       vY.push_back(dY);
+      dDummy1 = (dX - dX_origin) / dResolution_elevation;
+      lColumn_index = long(round(dDummy1));
+
+      dDummy2 = (dY_origin - dY) / dResolution_elevation;
+      lRow_index = long(round(dDummy2));
+      if (lColumn_index >= 0 && lColumn_index < nColumn_elevation && lRow_index >= 0 && lRow_index < nRow_elevation)
+      {
+        lColumn_index = lround(dDummy1);
+        lRow_index = lround(dDummy2);
+        lIndex = lRow_index * nColumn_elevation + lColumn_index;
+        if (vElevation.at(lIndex) == missing_value)
+        {
+          //missing value
+          (*iIterator).vPtVertex.at(i).dZ = missing_value;
+        }
+        else
+        {
+          (*iIterator).vPtVertex.at(i).dZ = vElevation.at(lIndex);
+        }
+      }
+      else
+      {
+        //missing value
+        (*iIterator).vPtVertex.at(i).dZ = missing_value;
+      }
     }
 
     //calculate center location
@@ -473,6 +475,7 @@ int domain::domain_assign_elevation_to_hexagon()
         vCell.at(lRecord).dElevation = vElevation.at(lIndex);
         vCell.at(lRecord).iFlag_active = 1;
 
+        //assign local index
         (*iIterator).lID = lLocal_Index;
         vCell_active.push_back(*iIterator);
         lLocal_Index = lLocal_Index + 1;
@@ -2830,21 +2833,36 @@ int domain::domain_save_polyline_vtk(eVariable eV_in,
         }
       }
     }
-    nVertex = vVertex_all.size();
-
-    float pts[nVertex * 3];
-    for (long i = 0; i < nVertex; i++)
-    {
-      pts[i] = vVertex_all.at(i).dX;
-      pts[i + 1] = vVertex_all.at(i).dY;
-      pts[i + 2] = vVertex_all.at(i).dZ;
-    }
-    write_unstructured_mesh(const char *filename, int useBinary, int npts,
-                            float *pts, int ncells, int *celltypes, int *conn,
-                            int nvars, int *vardim, int *centering,
-                            const char *const *varnames, float **vars);
   }
+  nVertex = vVertex_all.size();
 
+  float pts[nVertex * 3];
+  for (long i = 0; i < nVertex; i++)
+  {
+    pts[i] = vVertex_all.at(i).dX;
+    pts[i + 1] = vVertex_all.at(i).dY;
+    pts[i + 2] = vVertex_all.at(i).dZ;
+  }
+  int useBinary = 0;
+  int npts = nVertex;
+  int ncells = vCell_active.size();
+  int celltypes[ncells];
+  for (long i = 0; i < ncells; i++)
+  {
+    celltypes[i] = 6;
+  }
+  int conn[ncells * 6];
+  for (long i = 0; i < ncells; i++)
+  {
+    for (long j = 0; j < 6; j++)
+    {
+      conn[i + j] = 6;
+    }
+  }
+  write_unstructured_mesh(sFilename_flow_direction_vtk.c_str(), useBinary, npts,
+                          pts, ncells, *celltypes, *conn,
+                          int nvars, int *vardim, int *centering,
+                          const char *const *varnames, float **vars);
   return error_code;
 }
 

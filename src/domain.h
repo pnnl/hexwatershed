@@ -135,7 +135,7 @@ public:
   std::string sFilename_stream_order_polyline;
 
   //vtk
-   std::string sFilename_flow_direction_vtk;
+  std::string sFilename_flow_direction_vtk;
 
   //others
 

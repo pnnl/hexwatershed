@@ -13,6 +13,7 @@
 #include <string>
 #include <vector>
 #include <array>
+#include "global.h"
 
 using namespace std;
 namespace hexwatershed
@@ -20,8 +21,9 @@ namespace hexwatershed
 
       struct ptVertex
       {
-          double dX; //map projection
-          double dY; //map projection
+          double dX = missing_value; //map projection
+          double dY = missing_value; //map projection
+          double dZ = missing_value; //elevation of VTK
       };
       class hexagon
       {
