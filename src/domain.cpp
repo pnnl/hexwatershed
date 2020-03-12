@@ -322,6 +322,7 @@ int domain::domain_retrieve_user_input()
   sFilename_wetness_index_polygon = sWorkspace_output + slash + "wetness_index_polygon.shp";
   // polyline
   sFilename_flow_direction_polyline = sWorkspace_output + slash + "flow_direction.shp";
+  sFilename_flow_direction_vtk = sWorkspace_output + slash + "flow_direction.vtk";
 
   sFilename_flow_direction_polyline_debug = sWorkspace_output + slash + "flow_direction_debug.shp";
   sFilename_stream_order_polyline = sWorkspace_output + slash + "stream_order.shp";
@@ -360,11 +361,15 @@ int domain::domain_read_all_cell_information(std::string sFilename_hexagon_point
   double dX_dummy, dY_dummy;
 
   std::vector<hexagon>::iterator iIterator;
-  //first read all the hexagon
+  //first read the dem data as a matrix
+  read_digital_elevation_model(std::move(sFilename_elevation_in));
+  //then read all the hexagon
 
   error_code = read_hexagon_polygon_shapefile(sFilename_hexagon_polygon_shapefile_in);
   if (error_code != 0)
   {
+
+    //then read hexagon grid
     //point feature is not required
     if (iFlag_hexagon_point == 1)
     {
@@ -374,70 +379,34 @@ int domain::domain_read_all_cell_information(std::string sFilename_hexagon_point
     {
       //each polygon should have 5/6 vextex
       //now we will calculate point location based on polygon location
-      domain_calculate_hexagon_polygon_center_location();
+      domain_assign_elevation_to_hexagon();
     }
 
-    //second read the dem data as a matrix
-    read_digital_elevation_model(std::move(sFilename_elevation_in));
+    //third assign elevation for hexagon vertex
 
-    //third assign elevation for hexagon
-    //get elevation for each point
-#pragma omp parallel for private(lRecord, dX_dummy, dY_dummy, \
-                                 lColumn_index,lRow_index,  dDummy1, dDummy2, lIndex)
-    for (lRecord = 0; lRecord < nRecord_shapefile; lRecord++)
-    {
-      dX_dummy = vCell.at(lRecord).dX;
-      dY_dummy = vCell.at(lRecord).dY;
-
-      //calculate location
-
-      dDummy1 = (dX_dummy - dX_origin) / dResolution_elevation;
-      lColumn_index = long(round(dDummy1));
-
-      dDummy2 = (dY_origin - dY_dummy) / dResolution_elevation;
-      lRow_index = long(round(dDummy2));
-
-      if (lColumn_index >= 0 && lColumn_index < nColumn_elevation && lRow_index >= 0 && lRow_index < nRow_elevation)
-      //if (dDummy1 >= 0 && dDummy1 < nColumn_elevation && dDummy2 >= 0 && dDummy2 < nRow_elevation)
-      {
-        //within the range
-        lColumn_index = lround(dDummy1);
-        lRow_index = lround(dDummy2);
-        lIndex = lRow_index * nColumn_elevation + lColumn_index;
-        if (vElevation.at(lIndex) == missing_value)
-        {
-          vCell.at(lRecord).dElevation = missing_value;
-          vCell.at(lRecord).iFlag_active = 0;
-        }
-        else
-        {
-          vCell.at(lRecord).dElevation = vElevation.at(lIndex);
-          vCell.at(lRecord).iFlag_active = 1;
-        }
-      }
-      else
-      {
-        //out of bound
-        //std::cout<<dX_origin <<", "<< dY_origin<<", "<<dX_dummy <<", "<< dY_dummy<<", "<<lColumn_index<<", "<<lRow_index<<std::endl;
-        vCell.at(lRecord).dElevation = missing_value;
-        vCell.at(lRecord).iFlag_active = 0;
-      }
-    }
+    //fourth get elevation for hexagon center
+//#pragma omp parallel for private(lRecord, dX_dummy, dY_dummy, \
+                                 lColumn_index, lRow_index, dDummy1, dDummy2, lIndex)
+    //for (lRecord = 0; lRecord < nRecord_shapefile; lRecord++)
+    //{
+    //  dX_dummy = vCell.at(lRecord).dX;
+    //  dY_dummy = vCell.at(lRecord).dY;
+    //}
     //setup the local index starting from 0
-    lIndex = 0;
-    for (iIterator = vCell.begin(); iIterator != vCell.end(); iIterator++)
-    {
-      if ((*iIterator).iFlag_active == 1)
-      {
-        (*iIterator).lID = lIndex;
-        vCell_active.push_back(*iIterator);
-        lIndex = lIndex + 1;
-      }
-      else
-      {
-        /* code */
-      }
-    }
+    //lIndex = 0;
+    //for (iIterator = vCell.begin(); iIterator != vCell.end(); iIterator++)
+    //{
+    //  if ((*iIterator).iFlag_active == 1)
+    //  {
+    //    (*iIterator).lID = lIndex;
+    //    vCell_active.push_back(*iIterator);
+    //    lIndex = lIndex + 1;
+    //  }
+    //  else
+    //  {
+    //    /* code */
+    //  }
+    //}
   }
   else
   {
@@ -451,12 +420,13 @@ int domain::domain_read_all_cell_information(std::string sFilename_hexagon_point
  * calculate the center location of a hexagon using 6 vertex
  * @return
  */
-int domain::domain_calculate_hexagon_polygon_center_location()
+int domain::domain_assign_elevation_to_hexagon()
 {
   int error_code = 1;
   int nPt;
   int i;
   double dX, dY;
+  long lLocal_Index = 0;
   std::vector<double> vX;
   std::vector<double> vY;
   std::vector<hexagon>::iterator iIterator;
@@ -474,9 +444,47 @@ int domain::domain_calculate_hexagon_polygon_center_location()
       vY.push_back(dY);
     }
 
-    (*iIterator).dX = (std::accumulate(vX.begin(), vX.end(), 0.0)) / nPt;
+    //calculate center location
+    dX_dummy = (std::accumulate(vX.begin(), vX.end(), 0.0)) / nPt;
+    dY_dummy = (std::accumulate(vY.begin(), vY.end(), 0.0)) / nPt;
+    (*iIterator).dX = dX_dummy;
+    (*iIterator).dY = dY_dummy;
 
-    (*iIterator).dY = (std::accumulate(vY.begin(), vY.end(), 0.0)) / nPt;
+    dDummy1 = (dX_dummy - dX_origin) / dResolution_elevation;
+    lColumn_index = long(round(dDummy1));
+
+    dDummy2 = (dY_origin - dY_dummy) / dResolution_elevation;
+    lRow_index = long(round(dDummy2));
+
+    if (lColumn_index >= 0 && lColumn_index < nColumn_elevation && lRow_index >= 0 && lRow_index < nRow_elevation)
+    //if (dDummy1 >= 0 && dDummy1 < nColumn_elevation && dDummy2 >= 0 && dDummy2 < nRow_elevation)
+    {
+      //within the range
+      lColumn_index = lround(dDummy1);
+      lRow_index = lround(dDummy2);
+      lIndex = lRow_index * nColumn_elevation + lColumn_index;
+      if (vElevation.at(lIndex) == missing_value)
+      {
+        vCell.at(lRecord).dElevation = missing_value;
+        vCell.at(lRecord).iFlag_active = 0;
+      }
+      else
+      {
+        vCell.at(lRecord).dElevation = vElevation.at(lIndex);
+        vCell.at(lRecord).iFlag_active = 1;
+
+        (*iIterator).lID = lLocal_Index;
+        vCell_active.push_back(*iIterator);
+        lLocal_Index = lLocal_Index + 1;
+      }
+    }
+    else
+    {
+      //out of bound
+      //std::cout<<dX_origin <<", "<< dY_origin<<", "<<dX_dummy <<", "<< dY_dummy<<", "<<lColumn_index<<", "<<lRow_index<<std::endl;
+      vCell.at(lRecord).dElevation = missing_value;
+      vCell.at(lRecord).iFlag_active = 0;
+    }
   }
 
   return error_code;
@@ -791,7 +799,8 @@ int domain::domain_run_model()
   ofs_log << sLog << std::endl;
   ofs_log.flush();
   std::cout << sLog << std::endl;
-  domain_save_variable(eV_flow_direction);
+  domain_save_variable(eV_flow_direction); //will add vtk test here
+
   std::flush(std::cout);
 
   domain_calculate_flow_accumulation();
@@ -971,8 +980,8 @@ int domain::domain_calculate_flow_direction()
   std::vector<long>::iterator iIterator_neighbor;
   std::vector<long> vNeighbor;
 
-#pragma omp parallel for private(lIndex_self, vNeighbor, lIndex_lowest, dElevation, dDifference,  dDifference_new, iIterator_neighbor)
- for (lIndex_self = 0; lIndex_self < vCell_active.size(); lIndex_self++)
+#pragma omp parallel for private(lIndex_self, vNeighbor, lIndex_lowest, dElevation, dDifference, dDifference_new, iIterator_neighbor)
+  for (lIndex_self = 0; lIndex_self < vCell_active.size(); lIndex_self++)
   {
     vNeighbor = (vCell_active.at(lIndex_self)).vNeighbor;
     lIndex_lowest = -1;
@@ -1001,7 +1010,7 @@ int domain::domain_calculate_flow_direction()
       {
         std::cout << "Slope should be positive!" << std::endl;
       }
-      (vCell_active.at(lIndex_self)).dSlope = -dDifference /((vCell_active.at(lIndex_self)).dLength_edge * sqrt(3.0));
+      (vCell_active.at(lIndex_self)).dSlope = -dDifference / ((vCell_active.at(lIndex_self)).dLength_edge * sqrt(3.0));
     }
   }
   return error_code;
@@ -1093,13 +1102,14 @@ int domain::domain_calculate_flow_accumulation()
                 //std::cout << "====" << lIndex_downslope_neighbor << std::endl;
                 //this one accepts upslope and the upslope is done
                 (*iIterator_self).lAccumulation =
-                    (*iIterator_self).lAccumulation + 1 + vCell_active.at(lIndex_neighbor).lAccumulation;
+                    (*iIterator_self).lAccumulation + vCell_active.at(lIndex_neighbor).lAccumulation + 1;
               }
               else
               {
                 //this neighbor does not flow here, sorry
               }
             }
+            // (*iIterator_self).lAccumulation =  (*iIterator_self).lAccumulation + 1;
             //now this one is also done
             //std::cout << "======" << (*iIterator_self).lAccumulation << std::endl;
             vFlag.at((*iIterator_self).lID) = 1;
@@ -1132,7 +1142,7 @@ int domain::domain_define_stream_grid()
   lAccumulation_threshold = long(dThreshold);
 
 #pragma omp parallel for private(lIndex_self)
- for (lIndex_self = 0; lIndex_self < vCell_active.size(); lIndex_self++)
+  for (lIndex_self = 0; lIndex_self < vCell_active.size(); lIndex_self++)
   {
     if ((vCell_active.at(lIndex_self)).lAccumulation >= lAccumulation_threshold)
     {
@@ -1176,7 +1186,7 @@ int domain::domain_define_watershed_boundary()
   vAccumulation.clear();
   lOutlet = iIndex_out;
 
-#pragma omp parallel for private(lIndex_self, iFound_outlet,  lIndex_downslope, lIndex_current)
+#pragma omp parallel for private(lIndex_self, iFound_outlet, lIndex_downslope, lIndex_current)
   for (lIndex_self = 0; lIndex_self < vCell_active.size(); lIndex_self++)
   {
     iFound_outlet = 0;
@@ -1800,7 +1810,7 @@ int domain::domain_calculate_topographic_wetness_index()
   double dTwi;
   dArea_hexagon = 1.5 * sqrt(3.0) * dLength_hexagon * dLength_hexagon;
   std::vector<hexagon>::iterator iIterator;
-//can use openmp
+  //can use openmp
   for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
   {
 
@@ -1869,17 +1879,15 @@ int domain::domain_save_result()
   int error_code = 1;
 
   //now we will update some new result due to debug flag
-  domain_save_variable(eV_elevation);
-  domain_save_variable(eV_flow_direction);
-  domain_save_variable(eV_flow_accumulation);
-
+  //domain_save_variable(eV_elevation);
+  //domain_save_variable(eV_flow_direction);
+  //domain_save_variable(eV_flow_accumulation);
   //domain_save_variable(eV_watershed);
   //domain_save_variable(eV_confluence);
   //domain_save_variable(eV_segment);
   //domain_save_variable(eV_stream_order);
   //domain_save_variable(eV_subbasin);
-
-  domain_save_variable(eV_wetness_index);
+  //domain_save_variable(eV_wetness_index);
 
   //close log file
 
@@ -1917,6 +1925,7 @@ int domain::domain_save_variable(eVariable eV_in)
       sFilename = sFilename_flow_direction_polyline_debug;
       sLayername = "direction";
       domain_save_polyline_vector(eV_flow_direction, sFieldname, sFilename, sLayername);
+
       break;
     case eV_flow_accumulation:
       sFieldname = "accu";
@@ -2780,6 +2789,65 @@ int domain::domain_save_polygon_vector(eVariable eV_in,
   return error_code;
 }
 
+int domain::domain_save_polyline_vtk(eVariable eV_in,
+                                     std::string sFieldname_in,
+                                     std::string sFilename_in,
+                                     std::string sLayername_in)
+{
+  int error_code = 1;
+  int nPtVertex;
+  long lValue;
+  long nVertex;
+  double dX, dY;
+
+  std::vector<hexagon>::iterator iIterator;
+  std::vector<ptVertex> vVertex_all;
+  std::vector<ptVertex> vVertex;
+  std::vector<ptVertex>::iterator pIterator;
+
+  //we will not duplicate shared vertex
+  //first we will count the total vertex
+
+  for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
+  {
+    if ((*iIterator).nNeighbor == 6 && (*iIterator).iFlag_watershed == 1)
+    {
+      lValue = (*iIterator).lID;
+      vVertex = (*iIterator).vPtVertex;
+      nPtVertex = (*iIterator).nPtVertex;
+      for (pIterator = vVertex.begin(); pIterator != vVertex.end(); pIterator++)
+      {
+
+        //dX = (*pIterator).dX;
+        //dY = (*pIterator).dY;
+        if (std::find(vVertex_all.begin(), vVertex_all.end(), *pIterator) != vVertex_all.end())
+        {
+          //already exist
+        }
+        else
+        {
+          vVertex_all.push_back(*pIterator);
+        }
+      }
+    }
+    nVertex = vVertex_all.size();
+
+    float pts[nVertex * 3];
+    for (long i = 0; i < nVertex; i++)
+    {
+      pts[i] = vVertex_all.at(i).dX;
+      pts[i + 1] = vVertex_all.at(i).dY;
+      pts[i + 2] = vVertex_all.at(i).dZ;
+    }
+    write_unstructured_mesh(const char *filename, int useBinary, int npts,
+                            float *pts, int ncells, int *celltypes, int *conn,
+                            int nvars, int *vardim, int *centering,
+                            const char *const *varnames, float **vars);
+  }
+
+  return error_code;
+}
+
 /**
  * clean up the model status
  * @return
@@ -2943,7 +3011,7 @@ int domain::find_all_neighbors()
 
   long lIndex_self;
   long lIndex_search;
-  long  lIndex_pt1, lIndex_pt2;
+  long lIndex_pt1, lIndex_pt2;
   std::vector<ptVertex> vPt1, vPt2;
 
   if (iOption == 1)

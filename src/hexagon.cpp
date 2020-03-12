@@ -24,7 +24,7 @@ namespace hexwatershed
         iFlag_headwater =0;
         lIndex_downslope = -1;
 
-        lAccumulation = 1;
+        lAccumulation = 0; // 0 
         iSubbasin = -1;
         iSegment = -1;
         iSegment_order = -1;

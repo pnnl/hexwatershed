@@ -134,6 +134,9 @@ public:
   std::string sFilename_flow_direction_polyline_debug;
   std::string sFilename_stream_order_polyline;
 
+  //vtk
+   std::string sFilename_flow_direction_vtk;
+
   //others
 
   std::string sFilename_watershed_characteristics;
@@ -175,7 +178,7 @@ public:
 
   int read_hexagon_polygon_shapefile(std::string sFilename_hexagon_polygon_shapefile_in);
 
-  int domain_calculate_hexagon_polygon_center_location();
+  int domain_assign_elevation_to_hexagon();
 
   int domain_initialize_model();
 
@@ -233,6 +236,11 @@ public:
                                   std::string sFieldname_in,
                                   std::string sFilename_in,
                                   std::string sLayername_in);
+  int domain_save_polyline_vtk(eVariable eV_in,
+                                  std::string sFieldname_in,
+                                  std::string sFilename_in,
+                                  std::string sLayername_in);
+
 
   int domain_save_polygon_vector(eVariable eV_in,
                                  std::string sFieldname_in,
