@@ -13,9 +13,9 @@ vertex::~vertex()
 {
 }
 
-bool operator==(const vertex &cVertex)
+bool vertex::operator==(const vertex &cVertex)
 {
-    if (this.dX == cVertex.dX && this.dY == cVertex.dY)
+    if (this->dX == cVertex.dX && this->dY == cVertex.dY)
     {
         return true;
     }

@@ -408,6 +408,7 @@ int domain::domain_assign_elevation_to_hexagon()
   std::vector<double> vX;
   std::vector<double> vY;
   std::vector<hexagon>::iterator iIterator;
+  std::vector<vertex> vVertex;
   std::vector<vertex>::iterator pIterator;
 
   //#pragma omp parallel for private(lRecord, dX_dummy, dY_dummy, \
