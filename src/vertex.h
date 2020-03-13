@@ -6,6 +6,10 @@ namespace hexwatershed
 {
 class vertex
 {
+     public:
+      vertex();
+
+    ~vertex();
     long lIndex;
     double dX ; //map projection
     double dY ; //map projection
