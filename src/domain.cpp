@@ -2836,6 +2836,20 @@ int domain::domain_save_polyline_vtk(eVariable eV_in,
   long lValue;
   long nVertex;
   double dX, dY;
+  std::string sLine;
+  std::ofstream ofs_vtk;
+  ofs_vtk.open(sFilename_flow_direction_vtk.c_str(), ios::out);
+
+  sLine = "# vtk DataFile Version 2.0" ;
+  ofs_vtk  << sLine << std::endl;
+  sLine = "Flow direction unstructured grid" ;
+  ofs_vtk  << sLine << std::endl;
+  sLine = "ASCII" ;
+  ofs_vtk  << sLine << std::endl;
+  sLine = "DATASET UNSTRUCTURED_GRID" ;
+  ofs_vtk  << sLine << std::endl;
+  
+ 
 
   //nVertex = vVertex_active.size();
   //
@@ -2897,7 +2911,8 @@ int domain::check_digital_elevation_model_depression(std::vector<hexagon> vCell_
   std::vector<double> vElevation_neighbor;
 
 #pragma omp parallel for private(lIndex_self, iIterator, iNeighbor, vNeighbor, \
-                                 dElevation_self, vElevation_neighbor, lID, dElevation_min, lIndex_search)
+                                 dElevation_self, vElevation_neighbor, \
+                                  lID, dElevation_min, lIndex_search)
   for (lIndex_self = 0; lIndex_self < vCell_in.size(); lIndex_self++)
   {
     if (error_code == 1)
@@ -2912,7 +2927,6 @@ int domain::check_digital_elevation_model_depression(std::vector<hexagon> vCell_
         {
           lID = (*iIterator);
           //find it
-
           for (lIndex_search = 0; lIndex_search < vCell_in.size(); lIndex_search++)
           {
             if (vCell_in.at(lIndex_search).lID == lID)
@@ -2927,7 +2941,6 @@ int domain::check_digital_elevation_model_depression(std::vector<hexagon> vCell_
         }
         //if it is the lowest?
         dElevation_min = *(std::min_element(vElevation_neighbor.begin(), vElevation_neighbor.end()));
-
         if (dElevation_self < dElevation_min)
         {
           error_code = 0;
