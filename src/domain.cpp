@@ -399,6 +399,7 @@ int domain::domain_assign_elevation_to_hexagon()
   int error_code = 1;
   int nPt;
   int i;
+  int iFlag;
   double dX, dY, dZ;
   double dDummy1, dDummy2;
   double dX_dummy, dY_dummy;
@@ -408,7 +409,6 @@ int domain::domain_assign_elevation_to_hexagon()
   std::vector<double> vX;
   std::vector<double> vY;
   std::vector<hexagon>::iterator iIterator;
-  std::vector<vertex> vVertex;
   std::vector<vertex>::iterator pIterator;
 
   //#pragma omp parallel for private(lRecord, dX_dummy, dY_dummy, \
@@ -419,6 +419,7 @@ int domain::domain_assign_elevation_to_hexagon()
     nPt = (*iIterator).nPtVertex;
     vX.clear();
     vY.clear();
+    iFlag = 0;
     for (i = 0; i < nPt; i++)
     {
       dX = (*iIterator).vVertex.at(i).dX;
@@ -442,6 +443,7 @@ int domain::domain_assign_elevation_to_hexagon()
         else
         {
           (*iIterator).vVertex.at(i).dZ = vElevation.at(lIndex);
+          iFlag = 1;
         }
       }
       else
@@ -450,67 +452,75 @@ int domain::domain_assign_elevation_to_hexagon()
         (*iIterator).vVertex.at(i).dZ = missing_value;
       }
     }
-
-    //calculate center location
-    dX_dummy = (std::accumulate(vX.begin(), vX.end(), 0.0)) / nPt;
-    dY_dummy = (std::accumulate(vY.begin(), vY.end(), 0.0)) / nPt;
-    (*iIterator).dX = dX_dummy;
-    (*iIterator).dY = dY_dummy;
-    dDummy1 = (dX_dummy - dX_origin) / dResolution_elevation;
-    lColumn_index = long(round(dDummy1));
-    dDummy2 = (dY_origin - dY_dummy) / dResolution_elevation;
-    lRow_index = long(round(dDummy2));
-
-    if (lColumn_index >= 0 && lColumn_index < nColumn_elevation && lRow_index >= 0 && lRow_index < nRow_elevation)
+    if (iFlag == 0)
     {
-      //within the range
-      lColumn_index = lround(dDummy1);
-      lRow_index = lround(dDummy2);
-      lIndex = lRow_index * nColumn_elevation + lColumn_index;
-      if (vElevation.at(lIndex) == missing_value)
-      {
-        (*iIterator).dElevation = missing_value;
-        (*iIterator).iFlag_active = 0;
-      }
-      else
-      {
-        (*iIterator).dElevation = vElevation.at(lIndex);
-        (*iIterator).iFlag_active = 1;
-
-        //assign local index
-        (*iIterator).lID = lLocal_index;
-        //add to global vertex
-        vVertex = (*iIterator).vVertex;
-        for (pIterator = vVertex.begin(); pIterator != vVertex.end(); pIterator++)
-        {
-          //we might need to revisit the vertex elevation because if the center location has elevation,
-          //the 6 vertex may not all have elevations
-          if ((*pIterator).dZ == missing_value)
-          {
-            (*pIterator).dZ = (*iIterator).dElevation;
-          }
-          if (std::find(vVertex_active.begin(), vVertex_active.end(), *pIterator) != vVertex_active.end())
-          {
-            //already exist
-          }
-          else
-          {
-            (*pIterator).lIndex = iVextex_index;
-            (*iIterator).vVertex_index.push_back(iVextex_index);
-            iVextex_index = iVextex_index + 1;
-            vVertex_active.push_back(*pIterator);
-          }
-        }
-
-        lLocal_index = lLocal_index + 1;
-        vCell_active.push_back(*iIterator);
-      }
+      //all vertex has no elevation
     }
     else
     {
-      //out of bound
-      (*iIterator).dElevation = missing_value;
-      (*iIterator).iFlag_active = 0;
+      //at least one is valid
+      //calculate center location
+      dX_dummy = (std::accumulate(vX.begin(), vX.end(), 0.0)) / nPt;
+      dY_dummy = (std::accumulate(vY.begin(), vY.end(), 0.0)) / nPt;
+      (*iIterator).dX = dX_dummy;
+      (*iIterator).dY = dY_dummy;
+      dDummy1 = (dX_dummy - dX_origin) / dResolution_elevation;
+      lColumn_index = long(round(dDummy1));
+      dDummy2 = (dY_origin - dY_dummy) / dResolution_elevation;
+      lRow_index = long(round(dDummy2));
+
+      if (lColumn_index >= 0 && lColumn_index < nColumn_elevation && lRow_index >= 0 && lRow_index < nRow_elevation)
+      {
+        //within the range
+        lColumn_index = lround(dDummy1);
+        lRow_index = lround(dDummy2);
+        lIndex = lRow_index * nColumn_elevation + lColumn_index;
+        if (vElevation.at(lIndex) == missing_value)
+        {
+          (*iIterator).dElevation = missing_value;
+          (*iIterator).iFlag_active = 0;
+        }
+        else
+        {
+          (*iIterator).dElevation = vElevation.at(lIndex);
+          (*iIterator).iFlag_active = 1;
+
+          //assign local index
+          (*iIterator).lID = lLocal_index;
+          //add to global vertex
+
+          for (pIterator = (*iIterator).vVertex.begin();
+               pIterator != (*iIterator).vVertex.end(); pIterator++)
+          {
+            //we might need to revisit the vertex elevation because if the center location has elevation,
+            //the 6 vertex may not all have elevations
+            if ((*pIterator).dZ == missing_value)
+            {
+              (*pIterator).dZ = (*iIterator).dElevation;
+            }
+            if (std::find(vVertex_active.begin(), vVertex_active.end(), *pIterator) != vVertex_active.end())
+            {
+              //already exist
+            }
+            else
+            {
+              (*pIterator).lIndex = iVextex_index;
+              (*iIterator).vVertex_index.push_back(iVextex_index);
+              iVextex_index = iVextex_index + 1;
+              vVertex_active.push_back(*pIterator);
+            }
+          }
+
+          lLocal_index = lLocal_index + 1;
+          vCell_active.push_back(*iIterator);
+        }
+      }
+      else
+      {
+        //out of bound
+        (*iIterator).dElevation = missing_value;
+        (*iIterator).iFlag_active = 0;
+      }
     }
   }
 
@@ -2827,12 +2837,8 @@ int domain::domain_save_polyline_vtk(eVariable eV_in,
   long nVertex;
   double dX, dY;
 
-
-
- 
-
   //nVertex = vVertex_active.size();
-//
+  //
   //float pts[nVertex * 3];
   //for (long i = 0; i < nVertex; i++)
   //{
@@ -2856,7 +2862,7 @@ int domain::domain_save_polyline_vtk(eVariable eV_in,
   //    conn[i + j] = 6;
   //  }
   //}
- 
+
   return error_code;
 }
 
