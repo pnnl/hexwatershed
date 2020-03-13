@@ -23,6 +23,8 @@ file(GLOB hexwatershed_srcs ../hexwatershed/src/conversion.cpp
         ../hexwatershed/src/segment.h
         ../hexwatershed/src/system.cpp
         ../hexwatershed/src/system.h
+        ../hexwatershed/src/vertex.cpp
+        ../hexwatershed/src/vertex.h
         ../hexwatershed/src/watershed.cpp
         ../hexwatershed/src/watershed.h)
 

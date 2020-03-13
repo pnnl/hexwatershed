@@ -154,6 +154,7 @@ public:
   std::vector<segment> vSegment;
   std::vector<float> vElevation;
   std::vector<hexagon> vConfluence;
+  std::vector<vertex> vVertex_active;  
 
   OGRSpatialReference *oSRS;
 

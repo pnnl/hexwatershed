@@ -354,7 +354,7 @@ int domain::domain_read_all_cell_information(std::string sFilename_hexagon_point
                                              std::string sFilename_elevation_in)
 {
   int error_code;
-  unsigned long lRecord;
+
   unsigned long lIndex;
   unsigned long lColumn_index, lRow_index;
   double dDummy1, dDummy2;
@@ -381,9 +381,6 @@ int domain::domain_read_all_cell_information(std::string sFilename_hexagon_point
       //now we will calculate point location based on polygon location
       domain_assign_elevation_to_hexagon();
     }
-
-    //#pragma omp parallel for private(lRecord, dX_dummy, dY_dummy, \
-                                 lColumn_index, lRow_index, dDummy1, dDummy2, lIndex)
   }
   else
   {
@@ -403,10 +400,18 @@ int domain::domain_assign_elevation_to_hexagon()
   int nPt;
   int i;
   double dX, dY, dZ;
-  long lLocal_Index = 0;
+  double dDummy1, dDummy2;
+  double dX_dummy, dY_dummy;
+  long lColumn_index, lRow_index, lIndex;
+  long lLocal_index = 0; //local index
+  long iVextex_index = 0;
   std::vector<double> vX;
   std::vector<double> vY;
   std::vector<hexagon>::iterator iIterator;
+  std::vector<vertex>::iterator pIterator;
+
+  //#pragma omp parallel for private(lRecord, dX_dummy, dY_dummy, \
+                                 lColumn_index, lRow_index, dDummy1, dDummy2, lIndex)
 
   for (iIterator = vCell.begin(); iIterator != vCell.end(); iIterator++)
   {
@@ -415,13 +420,12 @@ int domain::domain_assign_elevation_to_hexagon()
     vY.clear();
     for (i = 0; i < nPt; i++)
     {
-      dX = (*iIterator).vPtVertex.at(i).dX;
-      dY = (*iIterator).vPtVertex.at(i).dY;
+      dX = (*iIterator).vVertex.at(i).dX;
+      dY = (*iIterator).vVertex.at(i).dY;
       vX.push_back(dX);
       vY.push_back(dY);
       dDummy1 = (dX - dX_origin) / dResolution_elevation;
       lColumn_index = long(round(dDummy1));
-
       dDummy2 = (dY_origin - dY) / dResolution_elevation;
       lRow_index = long(round(dDummy2));
       if (lColumn_index >= 0 && lColumn_index < nColumn_elevation && lRow_index >= 0 && lRow_index < nRow_elevation)
@@ -432,17 +436,17 @@ int domain::domain_assign_elevation_to_hexagon()
         if (vElevation.at(lIndex) == missing_value)
         {
           //missing value
-          (*iIterator).vPtVertex.at(i).dZ = missing_value;
+          (*iIterator).vVertex.at(i).dZ = missing_value;
         }
         else
         {
-          (*iIterator).vPtVertex.at(i).dZ = vElevation.at(lIndex);
+          (*iIterator).vVertex.at(i).dZ = vElevation.at(lIndex);
         }
       }
       else
       {
         //missing value
-        (*iIterator).vPtVertex.at(i).dZ = missing_value;
+        (*iIterator).vVertex.at(i).dZ = missing_value;
       }
     }
 
@@ -451,15 +455,12 @@ int domain::domain_assign_elevation_to_hexagon()
     dY_dummy = (std::accumulate(vY.begin(), vY.end(), 0.0)) / nPt;
     (*iIterator).dX = dX_dummy;
     (*iIterator).dY = dY_dummy;
-
     dDummy1 = (dX_dummy - dX_origin) / dResolution_elevation;
     lColumn_index = long(round(dDummy1));
-
     dDummy2 = (dY_origin - dY_dummy) / dResolution_elevation;
     lRow_index = long(round(dDummy2));
 
     if (lColumn_index >= 0 && lColumn_index < nColumn_elevation && lRow_index >= 0 && lRow_index < nRow_elevation)
-    //if (dDummy1 >= 0 && dDummy1 < nColumn_elevation && dDummy2 >= 0 && dDummy2 < nRow_elevation)
     {
       //within the range
       lColumn_index = lround(dDummy1);
@@ -467,26 +468,48 @@ int domain::domain_assign_elevation_to_hexagon()
       lIndex = lRow_index * nColumn_elevation + lColumn_index;
       if (vElevation.at(lIndex) == missing_value)
       {
-        vCell.at(lRecord).dElevation = missing_value;
-        vCell.at(lRecord).iFlag_active = 0;
+        (*iIterator).dElevation = missing_value;
+        (*iIterator).iFlag_active = 0;
       }
       else
       {
-        vCell.at(lRecord).dElevation = vElevation.at(lIndex);
-        vCell.at(lRecord).iFlag_active = 1;
+        (*iIterator).dElevation = vElevation.at(lIndex);
+        (*iIterator).iFlag_active = 1;
 
         //assign local index
-        (*iIterator).lID = lLocal_Index;
+        (*iIterator).lID = lLocal_index;
+        //add to global vertex
+        vVertex = (*iIterator).vVertex;
+        for (pIterator = vVertex.begin(); pIterator != vVertex.end(); pIterator++)
+        {
+          //we might need to revisit the vertex elevation because if the center location has elevation,
+          //the 6 vertex may not all have elevations
+          if ((*pIterator).dZ == missing_value)
+          {
+            (*pIterator).dZ = (*iIterator).dElevation;
+          }
+          if (std::find(vVertex_active.begin(), vVertex_active.end(), *pIterator) != vVertex_active.end())
+          {
+            //already exist
+          }
+          else
+          {
+            (*pIterator).lIndex = iVextex_index;
+            (*iIterator).vVertex_index.push_back(iVextex_index);
+            iVextex_index = iVextex_index + 1;
+            vVertex_active.push_back(*pIterator);
+          }
+        }
+
+        lLocal_index = lLocal_index + 1;
         vCell_active.push_back(*iIterator);
-        lLocal_Index = lLocal_Index + 1;
       }
     }
     else
     {
       //out of bound
-      //std::cout<<dX_origin <<", "<< dY_origin<<", "<<dX_dummy <<", "<< dY_dummy<<", "<<lColumn_index<<", "<<lRow_index<<std::endl;
-      vCell.at(lRecord).dElevation = missing_value;
-      vCell.at(lRecord).iFlag_active = 0;
+      (*iIterator).dElevation = missing_value;
+      (*iIterator).iFlag_active = 0;
     }
   }
 
@@ -658,28 +681,28 @@ int domain::read_hexagon_polygon_shapefile(std::string sFilename_hexagon_polygon
           nVertex = poExteriorRing->getNumPoints();
           for (int k = 0; k < nVertex - 1; k++)
           {
-            ptVertex pt;
+            vertex pt;
             poExteriorRing->getPoint(k, &ptTemp);
             pt.dX = ptTemp.getX();
             pt.dY = ptTemp.getY();
-            cCell.vPtVertex.push_back(pt);
+            cCell.vVertex.push_back(pt);
           }
           //calculate mean edge length, in the future, if the mesh is adaptive resolution,
           //we need a different algorithm
           dLength = 0.0;
           for (int k = 0; k < nVertex - 1; k++)
           {
-            dX1 = cCell.vPtVertex.at(k).dX;
-            dY1 = cCell.vPtVertex.at(k).dY;
+            dX1 = cCell.vVertex.at(k).dX;
+            dY1 = cCell.vVertex.at(k).dY;
             if (k != (nVertex - 2))
             {
-              dX2 = cCell.vPtVertex.at(k + 1).dX;
-              dY2 = cCell.vPtVertex.at(k + 1).dY;
+              dX2 = cCell.vVertex.at(k + 1).dX;
+              dY2 = cCell.vVertex.at(k + 1).dY;
             }
             else
             {
-              dX2 = cCell.vPtVertex.at(0).dX;
-              dY2 = cCell.vPtVertex.at(0).dY;
+              dX2 = cCell.vVertex.at(0).dX;
+              dY2 = cCell.vVertex.at(0).dY;
             }
 
             dLength = dLength + sqrt((dX1 - dX2) * (dX1 - dX2) + (dY1 - dY2) * (dY1 - dY2));
@@ -2552,7 +2575,7 @@ int domain::domain_save_polygon_vector(eVariable eV_in,
 
   std::vector<hexagon>::iterator iIterator;
 
-  std::vector<ptVertex>::iterator pIterator;
+  std::vector<vertex>::iterator pIterator;
 
   OGRRegisterAll();
   GDALDriver *poDriver;
@@ -2672,7 +2695,7 @@ int domain::domain_save_polygon_vector(eVariable eV_in,
         }
 
         OGRLinearRing poExteriorRing;
-        for (pIterator = (*iIterator).vPtVertex.begin(); pIterator != (*iIterator).vPtVertex.end(); pIterator++)
+        for (pIterator = (*iIterator).vVertex.begin(); pIterator != (*iIterator).vVertex.end(); pIterator++)
         {
           dX = (*pIterator).dX;
           dY = (*pIterator).dY;
@@ -2760,7 +2783,7 @@ int domain::domain_save_polygon_vector(eVariable eV_in,
         }
 
         OGRLinearRing poExteriorRing;
-        for (pIterator = (*iIterator).vPtVertex.begin(); pIterator != (*iIterator).vPtVertex.end(); pIterator++)
+        for (pIterator = (*iIterator).vVertex.begin(); pIterator != (*iIterator).vVertex.end(); pIterator++)
         {
           dX = (*pIterator).dX;
           dY = (*pIterator).dY;
@@ -2803,66 +2826,36 @@ int domain::domain_save_polyline_vtk(eVariable eV_in,
   long nVertex;
   double dX, dY;
 
-  std::vector<hexagon>::iterator iIterator;
-  std::vector<ptVertex> vVertex_all;
-  std::vector<ptVertex> vVertex;
-  std::vector<ptVertex>::iterator pIterator;
 
-  //we will not duplicate shared vertex
-  //first we will count the total vertex
 
-  for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
-  {
-    if ((*iIterator).nNeighbor == 6 && (*iIterator).iFlag_watershed == 1)
-    {
-      lValue = (*iIterator).lID;
-      vVertex = (*iIterator).vPtVertex;
-      nPtVertex = (*iIterator).nPtVertex;
-      for (pIterator = vVertex.begin(); pIterator != vVertex.end(); pIterator++)
-      {
+ 
 
-        //dX = (*pIterator).dX;
-        //dY = (*pIterator).dY;
-        if (std::find(vVertex_all.begin(), vVertex_all.end(), *pIterator) != vVertex_all.end())
-        {
-          //already exist
-        }
-        else
-        {
-          vVertex_all.push_back(*pIterator);
-        }
-      }
-    }
-  }
-  nVertex = vVertex_all.size();
-
-  float pts[nVertex * 3];
-  for (long i = 0; i < nVertex; i++)
-  {
-    pts[i] = vVertex_all.at(i).dX;
-    pts[i + 1] = vVertex_all.at(i).dY;
-    pts[i + 2] = vVertex_all.at(i).dZ;
-  }
-  int useBinary = 0;
-  int npts = nVertex;
-  int ncells = vCell_active.size();
-  int celltypes[ncells];
-  for (long i = 0; i < ncells; i++)
-  {
-    celltypes[i] = 6;
-  }
-  int conn[ncells * 6];
-  for (long i = 0; i < ncells; i++)
-  {
-    for (long j = 0; j < 6; j++)
-    {
-      conn[i + j] = 6;
-    }
-  }
-  write_unstructured_mesh(sFilename_flow_direction_vtk.c_str(), useBinary, npts,
-                          pts, ncells, *celltypes, *conn,
-                          int nvars, int *vardim, int *centering,
-                          const char *const *varnames, float **vars);
+  //nVertex = vVertex_active.size();
+//
+  //float pts[nVertex * 3];
+  //for (long i = 0; i < nVertex; i++)
+  //{
+  //  pts[i] = vVertex_all.at(i).dX;
+  //  pts[i + 1] = vVertex_all.at(i).dY;
+  //  pts[i + 2] = vVertex_all.at(i).dZ;
+  //}
+  //int useBinary = 0;
+  //int npts = nVertex;
+  //int ncells = vCell_active.size();
+  //int celltypes[ncells];
+  //for (long i = 0; i < ncells; i++)
+  //{
+  //  celltypes[i] = 6;
+  //}
+  //int conn[ncells * 6];
+  //for (long i = 0; i < ncells; i++)
+  //{
+  //  for (long j = 0; j < 6; j++)
+  //  {
+  //    conn[i + j] = 6;
+  //  }
+  //}
+ 
   return error_code;
 }
 
@@ -3030,7 +3023,7 @@ int domain::find_all_neighbors()
   long lIndex_self;
   long lIndex_search;
   long lIndex_pt1, lIndex_pt2;
-  std::vector<ptVertex> vPt1, vPt2;
+  std::vector<vertex> vPt1, vPt2;
 
   if (iOption == 1)
   {
@@ -3096,7 +3089,7 @@ int domain::find_all_neighbors()
       }
       (vCell_active.at(lIndex_self)).vNeighbor.clear();
 
-      vPt1 = (vCell_active.at(lIndex_self)).vPtVertex;
+      vPt1 = (vCell_active.at(lIndex_self)).vVertex;
 
       for (lIndex_pt1 = 0; lIndex_pt1 < vPt1.size(); lIndex_pt1++)
       {
@@ -3113,7 +3106,7 @@ int domain::find_all_neighbors()
           {
             if ((vCell_active.at(lIndex_search)).iFlag_neighbor == 0) //this cell not yet checked
             {
-              vPt2 = (vCell_active.at(lIndex_search)).vPtVertex;
+              vPt2 = (vCell_active.at(lIndex_search)).vVertex;
               for (lIndex_pt2 = 0; lIndex_pt2 < vPt2.size(); lIndex_pt2++)
               {
                 dX_dummy = (vPt2.at(lIndex_pt2)).dX;

@@ -14,17 +14,11 @@
 #include <vector>
 #include <array>
 #include "global.h"
-
+#include "vertex.h"
 using namespace std;
 namespace hexwatershed
   {
 
-      struct ptVertex
-      {
-          double dX = missing_value; //map projection
-          double dY = missing_value; //map projection
-          double dZ = missing_value; //elevation of VTK
-      };
       class hexagon
       {
       public:
@@ -64,10 +58,11 @@ namespace hexwatershed
           double dElevation;
           double dArea;
           double dTwi;
-          //std::array<long, 6> aNeighbor;
+
           std::vector<long> vNeighbor;
           std::vector<long> vUpslope;
-          std::vector<ptVertex> vPtVertex;
+          std::vector<long> vVertex_index;
+          std::vector<vertex> vVertex;
 
       };
 
