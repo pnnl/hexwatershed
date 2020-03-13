@@ -416,7 +416,7 @@ int domain::domain_assign_elevation_to_hexagon()
 
   for (iIterator = vCell.begin(); iIterator != vCell.end(); iIterator++)
   {
-    nPt = (*iIterator).nPtVertex;
+    nPt = (*iIterator).nVertex;
     vX.clear();
     vY.clear();
     iFlag = 0;
@@ -720,7 +720,7 @@ int domain::read_hexagon_polygon_shapefile(std::string sFilename_hexagon_polygon
           }
           dLength = dLength / (nVertex - 1);
 
-          cCell.nPtVertex = nVertex - 1;
+          cCell.nVertex = nVertex - 1;
           cCell.dLength_edge = dLength;
           vCell.push_back(cCell);
 
@@ -1962,7 +1962,8 @@ int domain::domain_save_variable(eVariable eV_in)
       sFilename = sFilename_flow_direction_polyline_debug;
       sLayername = "direction";
       domain_save_polyline_vector(eV_flow_direction, sFieldname, sFilename, sLayername);
-
+      sFilename = sFilename_flow_direction_vtk;
+      domain_save_polyline_vtk(eV_flow_direction,sFilename );
       break;
     case eV_flow_accumulation:
       sFieldname = "accu";
@@ -1995,6 +1996,7 @@ int domain::domain_save_variable(eVariable eV_in)
       sFilename = sFilename_flow_direction_polyline;
       sLayername = "direction";
       domain_save_polyline_vector(eV_flow_direction, sFieldname, sFilename, sLayername);
+      
       break;
     case eV_flow_accumulation:
       sFieldname = "accu";
@@ -2827,56 +2829,64 @@ int domain::domain_save_polygon_vector(eVariable eV_in,
 }
 
 int domain::domain_save_polyline_vtk(eVariable eV_in,
-                                     std::string sFieldname_in,
-                                     std::string sFilename_in,
-                                     std::string sLayername_in)
+                                     std::string sFilename_in)
 {
   int error_code = 1;
-  int nPtVertex;
+
   long lValue;
-  long nVertex;
+  long nVertex, nHexagon;
   double dX, dY;
+  std::string sDummy;
   std::string sLine;
+  std::string sPoint, sHexagon, sHexagon_vertex;
   std::ofstream ofs_vtk;
-  ofs_vtk.open(sFilename_flow_direction_vtk.c_str(), ios::out);
+  std::vector<hexagon>::iterator iIterator;
+  std::vector<vertex>::iterator pIterator;
+  std::vector<long>::iterator lIterator;
+  ofs_vtk.open(sFilename_in.c_str(), ios::out);
 
-  sLine = "# vtk DataFile Version 2.0" ;
-  ofs_vtk  << sLine << std::endl;
-  sLine = "Flow direction unstructured grid" ;
-  ofs_vtk  << sLine << std::endl;
-  sLine = "ASCII" ;
-  ofs_vtk  << sLine << std::endl;
-  sLine = "DATASET UNSTRUCTURED_GRID" ;
-  ofs_vtk  << sLine << std::endl;
-  
- 
+  sLine = "# vtk DataFile Version 2.0";
+  ofs_vtk << sLine << std::endl;
+  sLine = "Flow direction unstructured grid";
+  ofs_vtk << sLine << std::endl;
+  sLine = "ASCII";
+  ofs_vtk << sLine << std::endl;
+  sLine = "DATASET UNSTRUCTURED_GRID";
+  ofs_vtk << sLine << std::endl;
 
-  //nVertex = vVertex_active.size();
-  //
-  //float pts[nVertex * 3];
-  //for (long i = 0; i < nVertex; i++)
-  //{
-  //  pts[i] = vVertex_all.at(i).dX;
-  //  pts[i + 1] = vVertex_all.at(i).dY;
-  //  pts[i + 2] = vVertex_all.at(i).dZ;
-  //}
-  //int useBinary = 0;
-  //int npts = nVertex;
-  //int ncells = vCell_active.size();
-  //int celltypes[ncells];
-  //for (long i = 0; i < ncells; i++)
-  //{
-  //  celltypes[i] = 6;
-  //}
-  //int conn[ncells * 6];
-  //for (long i = 0; i < ncells; i++)
-  //{
-  //  for (long j = 0; j < 6; j++)
-  //  {
-  //    conn[i + j] = 6;
-  //  }
-  //}
+  //point
+  nVertex = vVertex_active.size();
+  sPoint = convert_long_to_string(nVertex);
+  sLine = "POINTS " + sPoint + " float";
+  ofs_vtk << sLine << std::endl;
 
+  for (pIterator = vVertex_active.begin(); pIterator != vVertex_active.end(); pIterator++)
+  {
+    sLine = convert_double_to_string((*pIterator).dX) + " " + convert_double_to_string((*pIterator).dY) + " " + convert_double_to_string((*pIterator).dZ);
+    ofs_vtk << sLine << std::endl;
+  }
+  nHexagon = vCell_active.size();
+  sHexagon = convert_long_to_string(nHexagon);
+  sHexagon_vertex = convert_long_to_string(nHexagon * 7);
+  sLine = "CELLS " + sHexagon + " " + sHexagon_vertex;
+  ofs_vtk << sLine << std::endl;
+  for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
+  {
+    sLine = "6 ";
+    for (lIterator = (*iIterator).vVertex_index.begin(); lIterator != (*iIterator).vVertex_index.end(); lIterator++)
+    {
+      sLine = sLine + convert_long_to_string(*lIterator) + " ";
+    }
+    ofs_vtk << sLine << std::endl;
+  }
+  sLine = "CELL_TYPES 7";
+  ofs_vtk << sLine << std::endl;
+  for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
+  {
+    sLine = "7";
+    ofs_vtk << sLine << std::endl;
+  }
+  ofs_vtk.close();
   return error_code;
 }
 
@@ -2911,8 +2921,8 @@ int domain::check_digital_elevation_model_depression(std::vector<hexagon> vCell_
   std::vector<double> vElevation_neighbor;
 
 #pragma omp parallel for private(lIndex_self, iIterator, iNeighbor, vNeighbor, \
-                                 dElevation_self, vElevation_neighbor, \
-                                  lID, dElevation_min, lIndex_search)
+                                 dElevation_self, vElevation_neighbor,         \
+                                 lID, dElevation_min, lIndex_search)
   for (lIndex_self = 0; lIndex_self < vCell_in.size(); lIndex_self++)
   {
     if (error_code == 1)

@@ -32,7 +32,7 @@ hexagon::hexagon()
   iSegment_downstream = -1;
   nUpslope = 0;
 
-  nPtVertex = -1;
+  nVertex = -1;
   //dLength_edge = 500; //this should be read from the user configuration
   dTwi = 0.0;
 }

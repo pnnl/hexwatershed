@@ -238,9 +238,7 @@ public:
                                   std::string sFilename_in,
                                   std::string sLayername_in);
   int domain_save_polyline_vtk(eVariable eV_in,
-                                  std::string sFieldname_in,
-                                  std::string sFilename_in,
-                                  std::string sLayername_in);
+                                  std::string sFilename_in);
 
 
   int domain_save_polygon_vector(eVariable eV_in,

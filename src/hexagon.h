@@ -44,7 +44,7 @@ namespace hexwatershed
           int nUpslope;
           int iSegment_downstream;
 
-          int nPtVertex; //the vertex number from polygon
+          int nVertex; //the vertex number from polygon
           //std::string sMeta;
           long lIndex_downslope;
           long lAccumulation;

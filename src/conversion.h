@@ -39,7 +39,7 @@ double convert_from_joule_per_meter_to_calorie_per_centimeter(double dJoule_per_
 double convert_from_calorie_per_centimeter_to_joule_per_meter(double dCalorie_per_centimeter_in);
 
 std::string convert_integer_to_string(int iNumber_in);
-
+std::string convert_long_to_string(long iNumber_in);
 std::string convert_integer_to_string(int iNumber_in,
 	int iWidth_in);
 std::string convert_double_to_string( double dNumber_in);

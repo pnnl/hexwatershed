@@ -30,6 +30,15 @@ std::string convert_integer_to_string(int iNumber_in)
 	return str_out;
 }
 
+std::string convert_long_to_string(long iNumber_in)
+{
+	std::string str_out;
+	std::stringstream ss;
+	ss << iNumber_in;
+	str_out = ss.str();
+	return str_out;
+}
+
 /**
  * @brief convert an integer to a string with fixed length
  * 
