@@ -240,7 +240,7 @@ public:
   int domain_save_polyline_vtk(eVariable eV_in,
                                   std::string sFilename_in);
 
-
+  long domain_find_vertex_index(double dX, double dY);
   int domain_save_polygon_vector(eVariable eV_in,
                                  std::string sFieldname_in,
                                  std::string sFilename_in,

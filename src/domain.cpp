@@ -498,14 +498,19 @@ int domain::domain_assign_elevation_to_hexagon()
             {
               (*pIterator).dZ = (*iIterator).dElevation;
             }
-            if (std::find(vVertex_active.begin(), vVertex_active.end(), *pIterator) != vVertex_active.end())
+
+            std::vector<vertex>::iterator it = std::find(vVertex_active.begin(),
+                                                         vVertex_active.end(), *pIterator);
+
+            if (it != vVertex_active.end())
             {
-              //already exist
+
+              (*pIterator).lIndex = (*it).lIndex;
             }
             else
             {
               (*pIterator).lIndex = iVextex_index;
-              
+
               iVextex_index = iVextex_index + 1;
               vVertex_active.push_back(*pIterator);
             }
@@ -1963,7 +1968,7 @@ int domain::domain_save_variable(eVariable eV_in)
       sLayername = "direction";
       domain_save_polyline_vector(eV_flow_direction, sFieldname, sFilename, sLayername);
       sFilename = sFilename_flow_direction_vtk;
-      domain_save_polyline_vtk(eV_flow_direction,sFilename );
+      domain_save_polyline_vtk(eV_flow_direction, sFilename);
       break;
     case eV_flow_accumulation:
       sFieldname = "accu";
@@ -1996,7 +2001,7 @@ int domain::domain_save_variable(eVariable eV_in)
       sFilename = sFilename_flow_direction_polyline;
       sLayername = "direction";
       domain_save_polyline_vector(eV_flow_direction, sFieldname, sFilename, sLayername);
-      
+
       break;
     case eV_flow_accumulation:
       sFieldname = "accu";
@@ -2875,7 +2880,7 @@ int domain::domain_save_polyline_vtk(eVariable eV_in,
     sLine = "6 ";
     for (pIterator = (*iIterator).vVertex.begin(); pIterator != (*iIterator).vVertex.end(); pIterator++)
     {
-      sLine = sLine + convert_long_to_string( (*pIterator).lIndex ) + " ";
+      sLine = sLine + convert_long_to_string((*pIterator).lIndex) + " ";
     }
     ofs_vtk << sLine << std::endl;
   }
@@ -2890,6 +2895,12 @@ int domain::domain_save_polyline_vtk(eVariable eV_in,
   return error_code;
 }
 
+long domain::domain_find_vertex_index(double dX, double dY)
+{
+  long lIndex = -1;
+
+  return lIndex;
+}
 /**
  * clean up the model status
  * @return
