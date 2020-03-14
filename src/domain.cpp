@@ -1926,15 +1926,15 @@ int domain::domain_save_watershed_characteristics()
 int domain::domain_save_result()
 {
   int error_code = 1;
-
+std::string sFilename;
   //now we will update some new result due to debug flag
   domain_save_variable(eV_elevation);
   domain_save_variable(eV_flow_direction);
   domain_save_variable(eV_flow_accumulation);
 
   //domain_save_variable(eV_wetness_index);
-  sFilename = sFilename_vtk;
-  domain_save_vtk(sFilename);
+  //sFilename = sFilename_vtk;
+  //domain_save_vtk(sFilename);
   //close log file
 
   ofs_log.close();
@@ -2897,7 +2897,7 @@ int domain::domain_save_vtk(std::string sFilename_in)
         nBoundary = nBoundary + 1;
       }
     }
-    sCell = convert_long_to_string(nHexagon + nHexagon - nBoundary);
+    sCell = convert_long_to_string(nHexagon + (nHexagon - nBoundary) );
     sCell_size = convert_long_to_string(nHexagon * 7 + (nHexagon - nBoundary) * 2);
     sLine = "CELLS " + sCell + " " + sCell_size;
     ofs_vtk << sLine << std::endl;
@@ -2918,12 +2918,13 @@ int domain::domain_save_vtk(std::string sFilename_in)
       if ((*iIterator).lIndex_downslope != -1)
       {
         sLine = "2 ";
-        sLine = sLine + convert_long_to_string((*pIterator).lIndex) + " " + convert_long_to_string((*pIterator).lIndex_downslope);
+        sLine = sLine + convert_long_to_string((*iIterator).lID) + " " + convert_long_to_string((*iIterator).lIndex_downslope);
         ofs_vtk << sLine << std::endl;
       }
     }
     //cell type information
-    sLine = "CELL_TYPES " + sHexagon;
+
+    sLine = "CELL_TYPES " + sCell;
     ofs_vtk << sLine << std::endl;
     for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
     {
