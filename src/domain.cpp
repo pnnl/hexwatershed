@@ -830,6 +830,7 @@ int domain::domain_initialize_model()
 int domain::domain_run_model()
 {
   int error_code = 1;
+  std::string sFilename;
   iFlag_debug = 1;
   domain_fill_depression();
   sLog = "Finished depression filling";
