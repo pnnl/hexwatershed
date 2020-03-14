@@ -2895,12 +2895,12 @@ int domain::domain_save_polyline_vtk(eVariable eV_in,
   return error_code;
 }
 
-long domain::domain_find_vertex_index(double dX, double dY)
-{
-  long lIndex = -1;
-
-  return lIndex;
-}
+//long domain::domain_find_vertex_index(double dX, double dY)
+//{
+//  long lIndex = -1;
+//
+//  return lIndex;
+//}
 /**
  * clean up the model status
  * @return
