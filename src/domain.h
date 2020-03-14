@@ -246,8 +246,7 @@ public:
                                  std::string sFilename_in,
                                  std::string sLayer_name_in);
 
- int domain_save_vtk(eVariable eV_in,
-                                  std::string sFilename_in);
+ int domain_save_vtk(    std::string sFilename_in);
 
   int domain_cleanup();
 
