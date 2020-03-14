@@ -322,7 +322,8 @@ int domain::domain_retrieve_user_input()
   sFilename_wetness_index_polygon = sWorkspace_output + slash + "wetness_index_polygon.shp";
   // polyline
   sFilename_flow_direction_polyline = sWorkspace_output + slash + "flow_direction.shp";
-  sFilename_flow_direction_vtk = sWorkspace_output + slash + "flow_direction.vtk";
+  sFilename_vtk = sWorkspace_output + slash + "hexwatershed.vtk";
+  sFilename_vtk_debug = sWorkspace_output + slash + "hexwatershed_debug.vtk";
 
   sFilename_flow_direction_polyline_debug = sWorkspace_output + slash + "flow_direction_debug.shp";
   sFilename_stream_order_polyline = sWorkspace_output + slash + "stream_order.shp";
@@ -404,13 +405,14 @@ int domain::domain_assign_elevation_to_hexagon()
   double dDummy1, dDummy2;
   double dX_dummy, dY_dummy;
   long lColumn_index, lRow_index, lIndex;
-  long lLocal_index = 0; //local index
+  long lLocal_index; //local index
   long iVextex_index = 0;
   std::vector<double> vX;
   std::vector<double> vY;
   std::vector<hexagon>::iterator iIterator;
   std::vector<vertex>::iterator pIterator;
 
+  lLocal_index = 0;
   //#pragma omp parallel for private(lRecord, dX_dummy, dY_dummy, \
                                  lColumn_index, lRow_index, dDummy1, dDummy2, lIndex)
 
@@ -483,6 +485,7 @@ int domain::domain_assign_elevation_to_hexagon()
         else
         {
           (*iIterator).dElevation = vElevation.at(lIndex);
+          (*iIterator).dZ = (*iIterator).dElevation;
           (*iIterator).iFlag_active = 1;
 
           //assign local index
@@ -860,6 +863,9 @@ int domain::domain_run_model()
   std::cout << sLog << std::endl;
 
   std::flush(std::cout);
+
+  sFilename = sFilename_vtk_debug;
+  domain_save_vtk(sFilename);
 
   //starting from here, use the watershed boundary
   iFlag_debug = 0;
@@ -1921,16 +1927,13 @@ int domain::domain_save_result()
   int error_code = 1;
 
   //now we will update some new result due to debug flag
-  //domain_save_variable(eV_elevation);
-  //domain_save_variable(eV_flow_direction);
-  //domain_save_variable(eV_flow_accumulation);
-  //domain_save_variable(eV_watershed);
-  //domain_save_variable(eV_confluence);
-  //domain_save_variable(eV_segment);
-  //domain_save_variable(eV_stream_order);
-  //domain_save_variable(eV_subbasin);
-  //domain_save_variable(eV_wetness_index);
+  domain_save_variable(eV_elevation);
+  domain_save_variable(eV_flow_direction);
+  domain_save_variable(eV_flow_accumulation);
 
+  //domain_save_variable(eV_wetness_index);
+  sFilename = sFilename_vtk;
+  domain_save_vtk(sFilename);
   //close log file
 
   ofs_log.close();
@@ -1967,8 +1970,7 @@ int domain::domain_save_variable(eVariable eV_in)
       sFilename = sFilename_flow_direction_polyline_debug;
       sLayername = "direction";
       domain_save_polyline_vector(eV_flow_direction, sFieldname, sFilename, sLayername);
-      sFilename = sFilename_flow_direction_vtk;
-      domain_save_polyline_vtk(eV_flow_direction, sFilename);
+
       break;
     case eV_flow_accumulation:
       sFieldname = "accu";
@@ -2833,21 +2835,20 @@ int domain::domain_save_polygon_vector(eVariable eV_in,
   return error_code;
 }
 
-int domain::domain_save_polyline_vtk(eVariable eV_in,
-                                     std::string sFilename_in)
+int domain::domain_save_vtk(std::string sFilename_in)
 {
   int error_code = 1;
 
   long lValue;
-  long nVertex, nHexagon;
+  long nVertex, nHexagon, nBoundary;
   double dX, dY;
   std::string sDummy;
   std::string sLine;
-  std::string sPoint, sHexagon, sHexagon_vertex;
+  std::string sPoint, sCell, sCell_vertex;
   std::ofstream ofs_vtk;
   std::vector<hexagon>::iterator iIterator;
   std::vector<vertex>::iterator pIterator;
-  //std::vector<long>::iterator lIterator;
+
   ofs_vtk.open(sFilename_in.c_str(), ios::out);
 
   sLine = "# vtk DataFile Version 2.0";
@@ -2859,39 +2860,85 @@ int domain::domain_save_polyline_vtk(eVariable eV_in,
   sLine = "DATASET UNSTRUCTURED_GRID";
   ofs_vtk << sLine << std::endl;
 
-  //point
-  nVertex = vVertex_active.size();
-  sPoint = convert_long_to_string(nVertex);
-  sLine = "POINTS " + sPoint + " float";
-  ofs_vtk << sLine << std::endl;
+  if (iFlag_debug == 1)
+  {
+    //point
+    nHexagon = vCell_active.size();
+    nVertex = vVertex_active.size();
 
-  for (pIterator = vVertex_active.begin(); pIterator != vVertex_active.end(); pIterator++)
-  {
-    sLine = convert_double_to_string((*pIterator).dX) + " " + convert_double_to_string((*pIterator).dY) + " " + convert_double_to_string((*pIterator).dZ);
+    //we consider both vertex and the center of hexagon
+    sPoint = convert_long_to_string(nVertex + nHexagon);
+
+    sLine = "POINTS " + sPoint + " float";
     ofs_vtk << sLine << std::endl;
-  }
-  nHexagon = vCell_active.size();
-  sHexagon = convert_long_to_string(nHexagon);
-  sHexagon_vertex = convert_long_to_string(nHexagon * 7);
-  sLine = "CELLS " + sHexagon + " " + sHexagon_vertex;
-  ofs_vtk << sLine << std::endl;
-  for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
-  {
-    sLine = "6 ";
-    for (pIterator = (*iIterator).vVertex.begin(); pIterator != (*iIterator).vVertex.end(); pIterator++)
+
+    //hexagon center first
+    for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
     {
-      sLine = sLine + convert_long_to_string((*pIterator).lIndex) + " ";
+      sLine = convert_double_to_string((*iIterator).dX) + " " + convert_double_to_string((*iIterator).dY) + " " + convert_double_to_string((*iIterator).dZ);
+      ofs_vtk << sLine << std::endl;
     }
+    //then hexagon vertex
+    for (pIterator = vVertex_active.begin(); pIterator != vVertex_active.end(); pIterator++)
+    {
+      sLine = convert_double_to_string((*pIterator).dX) + " " + convert_double_to_string((*pIterator).dY) + " " + convert_double_to_string((*pIterator).dZ);
+      ofs_vtk << sLine << std::endl;
+    }
+
+    //then cell (polygon + polyline)
+    //we need to execlude boundary because they have no downslope
+    nBoundary = 0;
+    for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
+    {
+      if ((*iIterator).lIndex_downslope == -1)
+      {
+        nBoundary = nBoundary + 1;
+      }
+    }
+    sCell = convert_long_to_string(nHexagon + nVertex - nBoundary);
+    sCell_vertex = convert_long_to_string(nHexagon * 7 + nVertex + nHexagon * 2);
+    sLine = "CELLS " + sCell + " " + sCell_vertex;
     ofs_vtk << sLine << std::endl;
+    //hexagon polygon
+    for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
+    {
+      sLine = "6 ";
+      for (pIterator = (*iIterator).vVertex.begin(); pIterator != (*iIterator).vVertex.end(); pIterator++)
+      {
+        sLine = sLine + convert_long_to_string((*pIterator).lIndex) + " ";
+      }
+      ofs_vtk << sLine << std::endl;
+    }
+    //hexagon center
+    for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
+    {
+      sLine = "1 ";
+      sLine = sLine + convert_long_to_string((*pIterator).lIndex) + " ";
+      ofs_vtk << sLine << std::endl;
+    }
+    //polyline
+    for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
+    {
+      sLine = "1 ";
+      sLine = sLine + convert_long_to_string((*pIterator).lIndex) + " ";
+      ofs_vtk << sLine << std::endl;
+    }
+    //cell type information
+    sLine = "CELL_TYPES " + sHexagon;
+    ofs_vtk << sLine << std::endl;
+    for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
+    {
+      sLine = "7";
+      ofs_vtk << sLine << std::endl;
+    }
+    //flow direction
+
+    ofs_vtk.close();
   }
-  sLine = "CELL_TYPES " + sHexagon;
-  ofs_vtk << sLine << std::endl;
-  for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
+  else
   {
-    sLine = "7";
-    ofs_vtk << sLine << std::endl;
   }
-  ofs_vtk.close();
+
   return error_code;
 }
 

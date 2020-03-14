@@ -33,6 +33,8 @@ hexagon::hexagon()
   nUpslope = 0;
 
   nVertex = -1;
+  dElevation = -9999.0;
+  dZ = -9999.0;
   //dLength_edge = 500; //this should be read from the user configuration
   dTwi = 0.0;
 }

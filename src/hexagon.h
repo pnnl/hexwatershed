@@ -53,6 +53,7 @@ namespace hexwatershed
           double dLength_edge;
           double dX; //map projection
           double dY; //map projection
+          double dZ; 
           double dLatitude;
           double dLongitude;
           double dElevation;

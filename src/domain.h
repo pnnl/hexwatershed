@@ -135,7 +135,8 @@ public:
   std::string sFilename_stream_order_polyline;
 
   //vtk
-  std::string sFilename_flow_direction_vtk;
+  std::string sFilename_vtk;
+  std::string sFilename_vtk_debug;
 
   //others
 
@@ -237,14 +238,16 @@ public:
                                   std::string sFieldname_in,
                                   std::string sFilename_in,
                                   std::string sLayername_in);
-  int domain_save_polyline_vtk(eVariable eV_in,
-                                  std::string sFilename_in);
+ 
 
-  //long domain_find_vertex_index(double dX, double dY);
+
   int domain_save_polygon_vector(eVariable eV_in,
                                  std::string sFieldname_in,
                                  std::string sFilename_in,
                                  std::string sLayer_name_in);
+
+ int domain_save_vtk(eVariable eV_in,
+                                  std::string sFilename_in);
 
   int domain_cleanup();
 
