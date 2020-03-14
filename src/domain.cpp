@@ -505,7 +505,7 @@ int domain::domain_assign_elevation_to_hexagon()
             else
             {
               (*pIterator).lIndex = iVextex_index;
-              (*iIterator).vVertex_index.push_back(iVextex_index);
+              
               iVextex_index = iVextex_index + 1;
               vVertex_active.push_back(*pIterator);
             }
@@ -2842,7 +2842,7 @@ int domain::domain_save_polyline_vtk(eVariable eV_in,
   std::ofstream ofs_vtk;
   std::vector<hexagon>::iterator iIterator;
   std::vector<vertex>::iterator pIterator;
-  std::vector<long>::iterator lIterator;
+  //std::vector<long>::iterator lIterator;
   ofs_vtk.open(sFilename_in.c_str(), ios::out);
 
   sLine = "# vtk DataFile Version 2.0";
@@ -2873,9 +2873,9 @@ int domain::domain_save_polyline_vtk(eVariable eV_in,
   for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
   {
     sLine = "6 ";
-    for (lIterator = (*iIterator).vVertex_index.begin(); lIterator != (*iIterator).vVertex_index.end(); lIterator++)
+    for (pIterator = (*iIterator).vVertex.begin(); pIterator != (*iIterator).vVertex.end(); pIterator++)
     {
-      sLine = sLine + convert_long_to_string(*lIterator) + " ";
+      sLine = sLine + convert_long_to_string( (*pIterator).lIndex ) + " ";
     }
     ofs_vtk << sLine << std::endl;
   }
