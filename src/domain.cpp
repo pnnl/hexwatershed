@@ -2884,7 +2884,7 @@ int domain::domain_save_polyline_vtk(eVariable eV_in,
     }
     ofs_vtk << sLine << std::endl;
   }
-  sLine = "CELL_TYPES 7";
+  sLine = "CELL_TYPES " + sHexagon;
   ofs_vtk << sLine << std::endl;
   for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
   {
