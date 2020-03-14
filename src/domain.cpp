@@ -2844,7 +2844,7 @@ int domain::domain_save_vtk(std::string sFilename_in)
   double dX, dY;
   std::string sDummy;
   std::string sLine;
-  std::string sPoint, sCell, sCell_vertex;
+  std::string sPoint, sCell, sCell_size;
   std::ofstream ofs_vtk;
   std::vector<hexagon>::iterator iIterator;
   std::vector<vertex>::iterator pIterator;
@@ -2879,6 +2879,7 @@ int domain::domain_save_vtk(std::string sFilename_in)
       ofs_vtk << sLine << std::endl;
     }
     //then hexagon vertex
+    //because the vertex index start from 0, we need to add the nhexagon to have unique index
     for (pIterator = vVertex_active.begin(); pIterator != vVertex_active.end(); pIterator++)
     {
       sLine = convert_double_to_string((*pIterator).dX) + " " + convert_double_to_string((*pIterator).dY) + " " + convert_double_to_string((*pIterator).dZ);
@@ -2895,9 +2896,9 @@ int domain::domain_save_vtk(std::string sFilename_in)
         nBoundary = nBoundary + 1;
       }
     }
-    sCell = convert_long_to_string(nHexagon + nVertex - nBoundary);
-    sCell_vertex = convert_long_to_string(nHexagon * 7 + nVertex + nHexagon * 2);
-    sLine = "CELLS " + sCell + " " + sCell_vertex;
+    sCell = convert_long_to_string(nHexagon + nHexagon - nBoundary);
+    sCell_size = convert_long_to_string(nHexagon * 7 + (nHexagon - nBoundary) * 2);
+    sLine = "CELLS " + sCell + " " + sCell_size;
     ofs_vtk << sLine << std::endl;
     //hexagon polygon
     for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
@@ -2905,23 +2906,20 @@ int domain::domain_save_vtk(std::string sFilename_in)
       sLine = "6 ";
       for (pIterator = (*iIterator).vVertex.begin(); pIterator != (*iIterator).vVertex.end(); pIterator++)
       {
-        sLine = sLine + convert_long_to_string((*pIterator).lIndex) + " ";
+        sLine = sLine + convert_long_to_string((*pIterator).lIndex + nHexagon) + " ";
       }
       ofs_vtk << sLine << std::endl;
     }
-    //hexagon center
-    for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
-    {
-      sLine = "1 ";
-      sLine = sLine + convert_long_to_string((*pIterator).lIndex) + " ";
-      ofs_vtk << sLine << std::endl;
-    }
+
     //polyline
     for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
     {
-      sLine = "1 ";
-      sLine = sLine + convert_long_to_string((*pIterator).lIndex) + " ";
-      ofs_vtk << sLine << std::endl;
+      if ((*iIterator).lIndex_downslope != -1)
+      {
+        sLine = "2 ";
+        sLine = sLine + convert_long_to_string((*pIterator).lIndex) + " " + convert_long_to_string((*pIterator).lIndex_downslope);
+        ofs_vtk << sLine << std::endl;
+      }
     }
     //cell type information
     sLine = "CELL_TYPES " + sHexagon;
@@ -2930,6 +2928,14 @@ int domain::domain_save_vtk(std::string sFilename_in)
     {
       sLine = "7";
       ofs_vtk << sLine << std::endl;
+    }
+    for (iIterator = vCell_active.begin(); iIterator != vCell_active.end(); iIterator++)
+    {
+      if ((*iIterator).lIndex_downslope != -1)
+      {
+        sLine = "3";
+        ofs_vtk << sLine << std::endl;
+      }
     }
     //flow direction
 
