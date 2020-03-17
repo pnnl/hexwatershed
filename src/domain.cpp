@@ -2897,6 +2897,7 @@ int domain::domain_save_vtk(std::string sFilename_in)
         nBoundary = nBoundary + 1;
       }
     }
+    //be careful with connectivity
     sCell = convert_long_to_string(nHexagon + (nHexagon - nBoundary) );
     sCell_size = convert_long_to_string(nHexagon * 7 + (nHexagon - nBoundary) * 3);
     sLine = "CELLS " + sCell + " " + sCell_size;
