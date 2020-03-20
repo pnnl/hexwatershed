@@ -69,6 +69,10 @@ int domain::domain_setup_model()
   mParameter.insert(std::pair<std::string, std::string>("sFilename_elevation_raster", sFilename_elevation_raster));
 
   mParameter.insert(
+      std::pair<std::string, std::string>("iFile_type_io",
+                                          convert_integer_to_string(iFile_type_io, 1)));
+
+  mParameter.insert(
       std::pair<std::string, std::string>("sFilename_hexagon_point_shapefile",
                                           sFilename_hexagon_point_shapefile));
 
@@ -98,43 +102,80 @@ int domain::domain_read_data()
   domain_read_configuration_file();
   domain_retrieve_user_input();
 
-  //read shapefile
-  if (file_test(sFilename_hexagon_polygon_shapefile) != 1)
+  switch (eFile_type_io)
   {
-    error_code = 0;
-    std::cout << "Shapefile does not exist: " << sFilename_hexagon_polygon_shapefile << std::endl;
-    iFlag_hexagon_polygon = 0;
-    return error_code;
-  }
-  else
+  case eFT_netcdf:
   {
-    iFlag_hexagon_polygon = 1;
+    if (file_test(sFilename_hexagon_netcdf) != 1)
+    {
+      error_code = 0;
+      std::cout << "Netcdf file does not exist: " << sFilename_hexagon_netcdf << std::endl;
+      iFlag_netcdf = 0;
+      return error_code;
+    }
+    else
+    {
+    }
+    //we will consider to read elevation from netcdf in the future
+    if (file_test(sFilename_elevation_raster) != 1)
+    {
+      error_code = 0;
+      std::cout << " dem does not exist! " << std::endl;
+      return error_code;
+    }
+    else
+    {
+    }
+    domain_read_cell_information_by_netcdf(sFilename_hexagon_netcdf, sFilename_elevation_raster);
+    break;
   }
+  case eFT_shapefile:
+  {
 
-  if (file_test(sFilename_hexagon_point_shapefile) != 1)
-  {
-    error_code = 2;
-    std::cout << "Point Hexagon Shapefile does not exist: " << sFilename_hexagon_point_shapefile << std::endl;
-    std::cout << "We will use polygon center instead! " << std::endl;
-    iFlag_hexagon_point = 0;
-  }
-  else
-  {
-    iFlag_hexagon_point = 1;
-  }
+    //read shapefile
+    if (file_test(sFilename_hexagon_polygon_shapefile) != 1)
+    {
+      error_code = 0;
+      std::cout << "Shapefile does not exist: " << sFilename_hexagon_polygon_shapefile << std::endl;
+      iFlag_hexagon_polygon = 0;
+      return error_code;
+    }
+    else
+    {
+      iFlag_hexagon_polygon = 1;
+    }
 
-  if (file_test(sFilename_elevation_raster) != 1)
-  {
-    error_code = 0;
-    std::cout << " dem does not exist! " << std::endl;
-    return error_code;
+    if (file_test(sFilename_hexagon_point_shapefile) != 1)
+    {
+      error_code = 2;
+      std::cout << "Point Hexagon Shapefile does not exist: " << sFilename_hexagon_point_shapefile << std::endl;
+      std::cout << "We will use polygon center instead! " << std::endl;
+      iFlag_hexagon_point = 0;
+    }
+    else
+    {
+      iFlag_hexagon_point = 1;
+    }
+
+    if (file_test(sFilename_elevation_raster) != 1)
+    {
+      error_code = 0;
+      std::cout << " dem does not exist! " << std::endl;
+      return error_code;
+    }
+    else
+    {
+    }
+    //at this point, we must at least have both polygon and dem data set.
+    domain_read_cell_information_by_shapefile(sFilename_hexagon_point_shapefile, sFilename_hexagon_polygon_shapefile,
+                                              sFilename_elevation_raster);
+    break;
   }
-  else
+  default:
   {
+    break;
   }
-  //at this point, we must at least have both polygon and dem data set.
-  domain_read_all_cell_information(sFilename_hexagon_point_shapefile, sFilename_hexagon_polygon_shapefile,
-                                   sFilename_elevation_raster);
+  }
 
   std::cout << "Finished reading data!" << std::endl;
   std::flush(std::cout);
@@ -247,6 +288,21 @@ int domain::domain_retrieve_user_input()
   {
     this->sFilename_elevation_raster = sWorkspace_data + slash + "raster" + slash + "dem" + slash + search->second;
   }
+  sKey = "iFile_type_io";
+  search = mParameter.find(sKey);
+  if (search != mParameter.end())
+  {
+    this->iFile_type_io = std::stoi(search->second);
+    eFile_type_io = eFileTypeIO(iFile_type_io);
+  }
+
+  sKey = "sFilename_hexagon_netcdf";
+  search = mParameter.find(sKey);
+  if (search != mParameter.end())
+  {
+    this->sFilename_hexagon_netcdf = sWorkspace_data + slash + "vector" + slash + search->second;
+  }
+
   sKey = "sFilename_hexagon_point_shapefile";
   search = mParameter.find(sKey);
   if (search != mParameter.end())
@@ -330,6 +386,8 @@ int domain::domain_retrieve_user_input()
   sFilename_stream_segment_polyline = sWorkspace_output + slash + "stream_segment_polyline.shp";
   sFilename_stream_segment_merge_polyline = sWorkspace_output + slash + "stream_segment_merge_polyline.shp";
 
+  //netcdf
+
   //others
 
   sFilename_watershed_characteristics = sWorkspace_output + slash + "watershed_characteristics" + sExtension_text;
@@ -350,9 +408,9 @@ int domain::domain_retrieve_user_input()
  * @param sFilename_elevation_in :the digital elevation model file
  * @return
  */
-int domain::domain_read_all_cell_information(std::string sFilename_hexagon_point_shapefile_in,
-                                             std::string sFilename_hexagon_polygon_shapefile_in,
-                                             std::string sFilename_elevation_in)
+int domain::domain_read_cell_information_by_shapefile(std::string sFilename_hexagon_point_shapefile_in,
+                                                      std::string sFilename_hexagon_polygon_shapefile_in,
+                                                      std::string sFilename_elevation_in)
 {
   int error_code;
 
@@ -391,6 +449,33 @@ int domain::domain_read_all_cell_information(std::string sFilename_hexagon_point
   return error_code;
 }
 
+int domain::domain_read_cell_information_by_netcdf(std::string sFilename_hexagon_netcdf_in, std::string sFilename_elevation_in)
+{
+  int error_code;
+
+  unsigned long lIndex;
+  unsigned long lColumn_index, lRow_index;
+  double dDummy1, dDummy2;
+  double dX_dummy, dY_dummy;
+  //read raster
+  //first read the dem data as a matrix
+  read_digital_elevation_model(std::move(sFilename_elevation_in));
+  //read netcdf
+
+  error_code = read_hexagon_polygon_netcdf(sFilename_hexagon_netcdf_in);
+  if (error_code != 0)
+  {
+    //each polygon should have 5/6 vextex
+    //now we will calculate point location based on polygon location
+    domain_assign_elevation_to_hexagon();
+  }
+  else
+  {
+    //failed reading
+  }
+
+  return error_code;
+}
 /**
  * calculate the center location of a hexagon using 6 vertex
  * @return
@@ -1926,7 +2011,7 @@ int domain::domain_save_watershed_characteristics()
 int domain::domain_save_result()
 {
   int error_code = 1;
-std::string sFilename;
+  std::string sFilename;
   //now we will update some new result due to debug flag
   domain_save_variable(eV_elevation);
   domain_save_variable(eV_flow_direction);
@@ -2897,7 +2982,7 @@ int domain::domain_save_vtk(std::string sFilename_in)
         nBoundary = nBoundary + 1;
       }
     }
-    sCell = convert_long_to_string(nHexagon + (nHexagon - nBoundary) );
+    sCell = convert_long_to_string(nHexagon + (nHexagon - nBoundary));
     sCell_size = convert_long_to_string(nHexagon * 7 + (nHexagon - nBoundary) * 3);
     sLine = "CELLS " + sCell + " " + sCell_size;
     ofs_vtk << sLine << std::endl;

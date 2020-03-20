@@ -18,6 +18,7 @@
 #include <queue>
 #include <numeric>
 #include <utility>
+#include <netcdf>
 
 #include "ogrsf_frmts.h"
 #include "system.h"
@@ -26,6 +27,8 @@
 #include "conversion.h"
 
 using namespace std;
+using namespace netCDF;
+using namespace netCDF::exceptions;
 
 enum eVariable
 {
@@ -40,6 +43,13 @@ enum eVariable
   eV_wetness_index,
 };
 
+enum eFileTypeIO
+{
+  eFT_netcdf,
+  eFT_shapefile,
+  eFT_txt,
+};
+
 namespace hexwatershed
 {
 class domain
@@ -51,8 +61,14 @@ public:
 
   ~domain();
 
+ int iFile_type_io; //used for file io
+ eFileTypeIO eFile_type_io; //used for file io
+
   int iFlag_debug;
   int iFlag_merge;
+  int iFlag_netcdf;
+  int iFlag_netcdf_dem;
+ 
   int iFlag_configuration_file;
 
   int iFlag_hexagon_point;   //user provided point hexagon
@@ -86,6 +102,8 @@ public:
   std::string sFilename_configuration;
   std::string sFilename_log;
   std::string sLog;
+
+std::string sFilename_hexagon_netcdf;
 
   std::string sFilename_hexagon_point_shapefile;
   std::string sFilename_hexagon_polygon_shapefile;
@@ -170,10 +188,10 @@ public:
 
   int domain_retrieve_user_input();
 
-  int domain_read_all_cell_information(std::string sFilename_hexagon_point_shapefile_in,
+  int domain_read_cell_information_by_shapefile(std::string sFilename_hexagon_point_shapefile_in,
                                        std::string sFilename_hexagon_polygon_shapefile_in,
                                        std::string sFilename_elevation_in);
-
+int domain_read_cell_information_by_netcdf(std::string sFilename_hexagon_netcdf_in,   std::string sFilename_elevation_in);
   int read_digital_elevation_model(std::string sFilename_elevation_in);
 
   int read_hexagon_point_shapefile(std::string sFilename_hexagon_point_shapefile_in);
