@@ -58,7 +58,6 @@ public:
   domain();
 
   domain(std::string sFilename_configuration);
-
   ~domain();
 
  int iFile_type_io; //used for file io
