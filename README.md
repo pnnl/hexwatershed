@@ -13,3 +13,15 @@ https://www.sciencedirect.com/science/article/pii/S1364815219308278
 # Acknowledgement
 The research described in this paper was primarily funded by a Laboratory Directed Research and Development (LDRD) Program project at Pacific Northwest National Laboratory. CL and LRL were also partly supported by U.S. Department of Energy Office of Science Biological and Environmental Research through the Earth and Environmental System Modeling program as part of the Energy Exascale Earth System Model (E3SM) project. 
 
+# Compile
+1. git clone git@github.com:changliao1025/hexwatershed.git
+2. Navigate to the directory which has the CMakeLists.txt file
+3. Adjust your configuration of the CMakeLists.txt
+4. cmake CMakeLists.txt
+5. make
+
+# Usage
+In order to run the program, you need to prepare a few input files:
+1. A hexagon grid
+2. A DEM
+
