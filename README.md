@@ -7,9 +7,11 @@ Spatial discretization is the cornerstone of all spatially-distributed numerical
 
 # Illustration 
 1. Depression filling
+   
 ![Depression filling](https://github.com/changliao1025/hexwatershed/blob/master/example/depression_filling.png?raw=true)
 
 2. Flow direction
+   
 ![Flow direction](https://github.com/changliao1025/hexwatershed/blob/master/example/cbf_flow_direction_90_full.png?raw=true)
 
 # Citation
