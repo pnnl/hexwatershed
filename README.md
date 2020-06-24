@@ -5,6 +5,9 @@ HexWatershed is a hydrology model based on hexagon framework.
 
 Spatial discretization is the cornerstone of all spatially-distributed numerical simulations including watershed hydrology. Traditional square grid spatial discretization has several limitations including inability to represent adjacency uniformly. In this study, we developed a watershed delineation model (HexWatershed) based on the hexagon grid spatial discretization. We applied this model to two different types of watershed in the US and we evaluated its performance against the traditional method. The comparisons show that the hexagon grid spatial discretization exhibits many advantages over the tradition method. We propose that spatially distributed hydrologic simulations should consider using a hexagon grid spatial discretization.
 
+# Illustration 
+![alt text](https://github.com/changliao/hexwatershed/blob/master/flow_direction.jpg?raw=true)
+
 # Citation
 Liao, C., Tesfa, T., Duan, Z., & Leung, L. R. (2020). Watershed delineation on a hexagonal mesh grid. Environmental Modelling & Software, 104702.
 
@@ -26,5 +29,5 @@ In order to run the program, you need to prepare a few input files:
 2. A DEM
 
 # Contact
-Please contact Chang liao (chang.liao@pnnl.gov) if you have any questions.
+Please contact Chang Liao (chang.liao@pnnl.gov) if you have any questions.
 
