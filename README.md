@@ -25,3 +25,6 @@ In order to run the program, you need to prepare a few input files:
 1. A hexagon grid
 2. A DEM
 
+# Contact
+Please contact Chang liao (chang.liao@pnnl.gov) if you have any questions.
+
