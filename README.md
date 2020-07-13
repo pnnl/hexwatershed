@@ -1,5 +1,5 @@
 # HexWatershed
-HexWatershed is a hydrology model based on hexagon framework.
+HexWatershed is a hydrologic routing model based on the hexagon mesh framework.
 
 # Abstarct
 
