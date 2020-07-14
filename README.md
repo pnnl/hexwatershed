@@ -23,7 +23,7 @@ Liao, C., Tesfa, T., Duan, Z., & Leung, L. R. (2020). Watershed delineation on a
 https://www.sciencedirect.com/science/article/pii/S1364815219308278
 
 # Acknowledgement
-The research described in this paper was primarily funded by a Laboratory Directed Research and Development (LDRD) Program project at Pacific Northwest National Laboratory. CL and LRL were also partly supported by U.S. Department of Energy Office of Science Biological and Environmental Research through the Earth and Environmental System Modeling program as part of the Energy Exascale Earth System Model (E3SM) project. 
+The research described in this paper was primarily funded by a Laboratory Directed Research and Development (LDRD) Program Quickstarter project at Pacific Northwest National Laboratory. CL and LRL were also partly supported by U.S. Department of Energy Office of Science Biological and Environmental Research through the Earth and Environmental System Modeling program as part of the Energy Exascale Earth System Model (E3SM) project. The data used for model simulations are listed in the tables and all input data and model outputs are archived on the computers at PNNL and will be available by contacting Chang Liao (chang. liao@pnnl.gov). The HexWatershed program can be accessed through Github HexWatershed. Some datasets in the Tin Pan watershed were produced from an effort of hydrology-based design of geomorphic evapotranspiration covers for reclamation of mine land. A portion of this research was performed using PNNL Research Computing at Pacific Northwest National Laboratory. PNNL is operated for DOE by Battelle Memorial Institute under contract DE-AC05-76RL01830.
 
 # Compile
 1. git clone git@github.com:changliao1025/hexwatershed.git
