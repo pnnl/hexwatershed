@@ -21,11 +21,7 @@ Spatial discretization is the cornerstone of all spatially-distributed numerical
    
 ![Flow direction](https://github.com/changliao1025/hexwatershed/blob/master/example/stream_topology.png?raw=true)
 # Citation
-Liao, C., Tesfa, T., Duan, Z., & Leung, L. R. (2020). Watershed delineation on a hexagonal mesh grid. Environmental Modelling & Software, 104702.
-
-https://www.sciencedirect.com/science/article/pii/S1364815219308278
-
-https://doi.org/10.1016/j.envsoft.2020.104702
+Liao, C., Tesfa, T., Duan, Z., & Leung, L. R. (2020). Watershed delineation on a hexagonal mesh grid. Environmental Modelling & Software, 104702. https://doi.org/10.1016/j.envsoft.2020.104702
 
 Liao, C. (2020) HexWatershed (Version 1.0.0). Zenodo.
 http://doi.org/10.5281/zenodo.3949225
