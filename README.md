@@ -1,4 +1,7 @@
 # HexWatershed
+
+![](https://zenodo.org/badge/DOI/10.5281/zenodo.3949225.svg?raw=true)
+
 HexWatershed is a hydrologic routing model based on the hexagon mesh framework.
 
 # Abstarct
@@ -24,8 +27,8 @@ https://www.sciencedirect.com/science/article/pii/S1364815219308278
 
 https://doi.org/10.1016/j.envsoft.2020.104702
 
-![](https://zenodo.org/badge/DOI/10.5281/zenodo.3949225.svg?raw=true)
-
+Liao, C. (2020) HexWatershed (Version 1.0.0). Zenodo.
+http://doi.org/10.5281/zenodo.3949225
 
 # Acknowledgement
 The research described in this paper was primarily funded by a Laboratory Directed Research and Development (LDRD) Program Quickstarter project at Pacific Northwest National Laboratory. CL and LRL were also partly supported by U.S. Department of Energy Office of Science Biological and Environmental Research through the Earth and Environmental System Modeling program as part of the Energy Exascale Earth System Model (E3SM) project. The data used for model simulations are listed in the tables and all input data and model outputs are archived on the computers at PNNL and will be available by contacting Chang Liao (chang.liao@pnnl.gov). A portion of this research was performed using PNNL Research Computing at Pacific Northwest National Laboratory. PNNL is operated for DOE by Battelle Memorial Institute under contract DE-AC05-76RL01830.
