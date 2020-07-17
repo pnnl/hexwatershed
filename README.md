@@ -22,6 +22,8 @@ Liao, C., Tesfa, T., Duan, Z., & Leung, L. R. (2020). Watershed delineation on a
 
 https://www.sciencedirect.com/science/article/pii/S1364815219308278
 
+https://doi.org/10.1016/j.envsoft.2020.104702
+
 ![](https://zenodo.org/badge/DOI/10.5281/zenodo.3949225.svg?raw=true)
 
 
