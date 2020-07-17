@@ -12,6 +12,9 @@
 
 #include "conversion.h"
 
+
+
+
 /**
  * @brief it is used to convert integer to string since c++ 11 doesn't support well
  * 
@@ -19,15 +22,6 @@
  * @return std::string 
  */
 std::string convert_integer_to_string(int iNumber_in)
-{
-	std::string str_out;
-	std::stringstream ss;
-	ss << iNumber_in;
-	str_out = ss.str();
-	return str_out;
-}
-
-std::string convert_long_to_string(long iNumber_in)
 {
 	std::string str_out;
 	std::stringstream ss;

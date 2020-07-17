@@ -4,10 +4,7 @@
  * @brief The header file of the conversion source file
  * @version 0.1
  * @date 2019-08-02
- * @citation Liao, C., Tesfa, T., Duan, Z., & Leung, L. R. (2020). 
- * Watershed delineation on a hexagonal mesh grid. Environmental Modelling & Software, 104702.
- * https://www.sciencedirect.com/science/article/pii/S1364815219308278
- * @github page https://github.com/changliao1025/hexwatershed
+ * 
  * @copyright Copyright (c) 2019
  * 
  */
@@ -42,7 +39,7 @@ double convert_from_joule_per_meter_to_calorie_per_centimeter(double dJoule_per_
 double convert_from_calorie_per_centimeter_to_joule_per_meter(double dCalorie_per_centimeter_in);
 
 std::string convert_integer_to_string(int iNumber_in);
-std::string convert_long_to_string(long iNumber_in);
+
 std::string convert_integer_to_string(int iNumber_in,
 	int iWidth_in);
 std::string convert_double_to_string( double dNumber_in);

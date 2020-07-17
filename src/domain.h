@@ -5,10 +5,7 @@
  * @brief Header file of the domain class
  * @version 0.1
  * @date 2019-08-02
- * @citation Liao, C., Tesfa, T., Duan, Z., & Leung, L. R. (2020). 
- * Watershed delineation on a hexagonal mesh grid. Environmental Modelling & Software, 104702.
- * https://www.sciencedirect.com/science/article/pii/S1364815219308278
- * @github page https://github.com/changliao1025/hexwatershed
+ * 
  * @copyright Copyright (c) 2019
  * 
  */
@@ -21,7 +18,6 @@
 #include <queue>
 #include <numeric>
 #include <utility>
-#include <netcdf>
 
 #include "ogrsf_frmts.h"
 #include "system.h"
@@ -30,8 +26,6 @@
 #include "conversion.h"
 
 using namespace std;
-using namespace netCDF;
-using namespace netCDF::exceptions;
 
 enum eVariable
 {
@@ -46,13 +40,6 @@ enum eVariable
   eV_wetness_index,
 };
 
-enum eFileTypeIO
-{
-  eFT_netcdf,
-  eFT_shapefile,
-  eFT_txt,
-};
-
 namespace hexwatershed
 {
 class domain
@@ -61,16 +48,11 @@ public:
   domain();
 
   domain(std::string sFilename_configuration);
-  ~domain();
 
- int iFile_type_io; //used for file io
- eFileTypeIO eFile_type_io; //used for file io
+  ~domain();
 
   int iFlag_debug;
   int iFlag_merge;
-  int iFlag_netcdf;
-  int iFlag_netcdf_dem;
- 
   int iFlag_configuration_file;
 
   int iFlag_hexagon_point;   //user provided point hexagon
@@ -104,8 +86,6 @@ public:
   std::string sFilename_configuration;
   std::string sFilename_log;
   std::string sLog;
-
-  std::string sFilename_hexagon_netcdf;
 
   std::string sFilename_hexagon_point_shapefile;
   std::string sFilename_hexagon_polygon_shapefile;
@@ -154,10 +134,6 @@ public:
   std::string sFilename_flow_direction_polyline_debug;
   std::string sFilename_stream_order_polyline;
 
-  //vtk
-  std::string sFilename_vtk;
-  std::string sFilename_vtk_debug;
-
   //others
 
   std::string sFilename_watershed_characteristics;
@@ -175,7 +151,6 @@ public:
   std::vector<segment> vSegment;
   std::vector<float> vElevation;
   std::vector<hexagon> vConfluence;
-  std::vector<vertex> vVertex_active;  
 
   OGRSpatialReference *oSRS;
 
@@ -190,17 +165,17 @@ public:
 
   int domain_retrieve_user_input();
 
-  int domain_read_cell_information_by_shapefile(std::string sFilename_hexagon_point_shapefile_in,
+  int domain_read_all_cell_information(std::string sFilename_hexagon_point_shapefile_in,
                                        std::string sFilename_hexagon_polygon_shapefile_in,
                                        std::string sFilename_elevation_in);
-int domain_read_cell_information_by_netcdf(std::string sFilename_hexagon_netcdf_in,   std::string sFilename_elevation_in);
+
   int read_digital_elevation_model(std::string sFilename_elevation_in);
 
   int read_hexagon_point_shapefile(std::string sFilename_hexagon_point_shapefile_in);
 
   int read_hexagon_polygon_shapefile(std::string sFilename_hexagon_polygon_shapefile_in);
 
-  int domain_assign_elevation_to_hexagon();
+  int domain_calculate_hexagon_polygon_center_location();
 
   int domain_initialize_model();
 
@@ -258,15 +233,11 @@ int domain_read_cell_information_by_netcdf(std::string sFilename_hexagon_netcdf_
                                   std::string sFieldname_in,
                                   std::string sFilename_in,
                                   std::string sLayername_in);
- 
-
 
   int domain_save_polygon_vector(eVariable eV_in,
                                  std::string sFieldname_in,
                                  std::string sFilename_in,
                                  std::string sLayer_name_in);
-
- int domain_save_vtk(    std::string sFilename_in);
 
   int domain_cleanup();
 
