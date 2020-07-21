@@ -1,7 +1,5 @@
 # HexWatershed
 
-![](https://zenodo.org/badge/DOI/10.5281/zenodo.3949225.svg?raw=true)
-
 HexWatershed is a hydrologic routing model based on the hexagon mesh framework.
 
 # Abstarct
@@ -21,13 +19,15 @@ Spatial discretization is the cornerstone of all spatially-distributed numerical
    
 ![Flow direction](https://github.com/pnnl/hexwatershed/blob/master/example/stream_topology.png?raw=true)
 # Citation
+
 Liao, C., Tesfa, T., Duan, Z., & Leung, L. R. (2020). Watershed delineation on a hexagonal mesh grid. Environmental Modelling & Software, 104702. https://doi.org/10.1016/j.envsoft.2020.104702
 
-Liao, C. (2020) HexWatershed (Version 1.0.0). Zenodo.
-http://doi.org/10.5281/zenodo.3949225
 
 # Acknowledgement
-The research described in this paper was primarily funded by a Laboratory Directed Research and Development (LDRD) Program Quickstarter project at Pacific Northwest National Laboratory. CL and LRL were also partly supported by U.S. Department of Energy Office of Science Biological and Environmental Research through the Earth and Environmental System Modeling program as part of the Energy Exascale Earth System Model (E3SM) project. The data used for model simulations are listed in the tables and all input data and model outputs are archived on the computers at PNNL and will be available by contacting Chang Liao (chang.liao@pnnl.gov). A portion of this research was performed using PNNL Research Computing at Pacific Northwest National Laboratory. PNNL is operated for DOE by Battelle Memorial Institute under contract DE-AC05-76RL01830.
+The model described in this repository was primarily funded by a Laboratory Directed Research and Development (LDRD) Program Quickstarter project at Pacific Northwest National Laboratory. 
+This work was also supported by theEarth System Model Development and Regional and Global Modeling and Analysis program areas of the U.S. Department of Energy, Office of Science, Office of Biological and Environmental Research as part of the multi-program, collaborative Integrated Coastal Modeling (ICoM) project.
+CL was also partly supported by U.S. Department of Energy Office of Science Biological and Environmental Research through the Earth and Environmental System Modeling program as part of the Energy Exascale Earth System Model (E3SM) project. 
+A portion of this research was performed using PNNL Research Computing at Pacific Northwest National Laboratory. PNNL is operated for DOE by Battelle Memorial Institute under contract DE-AC05-76RL01830.
 
 # Compile
 1. git clone git@github.com:pnnl/hexwatershed.git
