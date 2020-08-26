@@ -44,5 +44,6 @@ In order to run the program, you need to prepare a few input files:
 2. A DEM
 
 # Contact
-Please contact Chang Liao (chang.liao@pnnl.gov) if you have any questions.
+We are now using the Issue (https://github.com/pnnl/hexwatershed/issues) for Q&A.
+For other types of questions, please contact Chang Liao (chang.liao@pnnl.gov).
 
