@@ -7,5 +7,6 @@ https://github.com/pnnl/hexwatershed
 Newer version which includes NetCDF and VTK support will be released upon request.
 
 # Contact
-Please contact Chang Liao (chang.liao@pnnl.gov) if you have any questions.
+We are now using the issue for Q&A. Please navigate to https://github.com/pnnl/hexwatershed/issues if you have technical issues.
 
+For other types of questions, you can ask in the Slack hexwatershed channel. Send an email to changliao.climate@gmail.com with your preferred email address.
