@@ -2,7 +2,9 @@
 
 HexWatershed is a hydrologic routing model based on the hexagon mesh framework.
 
-Please navigate to https://github.com/changliao1025/hexwatershed for latest version information.
+Please navigate to https://github.com/changliao1025/hexwatershed for latest version information such as VTK support and Global Routing Map.
+Global Routing Map: https://youtu.be/t86fTpJX9Es
+VTK support: https://youtu.be/Vuqz3hdRK0s
 
 # Abstarct
 
