@@ -99,5 +99,6 @@ In order to run the program, you need to prepare a few input files:
 
 # Contact
 We are now using the Issue (https://github.com/pnnl/hexwatershed/issues) for Q&A.
+For more about HexWatershed, please go to (https://www.hexwatershed.org)
 For other types of questions, please contact Chang Liao (chang.liao@pnnl.gov).
 
