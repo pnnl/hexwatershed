@@ -2,26 +2,67 @@
 
 HexWatershed is a hydrologic routing model based on the hexagon mesh framework.
 
-Please navigate to https://github.com/changliao1025/hexwatershed for latest version information such as VTK support and Global Routing Map.
-Global Routing Map: https://youtu.be/t86fTpJX9Es
-VTK support: https://youtu.be/Vuqz3hdRK0s
 
 # Abstarct
 
 Spatial discretization is the cornerstone of all spatially-distributed numerical simulations including watershed hydrology. Traditional square grid spatial discretization has several limitations including inability to represent adjacency uniformly. In this study, we developed a watershed delineation model (HexWatershed) based on the hexagon grid spatial discretization. We applied this model to two different types of watershed in the US and we evaluated its performance against the traditional method. The comparisons show that the hexagon grid spatial discretization exhibits many advantages over the tradition method. We propose that spatially distributed hydrologic simulations should consider using a hexagon grid spatial discretization.
 
-# Illustration 
+# Introduction
+
+Spatial discretization is the cornerstone of all spatially distributed numerical simulations including hydrologic simulations. In hydrologic modeling the study domain is commonly discretized using a Square Grid Spatial Discretization (SGSD). Few studies have investigated the performance of other spatial discretizations such as Hexagon Grid Spatial Discretization (HGSD) in hydrology.
+
+In Geographic Information System (GIS), SGSD is the most widely used approach to represent spatial information. For example, a raster Digital Elevation Model (DEM) dateset is usually used to describe the surface elevation of a Region Of Interest (ROI) on the Earth's surface \citep{Gesch2002}. Because SGSD data structure can be represented by a rectangular array /matrix directly, it is convenient for computation, analysis, visualization and storage. However, SGSD has several limitations:
+* SGSD cannot represent adjacency uniformly
+* SGSD will create ``island'' effect due to the differences in D4 and D8 neighbor definitions
+* SGSD cannot effectively represent a spherical topology
+
+In contrast, the HGSD method can resolve these limitations:
+* In HGSD, each grid has only one type of neighbor with the same connectivity and distance As a result, we can route both surface and subsurface water flow consistently without using different weights, thus getting rid of the decadal old assumption on travel length. This will improve spatially distributed hydrologic models that rely on grid connectivity.
+* The ``island'' effect is automatically eliminated because all neighbors are connected through faces. No manual corrections are needed to resolve the diagonal traveling path issue. 
+* It can provide continental to global coverage at consistent or variable spatial resolutions. It can be used to couple land surface/hydrologic models with oceanic models using a unified mesh grid (e.g., the Voronoi tessellation of the Model for Prediction Across Scale (MPAS)).
+
+Additionally, it has other advantages:
+
+* It can be used for coupled surface (D6) and subsurface (9-point structured connectivity) hydrologic modeling to resolve the inconsistency in connectivity.
+* The conceptual model is more compatible with the flow width information because the flow path can be contained within the grid boundary.
+* It can improve model performance as many studies show that numerical simulations based on hexagon grid perform better when compared with other mesh grids. 
+* Other flow direction methods (e.g., D-infinity) can also be implemented on HGSD with modifications to improve flow direction and partitions.
+
+In this study, we made the first attempt to develop a watershed delineation model (HexWatershed) with a set of algorithms based on the HGSD method. 
+
+# Algorithms
+Following the traditional watershed delineation algorithms, we developed a list of algorithms for the HGSD method. 
+Because these algorithms are fundamentally similar in principle, we mainly focus on the differences that were introduced in the new model.
 1. Depression filling
-   
+Similar to traditional DEM, hexagonal DEM could potentially have local depressions when generated. We developed an algorithm following the method proposed by Richard Barnes, which uses the priority-flood method to fill the depressions in any grid system \citep{Barnes2014}. Priority-flood is an efficient algorithm to fill DEM depressions by sequentially ``flooding" the domain from the boundary inward to adjust elevations to assure that surface will drain.    
+
 ![Depression filling](https://github.com/pnnl/hexwatershed/blob/master/example/depression_filling.png?raw=true)
 
 2. Flow direction
-   
+Flow direction is defined from the hexagon center to the center of neighbor hexagon which has the lowest elevation. In other words, flow direction is the flow path which has the steepest slope.
+
+3. Flow accumulation
+We developed a flow accumulation algorithm based on the concept from ArcGIS flow accumulation. In short, this algorithm scans all the hexagon grids and sums up the accumulations once all the accumulations of upslope hexagons are calculated. It runs recursively until accumulations of all hexagons are calculated.
+
+4. Stream topology
+Stream topology is defined based on the stream reaches information.   
+![Stream topology](https://github.com/pnnl/hexwatershed/blob/master/example/stream_topology.png?raw=true)
+
+# Results
+
+1. Flow direction
+Flow direction is defined from the hexagon center to the center of neighbor hexagon which has the lowest elevation. In other words, flow direction is the flow path which has the steepest slope.
 ![Flow direction](https://github.com/pnnl/hexwatershed/blob/master/example/cbf_flow_direction_90_full.png?raw=true)
 
-3. Stream topology
-   
-![Flow direction](https://github.com/pnnl/hexwatershed/blob/master/example/stream_topology.png?raw=true)
+2. Flow accumulation
+![Flow accumulation](https://github.com/pnnl/hexwatershed/blob/master/example/cbf_flow_accumulation_90_full.png?raw=true)
+
+3. Subbasin
+![Subbasin](https://github.com/pnnl/hexwatershed/blob/master/example/cbf_subbasin_90_full.png?raw=true)
+
+3. Stream order
+![Stream order](https://github.com/pnnl/hexwatershed/blob/master/example/cbf_stream_order_90_full.png?raw=true)
+
 # Citation
 
 Liao, C., Tesfa, T., Duan, Z., & Leung, L. R. (2020). Watershed delineation on a hexagonal mesh grid. Environmental Modelling & Software, 104702. https://doi.org/10.1016/j.envsoft.2020.104702
