@@ -59,7 +59,7 @@ Flow direction is defined from the hexagon center to the center of neighbor hexa
 We developed a flow accumulation algorithm based on the concept from ArcGIS flow accumulation. In short, this algorithm scans all the hexagon grids and sums up the accumulations once all the accumulations of upslope hexagons are calculated. It runs recursively until accumulations of all hexagons are calculated.
 
 4. Stream topology
-Stream topology is defined based on the stream reaches information.   
+Stream topology is defined based on the stream reaches information.
 ![Stream topology](https://github.com/pnnl/hexwatershed/blob/master/example/stream_topology.png?raw=true)
 
 # Results
