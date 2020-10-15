@@ -22,9 +22,9 @@ Spatial discretization is the cornerstone of all spatially-distributed numerical
 
 # Introduction
 
-Spatial discretization is the cornerstone of all spatially distributed numerical simulations including hydrologic simulations. In hydrologic modeling the study domain is commonly discretized using a Square Grid Spatial Discretization (SGSD). Few studies have investigated the performance of other spatial discretizations such as Hexagon Grid Spatial Discretization (HGSD) in hydrology.
+Spatial discretization is the cornerstone of all spatially distributed numerical simulations including hydrologic simulations. In hydrologic modeling the study domain is commonly discretized using a Square Grid Spatial Discretization (SGSD). Few studies have investigated the performance of other spatial discretizations such as Hexagon Grid Spatial Discretization (HGSD) in hydrology [@Weller2009].
 
-In Geographic Information System (GIS), SGSD is the most widely used approach to represent spatial information. For example, a raster Digital Elevation Model (DEM) dateset is usually used to describe the surface elevation of a Region Of Interest (ROI) on the Earth's surface \citep{Gesch2002}. Because SGSD data structure can be represented by a rectangular array /matrix directly, it is convenient for computation, analysis, visualization and storage. However, SGSD has several limitations:
+In Geographic Information System (GIS), SGSD is the most widely used approach to represent spatial information. For example, a raster Digital Elevation Model (DEM) dateset is usually used to describe the surface elevation of a Region Of Interest (ROI) on the Earth's surface [@Gesch2002]. Because SGSD data structure can be represented by a rectangular array/matrix directly, it is convenient for computation, analysis, visualization and storage. However, SGSD has several limitations:
 * SGSD cannot represent adjacency uniformly
 * SGSD will create ``island'' effect due to the differences in D4 and D8 neighbor definitions
 * SGSD cannot effectively represent a spherical topology
@@ -44,10 +44,11 @@ Additionally, it has other advantages:
 In this study, we made the first attempt to develop a watershed delineation model (HexWatershed) with a set of algorithms based on the HGSD method. 
 
 # Algorithms
-Following the traditional watershed delineation algorithms, we developed a list of algorithms for the HGSD method. 
+
+Following the traditional watershed delineation algorithms, we developed a list of algorithms for the HGSD method [@Liao2020]. 
 Because these algorithms are fundamentally similar in principle, we mainly focus on the differences that were introduced in the new model.
 1. Depression filling
-Similar to traditional DEM, hexagonal DEM could potentially have local depressions when generated. We developed an algorithm following the method proposed by Richard Barnes, which uses the priority-flood method to fill the depressions in any grid system \citep{Barnes2014}. Priority-flood is an efficient algorithm to fill DEM depressions by sequentially ``flooding" the domain from the boundary inward to adjust elevations to assure that surface will drain.    
+Similar to traditional DEM, hexagonal DEM could potentially have local depressions when generated. We developed an algorithm following the method proposed by Richard Barnes, which uses the priority-flood method to fill the depressions in any grid system [@Barnes2014]. Priority-flood is an efficient algorithm to fill DEM depressions by sequentially ``flooding" the domain from the boundary inward to adjust elevations to assure that surface will drain.
 
 ![Depression filling](https://github.com/pnnl/hexwatershed/blob/master/example/depression_filling.png?raw=true)
 
@@ -82,10 +83,6 @@ We have developed a watershed delineation model (HexWatershed) using the hexagon
 
 Our model can be applied to continental or global scale to improve large scale hydrologic simulations.
 
-# Citation
-
-Liao, C., Tesfa, T., Duan, Z., & Leung, L. R. (2020). Watershed delineation on a hexagonal mesh grid. Environmental Modelling & Software, 104702. https://doi.org/10.1016/j.envsoft.2020.104702
-
 
 # Acknowledgement
 The model described in this repository was supported by
@@ -97,3 +94,6 @@ The model described in this repository was supported by
 A portion of this research was performed using PNNL Research Computing at Pacific Northwest National Laboratory. 
 
 PNNL is operated for DOE by Battelle Memorial Institute under contract DE-AC05-76RL01830.
+
+# References
+
