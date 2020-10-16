@@ -48,46 +48,52 @@ Additionally, it has other advantages:
 * It can improve model performance as many studies show that numerical simulations based on hexagon grid perform better when compared with other mesh grids. 
 * Other flow direction methods (e.g., D-infinity) can also be implemented on HGSD with modifications to improve flow direction and partitions [@Tarboton1991].
 
-In this study, we made the first attempt to develop a watershed delineation model (HexWatershed) with a set of algorithms based on the HGSD method. 
+In this study, we made the first attempt to develop a watershed delineation model (HexWatershed) with a set of algorithms based on the HGSD method. And we applied this model in a watershed within the Columbia river basin to demonstrate its capability.
 
 # Algorithms
 
 Following the traditional watershed delineation algorithms, we developed a list of algorithms for the HGSD method [@Liao2020]. 
 Because these algorithms are fundamentally similar in principle, we mainly focus on the differences that were introduced in the new model.
+
 1. Depression filling
+
 Similar to traditional DEM, hexagonal DEM could potentially have local depressions when generated. We developed an algorithm following the method proposed by Richard Barnes, which uses the priority-flood method to fill the depressions in any grid system [@Barnes2014]. Priority-flood is an efficient algorithm to fill DEM depressions by sequentially ``flooding" the domain from the boundary inward to adjust elevations to assure that surface will drain.
 
-![Depression filling](https://github.com/pnnl/hexwatershed/blob/master/example/depression_filling.png?raw=true)
+![Illustration of the priority-flood depression filling for the HGSD method.](https://github.com/pnnl/hexwatershed/blob/master/example/depression_filling.png?raw=true)
 
 2. Flow direction
+
 Flow direction is defined from the hexagon center to the center of neighbor hexagon which has the lowest elevation. In other words, flow direction is the flow path which has the steepest slope.
 
 3. Flow accumulation
+
 We developed a flow accumulation algorithm based on the concept from ArcGIS flow accumulation. In short, this algorithm scans all the hexagon grids and sums up the accumulations once all the accumulations of upslope hexagons are calculated. It runs recursively until accumulations of all hexagons are calculated.
 
 4. Stream topology
+
 Stream topology is defined based on the stream reaches information.
 
-![Stream topology](https://github.com/pnnl/hexwatershed/blob/master/example/stream_topology.png?raw=true)
+![Illustration of the stream topology. Different colors represent 4 different stream segments, respectively. Each stream segment is made up by several stream reaches.](https://github.com/pnnl/hexwatershed/blob/master/example/stream_topology.png?raw=true)
 
 # Results
 
 1. Flow direction
+
 Flow direction is defined from the hexagon center to the center of neighbor hexagon which has the lowest elevation. In other words, flow direction is the flow path which has the steepest slope.
 
-![Flow direction](https://github.com/pnnl/hexwatershed/blob/master/example/cbf_flow_direction_90_full.png?raw=true)
+![The spatial distribtuion of flow direction.](https://github.com/pnnl/hexwatershed/blob/master/example/cbf_flow_direction_90_full.png?raw=true)
 
 2. Flow accumulation
 
-![Flow accumulation](https://github.com/pnnl/hexwatershed/blob/master/example/cbf_flow_accumulation_90_full.png?raw=true)
+![The spatial distribtuion of flow accumulation.](https://github.com/pnnl/hexwatershed/blob/master/example/cbf_flow_accumulation_90_full.png?raw=true)
 
 3. Subbasin
 
-![Subbasin](https://github.com/pnnl/hexwatershed/blob/master/example/cbf_subbasin_90_full.png?raw=true)
+![The spatial distribtuion of subbasin boundary.](https://github.com/pnnl/hexwatershed/blob/master/example/cbf_subbasin_90_full.png?raw=true)
 
 3. Stream order
 
-![Stream order](https://github.com/pnnl/hexwatershed/blob/master/example/cbf_stream_order_90_full.png?raw=true)
+![The spatial distribtuion of stream order.](https://github.com/pnnl/hexwatershed/blob/master/example/cbf_stream_order_90_full.png?raw=true)
 
 # Conclusion
 
