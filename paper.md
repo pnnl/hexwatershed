@@ -1,5 +1,5 @@
 ---
-title: 'HexWatershed: A watershed delineation model based on hexagonal mesh grid'
+title: 'HexWatershed: A watershed delineation model based on a hexagonal mesh grid'
 
 tags:
   - C/C++
@@ -7,7 +7,7 @@ tags:
   - watershed delineation
   - terrain analysis
   - geographic information system
-  
+
 authors:
   - name: Chang Liao
     orcid: 0000-0002-7348-8858    
@@ -37,7 +37,7 @@ In Geographic Information System (GIS), SGSD is the most widely used approach to
 In contrast, the HGSD method can resolve these limitations:
 * In HGSD, each grid has only one type of neighbor with the same connectivity and distance As a result, we can route both surface and subsurface water flow consistently without using different weights, thus getting rid of the decadal old assumption on travel length. This will improve spatially distributed hydrologic models that rely on grid connectivity.
 * The ``island'' effect is automatically eliminated because all neighbors are connected through faces. No manual corrections are needed to resolve the diagonal traveling path issue. 
-* It can provide continental to global coverage at consistent or variable spatial resolutions. It can be used to couple land surface/hydrologic models with oceanic models using a unified mesh grid (e.g., the Voronoi tessellation of the Model for Prediction Across Scale (MPAS)) [@Sahr2019].
+* It can provide continental to global coverage at consistent or variable spatial resolutions. It can be used to couple land surface/hydrologic models with oceanic models using a unified mesh grid (e.g., the Voronoi tessellation of the Model for Prediction Across Scale (MPAS)) [@Ringler2013, @Sahr2019].
 
 Additionally, it has other advantages:
 
@@ -65,21 +65,26 @@ We developed a flow accumulation algorithm based on the concept from ArcGIS flow
 
 4. Stream topology
 Stream topology is defined based on the stream reaches information.
+
 ![Stream topology](https://github.com/pnnl/hexwatershed/blob/master/example/stream_topology.png?raw=true)
 
 # Results
 
 1. Flow direction
 Flow direction is defined from the hexagon center to the center of neighbor hexagon which has the lowest elevation. In other words, flow direction is the flow path which has the steepest slope.
+
 ![Flow direction](https://github.com/pnnl/hexwatershed/blob/master/example/cbf_flow_direction_90_full.png?raw=true)
 
 2. Flow accumulation
+
 ![Flow accumulation](https://github.com/pnnl/hexwatershed/blob/master/example/cbf_flow_accumulation_90_full.png?raw=true)
 
 3. Subbasin
+
 ![Subbasin](https://github.com/pnnl/hexwatershed/blob/master/example/cbf_subbasin_90_full.png?raw=true)
 
 3. Stream order
+
 ![Stream order](https://github.com/pnnl/hexwatershed/blob/master/example/cbf_stream_order_90_full.png?raw=true)
 
 # Conclusion
