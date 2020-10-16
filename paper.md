@@ -7,21 +7,19 @@ tags:
   - watershed delineation
   - terrain analysis
   - geographic information system
-
+  
 authors:
   - name: Chang Liao
-
-    orcid: 0000-0002-7348-8858
-    
+    orcid: 0000-0002-7348-8858    
     affiliation: 1
 
 affiliations:
  - name: Atmospheric Sciences and Global Change, Pacific Northwest National Laboratory
    index: 1 
-
 date: 15 October 2020
 
 bibliography: paper.bib
+---
 
 # Abstarct
 
