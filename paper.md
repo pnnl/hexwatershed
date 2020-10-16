@@ -31,9 +31,9 @@ Spatial discretization is the cornerstone of all spatially distributed numerical
 
 In Geographic Information System (GIS), SGSD is the most widely used approach to represent spatial information. For example, a raster Digital Elevation Model (DEM) dateset is usually used to describe the surface elevation of a Region Of Interest (ROI) on the Earth's surface [@Gesch2002]. Because SGSD data structure can be represented by a rectangular array/matrix directly, it is convenient for computation, analysis, visualization and storage. However, SGSD has several limitations:
 
-* SGSD cannot represent adjacency uniformly
-* SGSD will create island effect due to the differences in D4 and D8 neighbor definitions [@Johnston2009]
-* SGSD cannot effectively represent a spherical topology 
+* SGSD cannot represent adjacency uniformly [@DeSousa2006].
+* SGSD will create island effect due to the differences in D4 and D8 neighbor definitions [@Johnston2009].
+* SGSD cannot effectively represent a spherical topology. 
 
 In contrast, the HGSD method can resolve these limitations [@Liao2020]:
 
@@ -43,9 +43,9 @@ In contrast, the HGSD method can resolve these limitations [@Liao2020]:
 
 Additionally, it has other advantages:
 
-* It can be used for coupled surface (D6) and subsurface (9-point structured connectivity) hydrologic modeling to resolve the inconsistency in connectivity.
+* It can be used for coupled surface (D6) and subsurface (9-point structured connectivity) hydrologic modeling to resolve the inconsistency in connectivity [@Markstrom2008].
 * The conceptual model is more compatible with the flow width information because the flow path can be contained within the grid boundary.
-* It can improve model performance as many studies show that numerical simulations based on hexagon grid perform better when compared with other mesh grids. 
+* It can improve model performance as many studies show that numerical simulations based on hexagon grid perform better when compared with other mesh grids [@Randall2002]. 
 * Other flow direction methods (e.g., D-infinity) can also be implemented on HGSD with modifications to improve flow direction and partitions [@Tarboton1991].
 
 In this study, we developed a watershed delineation model (HexWatershed) with a set of algorithms based on the HGSD method. And we applied this model to a watershed within the Columbia river basin to demonstrate its capability.
@@ -67,7 +67,7 @@ Flow direction is defined from the hexagon center to the center of neighbor hexa
 
 3. Flow accumulation
 
-We developed a flow accumulation algorithm based on the concept from ArcGIS flow accumulation. In short, this algorithm scans all the hexagon grids and sums up the accumulations once all the accumulations of upslope hexagons are calculated. It runs recursively until accumulations of all hexagons are calculated.
+We developed a flow accumulation algorithm based on the concept from ArcGIS flow accumulation [@Tarboton1991]. In short, this algorithm scans all the hexagon grids and sums up the accumulations once all the accumulations of upslope hexagons are calculated. It runs recursively until accumulations of all hexagons are calculated.
 
 4. Stream topology
 
