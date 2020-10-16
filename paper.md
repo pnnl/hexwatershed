@@ -1,5 +1,5 @@
 ---
-title: 'HexWatershed: A watershed delineation model based on a hexagonal mesh grid'
+title: 'HexWatershed: A new watershed delineation model based on hexagon grids'
 
 tags:
   - C/C++
@@ -14,7 +14,7 @@ authors:
     affiliation: 1
 
 affiliations:
- - name: Atmospheric Sciences and Global Change, Pacific Northwest National Laboratory
+ - name: Atmospheric Sciences and Global Change, Pacific Northwest National Laboratory, Richland, WA, USA
    index: 1 
 date: 15 October 2020
 
@@ -23,28 +23,28 @@ bibliography: paper.bib
 
 # Abstarct
 
-Spatial discretization is the cornerstone of all spatially-distributed numerical simulations including watershed hydrology. Traditional square grid spatial discretization has several limitations including inability to represent adjacency uniformly. In this study, we developed a watershed delineation model (HexWatershed) based on the hexagon grid spatial discretization. We applied this model to two different types of watershed in the US and we evaluated its performance against the traditional method. The comparisons show that the hexagon grid spatial discretization exhibits many advantages over the tradition method. We propose that spatially distributed hydrologic simulations should consider using a hexagon grid spatial discretization.
+Spatial discretization is the cornerstone of all spatially-distributed numerical simulations including watershed hydrology. Traditional square grid spatial discretization has several limitations including inability to represent adjacency uniformly. In this study, we developed a watershed delineation model (HexWatershed) based on the hexagon grid spatial discretization. Model evaluations show that the hexagon grid spatial discretization exhibits many advantages over the tradition method. We propose that spatially distributed hydrologic simulations should consider using a hexagon grid spatial discretization.
 
 # Introduction
 
 Spatial discretization is the cornerstone of all spatially distributed numerical simulations including hydrologic simulations. In hydrologic modeling the study domain is commonly discretized using a Square Grid Spatial Discretization (SGSD). Few studies have investigated the performance of other spatial discretizations such as Hexagon Grid Spatial Discretization (HGSD) in hydrology [@Weller2009].
 
 In Geographic Information System (GIS), SGSD is the most widely used approach to represent spatial information. For example, a raster Digital Elevation Model (DEM) dateset is usually used to describe the surface elevation of a Region Of Interest (ROI) on the Earth's surface [@Gesch2002]. Because SGSD data structure can be represented by a rectangular array/matrix directly, it is convenient for computation, analysis, visualization and storage. However, SGSD has several limitations:
-* SGSD cannot represent adjacency uniformly
-* SGSD will create ``island'' effect due to the differences in D4 and D8 neighbor definitions
-* SGSD cannot effectively represent a spherical topology
+- SGSD cannot represent adjacency uniformly
+- SGSD will create island effect due to the differences in D4 and D8 neighbor definitions
+- SGSD cannot effectively represent a spherical topology
 
 In contrast, the HGSD method can resolve these limitations:
-* In HGSD, each grid has only one type of neighbor with the same connectivity and distance As a result, we can route both surface and subsurface water flow consistently without using different weights, thus getting rid of the decadal old assumption on travel length. This will improve spatially distributed hydrologic models that rely on grid connectivity.
-* The ``island'' effect is automatically eliminated because all neighbors are connected through faces. No manual corrections are needed to resolve the diagonal traveling path issue. 
-* It can provide continental to global coverage at consistent or variable spatial resolutions. It can be used to couple land surface/hydrologic models with oceanic models using a unified mesh grid (e.g., the Voronoi tessellation of the Model for Prediction Across Scale (MPAS)) [@Ringler2013, @Sahr2019].
+- In HGSD, each grid has only one type of neighbor with the same connectivity and distance As a result, we can route both surface and subsurface water flow consistently without using different weights, thus getting rid of the decadal old assumption on travel length. This will improve spatially distributed hydrologic models that rely on grid connectivity.
+- The island effect is automatically eliminated because all neighbors are connected through faces. No manual corrections are needed to resolve the diagonal traveling path issue. 
+- It can provide continental to global coverage at consistent or variable spatial resolutions. It can be used to couple land surface/hydrologic models with oceanic models using a unified mesh grid (e.g., the Voronoi tessellation of the Model for Prediction Across Scale (MPAS)) [@Ringler2013, @Sahr2019].
 
 Additionally, it has other advantages:
 
-* It can be used for coupled surface (D6) and subsurface (9-point structured connectivity) hydrologic modeling to resolve the inconsistency in connectivity.
-* The conceptual model is more compatible with the flow width information because the flow path can be contained within the grid boundary.
-* It can improve model performance as many studies show that numerical simulations based on hexagon grid perform better when compared with other mesh grids. 
-* Other flow direction methods (e.g., D-infinity) can also be implemented on HGSD with modifications to improve flow direction and partitions [@Tarboton1991].
+- It can be used for coupled surface (D6) and subsurface (9-point structured connectivity) hydrologic modeling to resolve the inconsistency in connectivity.
+- The conceptual model is more compatible with the flow width information because the flow path can be contained within the grid boundary.
+- It can improve model performance as many studies show that numerical simulations based on hexagon grid perform better when compared with other mesh grids. 
+- Other flow direction methods (e.g., D-infinity) can also be implemented on HGSD with modifications to improve flow direction and partitions [@Tarboton1991].
 
 In this study, we made the first attempt to develop a watershed delineation model (HexWatershed) with a set of algorithms based on the HGSD method. 
 
