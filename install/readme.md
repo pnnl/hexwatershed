@@ -44,5 +44,5 @@ The highlight rectangle is where you can change the gdal library.
 ./make.sh
 ```
 ![Run make](https://github.com/pnnl/hexwatershed/blob/master/install/figure/make_result.png?raw=true)
-* By now, your build should be successful if you receive no errors.
-
+* By now, your build should be successful if you receive no errors. And you will see the binary file in the CMake folder and another one within the repository as well.
+![Installation output](https://github.com/pnnl/hexwatershed/blob/master/install/figure/final.png?raw=true)
