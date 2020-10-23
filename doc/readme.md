@@ -9,4 +9,7 @@ In this instruction, I only use a Linux machine as an example. For other platfor
 Figures provided to illustrate the steps when needed.
 
 * In the terminal, create a folder for this project
-* Clone the repository into the folder with "git clone git@github.com:pnnl/hexwatershed.git"
+* Clone the repository into the folder with 
+```
+git clone git@github.com:pnnl/hexwatershed.git"
+```
