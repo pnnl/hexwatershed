@@ -2,17 +2,14 @@
 
 HexWatershed is a hydrologic routing model based on the hexagon mesh framework.
 
-# Compile
-1. git clone git@github.com:pnnl/hexwatershed.git
-2. Navigate to the directory which has the CMakeLists.txt file
-3. Adjust your configuration of the CMakeLists.txt
-4. cmake CMakeLists.txt
-5. make
+# Build
+Please refer the installation documentation for details.
+https://github.com/pnnl/hexwatershed/tree/master/install
 
 # Usage
-In order to run the program, you need to prepare a few input files:
-1. A hexagon grid
-2. A DEM
+Please refer the example documentation for details.
+https://github.com/pnnl/hexwatershed/tree/master/example
+
 
 # Acknowledgement
 The model described in this repository was supported by
