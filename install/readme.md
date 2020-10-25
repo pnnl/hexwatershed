@@ -5,7 +5,10 @@ It is possible to build and run the HexWatershed on Linux/Mac/Windows if your sy
 * GCC 5.2.0 and above
 * GDAL 2.3.1 
 
-In this instruction, I only use a Linux machine as an example. For other platform, you need to adjust several files. 
+In this instruction, I only use a Linux machine as an example. For other platform, you need to adjust three files. 
+1. CMakeLists.txt
+2. cmake.sh
+3. make.sh
 
 Figures provided to illustrate the steps when needed.
 
