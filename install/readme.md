@@ -34,7 +34,7 @@ chmod 755 make.sh
 ```
 * Open the CMakeLists.txt file and edit the path of gdal based on your system with your preferred editor.
 The highlight rectangle is where you can change the gdal library.
-![CMakeLists file](https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmakelists.png?raw=true | width=100)
+![CMakeLists file](https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmakelists.png | width=100)
 * Run the cmake bash script to load modules and run the cmake command
 ![Run cmake](https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmake.png?raw=true)
 ```
