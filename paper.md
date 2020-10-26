@@ -21,19 +21,40 @@ date: 15 October 2020
 bibliography: paper.bib
 ---
 
-# Abstarct
+# Abstract
 
 
 
 # Introduction
 
+Watershed delineation is the first step in most watershed scale hdyrology simulations. This process often relies on a square grid based raster digital elevation model (DEM). 
+Our recent study shows that watershed delineation on a hexagon mesh has several advantages compared with the traditional method:
+* It can represent adjacency uniformly because it only has one type of connectivity [@DeSousa2006].
+* It can elminate the island effect and diagonal travel path issues, which often occur in the traditional method [@Johnston2009].
+* It can be potentially applied at the global scale using a digital global grid system (DGGS) to provide better sphere coverage.
+* Because of the dependency of hydrologic processes on watershed characteristics, the hexagon mesh grid based watershed hydrology simulations may also be improved.
+
+To date, a software package speficially designed for watershed delineation on the hexagon mesh grid is not available.
+In this study, we present HexWatershed, the first watershed delineation model based on the hexagon mesh grid, as our effort to close the gap. We provide tenicial details and implementations of the model algorithms. We also provide example results from a case simulation to demonstrate the capability of the model.
 
 
 # Algorithms
 
+HexWatershed was developed based on existing algorithms and philosophies from the traditional method. However, due to the differences in mesh grid, significant changes are made in model design and implementation. These details are discussed in details in individual algorithm.
 
+1. Hexagon DEM
+In Hexwatershed 1.0, the elevation of each hexagon is assigned by its location and high resolution tradition DEM due to data availability.
 
-1. Depression filling
+2. Neighborhood definition
+
+The neighborhood information of each hexagon is defined using the following algorithm:
+    1. A global ID is assigned to each hexagon;
+    2. Loop through each hexagon and find its neighbors using shared vertices and edges;
+    2. Save the neighborhood information in a lookup table.
+
+2. Depression filling
+To remove the local depression, aka, ``pit'', within the hexagon DEM, a depression filling algorithm was implemented based on the priority-flood algorithm, which also the first implementation of the priority-flood algorithm on a D6 grid [@Barnes2014]. The priority-flood algorithm is an efficient depression filling algorithm and has been extensively discussed by several studies [@Barnes2014]. 
+
 
 
 
