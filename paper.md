@@ -52,7 +52,7 @@ The neighborhood information of each hexagon is defined using the following algo
     2. Loop through each hexagon and find its neighbors using shared vertices and edges;
     2. Save the neighborhood information in a lookup table.
 
-2. Depression filling
+3. Depression filling
 To remove the local depression, aka, ``pit'', within the hexagon DEM, a depression filling algorithm was implemented based on the priority-flood algorithm, which also the first implementation of the priority-flood algorithm on a D6 grid [@Barnes2014]. The priority-flood algorithm is an efficient depression filling algorithm and has been extensively discussed by several studies [@Barnes2014]. 
 
 
@@ -60,9 +60,20 @@ To remove the local depression, aka, ``pit'', within the hexagon DEM, a depressi
 
 ![Illustration of the priority-flood depression filling for the HGSD method.](https://github.com/pnnl/hexwatershed/blob/master/algorithm/depression_filling.png?raw=true)
 
+4. Flow direction
+5. Flow accumulation
+6. Stream grid
+7. Stream confluence
+8. Stream segment
+9. Stream topology
+
 Stream topology is defined based on the stream reaches information.
 
 ![Illustration of the stream topology. Different colors represent 4 different stream segments, respectively. Each stream segment is made up by several stream reaches.](https://github.com/pnnl/hexwatershed/blob/master/algorithm/stream_topology.png?raw=true)
+
+10. Stream order
+11. Subbasin boundary
+12. Other watershed characteristics
 
 # Results
 
