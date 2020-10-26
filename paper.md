@@ -41,7 +41,7 @@ bibliography: paper.bib
 
 Stream topology is defined based on the stream reaches information.
 
-![Illustration of the stream topology. Different colors represent 4 different stream segments, respectively. Each stream segment is made up by several stream reaches.](https://github.com/pnnl/hexwatershed/blob/master/example/stream_topology.png?raw=true)
+![Illustration of the stream topology. Different colors represent 4 different stream segments, respectively. Each stream segment is made up by several stream reaches.](https://github.com/pnnl/hexwatershed/blob/master/algorithm/stream_topology.png?raw=true)
 
 # Results
 
