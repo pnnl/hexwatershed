@@ -79,7 +79,8 @@ After the simulation is finished, you should see a list of shapefiles within the
 ![List of results](https://github.com/pnnl/hexwatershed/blob/master/example/figure/result_list.png?raw=true)
 
 You can use any GIS tools (ArcGIS, ENVI, and QGIS, etc.) to visulize the results.
-Below are some example output from this example:
+
+Below are some example outputs from this example:
 * Flow direction
 ![Flow direction](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_direction_90_full.png?raw=true)
 * Flow accumulation
