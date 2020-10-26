@@ -54,7 +54,7 @@ domain::domain(std::string sFilename_configuration_in)
     }
   }
 
-  dThreshold = 0.01;
+  dAccumulation_threshold = 0.01;
   sExtension_header = ".hdr";
   sExtension_envi = ".dat";
   sExtension_text = ".txt";
@@ -82,12 +82,12 @@ int domain::domain_setup_model()
       std::pair<std::string, std::string>("sFilename_hexagon_polygon_shapefile",
                                           sFilename_hexagon_polygon_shapefile));
   mParameter.insert(std::pair<std::string, std::string>(
-      "case",
+      "iCase",
       convert_integer_to_string(iCase, 1)));
 
   mParameter.insert(std::pair<std::string, std::string>(
-      "accumulation_threshold",
-      convert_double_to_string(dThreshold)));
+      "dAccumulation_threshold",
+      convert_double_to_string(dAccumulation_threshold)));
 
   std::cout << "Finished set up model" << std::endl;
   std::flush(std::cout);
@@ -132,7 +132,7 @@ int domain::domain_read_data()
   if (file_test(sFilename_elevation_raster) != 1)
   {
     error_code = 0;
-    std::cout << " dem does not exist! " << std::endl;
+    std::cout << " dem does not exist! "<< sFilename_elevation_raster << std::endl;
     return error_code;
   }
   else
@@ -166,7 +166,7 @@ int domain::domain_read_configuration_file()
   ifs.open(sFilename_configuration.c_str(), ios::in);
   if (ifs.good())
   {
-    std::cout << "Start to read_eco3d the configuration file" << std::endl;
+    std::cout << "Start to read hexwatershed configuration file" << std::endl;
     while (!ifs.eof()) //read_eco3d all the content
     {
       //reset sKey and sValue to null for each sLine
@@ -251,34 +251,34 @@ int domain::domain_retrieve_user_input()
   search = mParameter.find(sKey);
   if (search != mParameter.end())
   {
-    this->sFilename_elevation_raster = sWorkspace_data + slash + "raster" + slash + search->second;
+    this->sFilename_elevation_raster = sWorkspace_data + slash + "raster" + slash + "dem" + slash + search->second;
   }
   sKey = "sFilename_hexagon_point_shapefile";
   search = mParameter.find(sKey);
   if (search != mParameter.end())
   {
-    this->sFilename_hexagon_point_shapefile = sWorkspace_data + slash + "vector" + slash + search->second;
+    this->sFilename_hexagon_point_shapefile = sWorkspace_data + slash + "vector" + slash + "mesh"+ slash + search->second;
   }
 
   sKey = "sFilename_hexagon_polygon_shapefile";
   search = mParameter.find(sKey);
   if (search != mParameter.end())
   {
-    this->sFilename_hexagon_polygon_shapefile = sWorkspace_data + slash + "vector" + slash + search->second;
+    this->sFilename_hexagon_polygon_shapefile = sWorkspace_data + slash + "vector" + slash + "mesh" + slash + search->second;
   }
 
-  sKey = "case";
+  sKey = "iCase";
   search = mParameter.find(sKey);
   if (search != mParameter.end())
   {
     this->iCase = std::stoi(search->second);
   }
 
-  sKey = "accumulation_threshold";
+  sKey = "dAccumulation_threshold";
   search = mParameter.find(sKey);
   if (search != mParameter.end())
   {
-    this->dThreshold = std::stod(search->second);
+    this->dAccumulation_threshold = std::stod(search->second);
   }
 
   //output=================================
@@ -1134,7 +1134,7 @@ int domain::domain_define_stream_grid()
   long lAccumulation_threshold;
   std::vector<hexagon>::iterator iIterator_self;
 
-  lAccumulation_threshold = long(dThreshold);
+  lAccumulation_threshold = long(dAccumulation_threshold);
 
 #pragma omp parallel for private(lIndex_self)
  for (lIndex_self = 0; lIndex_self < vCell_active.size(); lIndex_self++)

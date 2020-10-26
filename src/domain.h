@@ -83,7 +83,7 @@ public:
   double dArea_2_stream_ratio;
   double dSlope_mean;
 
-  double dThreshold;
+  double dAccumulation_threshold;
   
   double missing_value;
 
