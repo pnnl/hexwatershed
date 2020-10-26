@@ -59,3 +59,19 @@ Then you may run the simulation by typing in the terminal:
 chmod 755 run.sh
 ./run.sh
 ```
+
+The terminal will output some model information directly:
+
+![Run log](https://github.com/pnnl/hexwatershed/blob/master/example/figure/run_log.png?raw=true)
+
+By then, you should have a successful hexWatershed simulation. 
+
+Below are some example output from this example:
+* Flow direction
+![Flow direction](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_direction_90_full.png?raw=true)
+* Flow accumulation
+![Flow accumulation](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_accumulation_90_full.png?raw=true)
+* Stream order
+![Stream order](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_stream_order_90_full.png?raw=true)
+* Subbasin
+![Subbasin](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_subbasin_90_full.png?raw=true)
