@@ -388,8 +388,8 @@ int domain::domain_read_all_cell_information(std::string sFilename_hexagon_point
 
     //third assign elevation for hexagon
     //get elevation for each point
-#pragma omp parallel for private(lRecord, dX_dummy, dY_dummy, \
-                                 lColumn_index,lRow_index,  dDummy1, dDummy2, lIndex)
+//#pragma omp parallel for private(lRecord, dX_dummy, dY_dummy, \
+   //                              lColumn_index,lRow_index,  dDummy1, dDummy2, lIndex)
     for (lRecord = 0; lRecord < nRecord_shapefile; lRecord++)
     {
       dX_dummy = vCell.at(lRecord).dX;
@@ -2953,7 +2953,7 @@ int domain::find_all_neighbors()
 
   if (iOption == 1)
   {
-#pragma omp parallel for private(lIndex_self, dX_self, dY_self, dElevation, \
+//#pragma omp parallel for private(lIndex_self, dX_self, dY_self, dElevation, \
                                  dX_dummy, dY_dummy, dDistance, dDistance_min, lIndex_search)
     for (lIndex_self = 0; lIndex_self < vCell_active.size(); lIndex_self++)
     {
@@ -2995,7 +2995,7 @@ int domain::find_all_neighbors()
   }
   else
   {
-#pragma omp parallel for private(lIndex_self, vPt1, vPt2, dX, dY, lIndex_search, dX_dummy, dY_dummy)
+#pragma omp parallel for private(lIndex_self, vPt1, vPt2, dX, dY, lIndex_search, dX_dummy, dY_dummy, lIndex_pt1, lIndex_pt2)
 
     for (lIndex_self = 0; lIndex_self < vCell_active.size(); lIndex_self++)
     {
