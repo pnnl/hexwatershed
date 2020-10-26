@@ -37,7 +37,7 @@ bibliography: paper.bib
 
 
 
-![Illustration of the priority-flood depression filling for the HGSD method.](https://github.com/pnnl/hexwatershed/blob/master/algorithm/priority_flood_legend.gif?raw=true)
+![Illustration of the priority-flood depression filling for the HGSD method.](https://github.com/pnnl/hexwatershed/blob/master/algorithm/depression_filling.png?raw=true)
 
 Stream topology is defined based on the stream reaches information.
 
