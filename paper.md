@@ -21,22 +21,24 @@ date: 15 October 2020
 bibliography: paper.bib
 ---
 
-# Abstract
+# Summary
+
+For decades, watershed delineation has been widely viewed as the first and most important step in wastershed hydrology simulations. While most studies focus on the physical processes in hydrologic simulations, less attentions have been paid to the underlying spatial discretization, the mesh grid.  HexWatershed is the first watershed delineation model that uses a hexagon mesh grid spatial discretization to resolve several limitations in current models.
 
 # Statement of need
 
-Watershed delineation is the first step in most watershed hydrology simulations. Currently, this process often requires a raster digital elevation model (DEM) dataset, which is based on the square grids. 
-From now on, we will use traditional method to represent all the numerical methods based on square grids unless otherwise stated.
+Watershed delineation is the first and yet most critical step in most watershed hydrology simulations. Currently, this process often requires a raster digital elevation model (DEM) dataset as input, which is based on the square grids. 
+From now on, we will use ``traditional methods'' to represent all the numerical methods based on square grids unless otherwise stated.
 
-Our recent study shows that watershed delineation on hexagon grids has several advantages compared with the traditional method:
+Recent study demonstrates that watershed delineation on hexagon grids has several advantages compared with the traditional methods:
 
 * It represents adjacency uniformly because it has only one type of connectivity [@DeSousa2006].
 * It elminates the island effect and diagonal travel path issues, which often occur in the traditional method [@Johnston2009].
 * It can be applied at continental to global scale using a digital global grid system (DGGS) to provide better sphere coverage.
 
-Because of the dependency of hydrologic processes on watershed characteristics, hexagon grids based watershed hydrology simulations may also be improved.
+Because of the dependency of hydrologic processes on watershed characteristics, hexagon grids based watershed hydrology simulations will be improved.
 
-Besides, in order to couple hydrologic models with oceanic models, it is imperative to develope a flow routing model based on unstructed grids (hexagon grids, etc.), which oceanic models often use.
+Besides, hexagon grids provide an opportunity in coupling hydrologic models with oceanic models because the latter are usually based on unstructured meshes.
 
 Despite these advantages and practical needs, such a software specifically designed for watershed delineation on the hexagon grids is not available.
 In this study, we present HexWatershed, the first watershed delineation model based on the hexagon grids.
@@ -122,9 +124,6 @@ Figure 4. The spatial distribtuion of stream order.
 ![The spatial distribtuion of subbasin boundary.](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_subbasin_90_full.png?raw=true)
 
 Figure 5. The spatial distribtuion of subbasin boundary.
-
-# Conclusion
-
 
 
 # Acknowledgement
