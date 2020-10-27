@@ -75,6 +75,7 @@ The flow accumulation algorithm was developed based on the concept from ArcGIS f
 5. Repeat step 4 until all grids are treated.
 
 * Stream segment
+
 Unlike most traditional methods, HexWatershed defines stream segment reversely from the watershed outlet to maintain an ascending order of stream indices using the following steps:
 
 1. Start from the outlet, set the current stream segment as the maximum segment (N);
@@ -85,12 +86,13 @@ Unlike most traditional methods, HexWatershed defines stream segment reversely f
 The maximum segment N is calculated based on stream confluence topology.
 
 * Subbasin boundary
+
 Similar to stream segment, HexWatershed defines subbasin reversely. The subbasin indices are the same with corresponding stream segments.
 
 # Example results
 
 HexWatershed produces all the watershed characteristics including stream networks and watershed boudnary.
-Most model outputs are in shapefile format and can be visulized using a Geographic Information System (GIS) application.
+Most model outputs are in shapefile format and can be visulized using a Geographic Information System (GIS) application. These outputs can also be converted or imported into other hydrologic models.
 
 * Flow direction
 
@@ -107,7 +109,6 @@ Most model outputs are in shapefile format and can be visulized using a Geograph
 * Stream order
 
 ![The spatial distribtuion of stream order. \label{fig:streamorder}](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_stream_order_90_full.png?raw=true)
-
 
 
 * Subbasin boundary
