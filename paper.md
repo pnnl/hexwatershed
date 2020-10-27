@@ -23,12 +23,12 @@ bibliography: paper.bib
 
 # Summary
 
-For decades, watershed delineation has been widely viewed as the first and most important step in wastershed hydrology simulations. While most studies focus on the physical processes in hydrologic simulations, less attentions have been paid to the underlying spatial discretization, the mesh grid.  HexWatershed is the first watershed delineation model that uses a hexagon mesh grid spatial discretization to resolve several limitations in current models.
+For decades, watershed delineation has been widely viewed as the first and most important step in wastershed hydrology simulations. While most studies focus on the physical processes in hydrologic simulations, less attentions have been paid to the underlying spatial discretization, the mesh grid.  HexWatershed is the first watershed delineation model that uses a hexagon mesh grid spatial discretization to resolve several limitations in current generation watershed delineation models.
 
 # Statement of need
 
 Watershed delineation is the first and yet most critical step in most watershed hydrology simulations. Currently, this process often requires a raster digital elevation model (DEM) dataset as input, which is based on the square grids. 
-From now on, we will use ``traditional methods'' to represent all the numerical methods based on square grids unless otherwise stated.
+From now on, we will use "traditional methods" to represent all the numerical methods based on square grids unless otherwise stated.
 
 Recent study demonstrates that watershed delineation on hexagon grids has several advantages compared with the traditional methods:
 
