@@ -105,7 +105,6 @@ Most model outputs are in shapefile format and can be visulized using a Geograph
 ![The spatial distribtuion of flow accumulation. \label{fig:accumulation}](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_accumulation_90_full.png?raw=true)
 
 
-
 * Stream order
 
 ![The spatial distribtuion of stream order. \label{fig:streamorder}](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_stream_order_90_full.png?raw=true)
