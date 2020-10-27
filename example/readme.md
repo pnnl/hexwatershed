@@ -64,7 +64,7 @@ chmod 755 run.sh
 ./run.sh
 ```
 
-The terminal will output some model information directly:
+The terminal will prints some model information directly:
 
 ![Run log](https://github.com/pnnl/hexwatershed/blob/master/example/figure/run_log.png?raw=true)
 
