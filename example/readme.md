@@ -92,8 +92,5 @@ Below are some example outputs from this example:
 * Flow accumulation
 ![Flow accumulation](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_accumulation_90_full.png?raw=true)
 
-* Stream order
-![Stream order](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_stream_order_90_full.png?raw=true)
-
 * Subbasin
 ![Subbasin](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_subbasin_90_full.png?raw=true)

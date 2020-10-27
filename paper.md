@@ -99,7 +99,6 @@ Most model outputs are in Shapefile format and can be visualized using a Geograp
 ![The spatial distribution of flow direction. \label{fig:direction}](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_direction_90_full.png?raw=true)
 
 
-
 * Flow accumulation
 
 ![The spatial distribution of flow accumulation. \label{fig:accumulation}](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_accumulation_90_full.png?raw=true)
