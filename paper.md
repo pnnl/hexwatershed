@@ -47,9 +47,9 @@ In Hexwatershed 1.0, the elevation of each hexagon is assigned by its location a
 
 In tradtional methods, the neighbors of a grid can be referred by moving its indices up and down. However, in an unstructured mesh such as hexagon grid, a specially designed index system is required. In HexWatershed 1.0,the neighborhood information of each hexagon is defined using the following algorithm:
 
-  1. A global ID is assigned to each hexagon;
-  2. Loop through each hexagon and find its neighbors using shared vertices and edges;
-  3. Save the neighborhood information in a lookup table.
+    1. A global ID is assigned to each hexagon;
+    2. Loop through each hexagon and find its neighbors using shared vertices and edges;
+    3. Save the neighborhood information in a lookup table.
   
 3. Depression filling
 To remove the local depression, aka, ``pit'', within the hexagon DEM, a depression filling algorithm was implemented based on the priority-flood algorithm, which is the first implementation of the priority-flood algorithm on a D6 grid [@Barnes2014]. 
