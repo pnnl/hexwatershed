@@ -69,7 +69,7 @@ By then, you should have a successful hexWatershed simulation.
 
 # Simulation results
 
-After the simulation is finished, you should see a list of shapefiles within the output firectory.
+After the simulation is finished, you should see a list of shapefiles within the output directory.
 1. hexagon DEM
 2. flow direction
 3. flow accumulation
