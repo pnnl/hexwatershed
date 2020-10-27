@@ -73,36 +73,55 @@ In HexWatershed 1.0, only the single flow direction is supported, which is defin
 
 * Flow accumulation
 
-The flow accumulation algorithm was developed based on the concept from ArcGIS flow accumulation. The algorithm runs in the following steps:
+The flow accumulation algorithm was developed based on the concept from ArcGIS flow accumulation. The new algorithm runs in the following steps:
 
-    1. Assign each hexagon flow accumulation as 1;
-    2. Assign a flag (FALSE) to each hexagon as untreated;
-    3. Loop through all hexagon grid, if it is untreated and all of its upslope grids are treated, then sum up it flow accumulation and set its flag as treated (TRUE);
-    4. Exit until all grids are treated.
+    1. Assign flow accumulation of each hexagon as 1;
+    2. Assign an initial flag to each hexagon as untreated (FALSE);
+    3. Set all hexagon grid as treated (TRUE) if it has no upslope;
+    4. Loop through all hexagon grids, if it is untreated (FALSE) and all of its upslope grids are treated (TRUE), then sum up its flow accumulation and set it as treated (TRUE);
+    5. Repeat step 4 until all grids are treated.
 
 * Stream segment
-Unlike most traditional methods, HexWatershed defines stream segment reversely from the watershed outlet to maintain an ascending order of stream indices.
+Unlike most traditional methods, HexWatershed defines stream segment reversely from the watershed outlet to maintain an ascending order of stream indices using the following steps:
+
+    1. Start from the outlet, set the current stream segment as the maximum segment (N);
+    2. Search upstream and assign all the stream grids as segment N until it reaches a stream confluence;
+    3. The current stream segment becomes N-1, then search all the upstreams of this stream confluence;
+    4. Repeat step 2 until N = 1.
+
+The maximum segment N is calculated based on stream confluence topology.
 
 * Subbasin boundary
-Similar to stream segment, HexWatershed define subbasin reversely. The subbasin indices are the same with corresponding stream segments.
+Similar to stream segment, HexWatershed defines subbasin reversely. The subbasin indices are the same with corresponding stream segments.
 
-# Results
+# Example results
+
+HexWatershed produces all the watershed characteristics including stream networks and watershed boudnary.
+Most model outputs are in shapefile format and can be visulized using a Geographic Information System (GIS) application.
 
 * Flow direction
 
 ![The spatial distribtuion of flow direction.](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_direction_90_full.png?raw=true)
 
+Figure 2. The spatial distribtuion of flow direction.
+
 * Flow accumulation
 
 ![The spatial distribtuion of flow accumulation.](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_accumulation_90_full.png?raw=true)
+
+Figure 3. The spatial distribtuion of flow accumulation.
 
 * Stream order
 
 ![The spatial distribtuion of stream order.](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_stream_order_90_full.png?raw=true)
 
+Figure 4. The spatial distribtuion of stream order.
+
 * Subbasin boundary
 
 ![The spatial distribtuion of subbasin boundary.](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_subbasin_90_full.png?raw=true)
+
+Figure 5. The spatial distribtuion of subbasin boundary.
 
 # Conclusion
 
