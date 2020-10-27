@@ -24,8 +24,7 @@ PNNL is operated for DOE by Battelle Memorial Institute under contract DE-AC05-7
 
 # Citation
 
-Liao, C.,. (2020). HexWatershed: A watershed delineation model based on hexagonal mesh grid.
-
+Liao, C., Tesfa, T., Duan, Z., & Leung, L. R. (2020). Watershed delineation on a hexagonal mesh grid. Environmental Modelling & Software, 128, 104702. https://doi.org/10.1016/j.envsoft.2020.104702
 
 # Contact
 
