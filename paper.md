@@ -23,57 +23,53 @@ bibliography: paper.bib
 
 # Abstract
 
+# Statement of need
 
+Watershed delineation is the first step in most watershed scale hydrology simulations. This process often relies on a square grid based raster digital elevation model (DEM). From now on, the traditional method refers to method based on square grid unless otherwise stated.
 
-# Introduction
-
-Watershed delineation is the first step in most watershed scale hdyrology simulations. This process often relies on a square grid based raster digital elevation model (DEM). 
 Our recent study shows that watershed delineation on a hexagon mesh has several advantages compared with the traditional method:
 * It can represent adjacency uniformly because it only has one type of connectivity [@DeSousa2006].
 * It can elminate the island effect and diagonal travel path issues, which often occur in the traditional method [@Johnston2009].
 * It can be potentially applied at the global scale using a digital global grid system (DGGS) to provide better sphere coverage.
 * Because of the dependency of hydrologic processes on watershed characteristics, the hexagon mesh grid based watershed hydrology simulations may also be improved.
 
-To date, a software package speficially designed for watershed delineation on the hexagon mesh grid is not available.
-In this study, we present HexWatershed, the first watershed delineation model based on the hexagon mesh grid, as our effort to close the gap. We provide tenicial details and implementations of the model algorithms. We also provide example results from a case simulation to demonstrate the capability of the model.
+However, such a software package speficially designed for watershed delineation on the hexagon mesh grid is not available.
+In this study, we present HexWatershed, the first watershed delineation model based on the hexagon mesh grid, as our effort to close the gap. 
 
+# Algorithms and implementation
 
-# Algorithms
-
-HexWatershed was developed based on existing algorithms and philosophies from the traditional method. However, due to the differences in mesh grid, significant changes are made in model design and implementation. These details are discussed in details in individual algorithm.
+HexWatershed was developed based on existing algorithms and philosophies from the traditional methods. However, due to the differences in mesh grid, significant changes are made in model design and implementation. Below we only provide information if the algorithm is significantly different from traditional methods.
 
 1. Hexagon DEM
 In Hexwatershed 1.0, the elevation of each hexagon is assigned by its location and high resolution tradition DEM due to data availability.
 
 2. Neighborhood definition
 
-The neighborhood information of each hexagon is defined using the following algorithm:
+In tradtional methods, the neighbors of a grid can be referred by moving its indices up and down. However, in an unstructured mesh such as hexagon grid, a specially designed index system is required. In HexWatershed 1.0,the neighborhood information of each hexagon is defined using the following algorithm:
     1. A global ID is assigned to each hexagon;
     2. Loop through each hexagon and find its neighbors using shared vertices and edges;
-    2. Save the neighborhood information in a lookup table.
-
+    3. Save the neighborhood information in a lookup table.
+  
 3. Depression filling
-To remove the local depression, aka, ``pit'', within the hexagon DEM, a depression filling algorithm was implemented based on the priority-flood algorithm, which also the first implementation of the priority-flood algorithm on a D6 grid [@Barnes2014]. The priority-flood algorithm is an efficient depression filling algorithm and has been extensively discussed by several studies [@Barnes2014]. 
+To remove the local depression, aka, ``pit'', within the hexagon DEM, a depression filling algorithm was implemented based on the priority-flood algorithm, which is the first implementation of the priority-flood algorithm on a D6 grid [@Barnes2014]. 
 
-
-
-
-![Illustration of the priority-flood depression filling for the HGSD method.](https://github.com/pnnl/hexwatershed/blob/master/algorithm/depression_filling.png?raw=true)
+![Illustration of the priority-flood depression filling on the hexagon mesh.](https://github.com/pnnl/hexwatershed/blob/master/algorithm/depression_filling.png?raw=true)
 
 4. Flow direction
+In HexWatershed 1.0, only the single flow direction is supported, which is defined as from the hexagon center to one of its neighbors which has the lowest elevation.
+
 5. Flow accumulation
-6. Stream grid
-7. Stream confluence
-8. Stream segment
-9. Stream topology
+The flow accumulation algorithm was developed based on the concept from ArcGIS flow accumulation. The algorithm runs in the following steps:
+    1. Assign each hexagon flow accumulation as 1;
+    2. Assign a flag (FALSE) to each hexagon as untreated;
+    3. Loop through all hexagon grid, if it is untreated and all of its upslope grids are treated, then sum up it flow accumulation and set its flag as treated (TRUE);
+    4. Exit until all grids are treated.
 
-Stream topology is defined based on the stream reaches information.
+6. Stream segment
+Unlike most traditional methods, HexWatershed defines stream segment reversely from the watershed outlet to maintain an ascending order of stream indices.
 
-![Illustration of the stream topology. Different colors represent 4 different stream segments, respectively. Each stream segment is made up by several stream reaches.](https://github.com/pnnl/hexwatershed/blob/master/algorithm/stream_topology.png?raw=true)
-
-10. Stream order
-11. Subbasin boundary
-12. Other watershed characteristics
+7. Subbasin boundary
+Similar to stream segment, HexWatershed define subbasin reversely. The subbasin indices are the same with corresponding stream segments.
 
 # Results
 
