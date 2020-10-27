@@ -28,20 +28,21 @@ HexWatershed is the first watershed delineation model that aims to resolve these
 
 # Statement of need
 
-Watershed delineation is the first and yet most critical step in watershed hydrology simulations. Currently, this process requires a raster digital elevation model (DEM) dataset as input, which is based on the square grids. 
+Watershed delineation is the first and yet most critical step in watershed hydrology simulations. Currently, this process requires a raster digital elevation model (DEM) dataset as input, which is based on the square grids [@Tarboton1991]. 
 From now on, we will use "traditional methods" to represent all the numerical methods based on square grids unless otherwise stated.
 
 Recent study demonstrates that watershed delineation on hexagon grids has several advantages compared with the traditional methods:
 
 * It represents adjacency uniformly because it has only one type of connectivity [@DeSousa2006].
 * It elminates the island effect and diagonal travel path issues, which often occur in the traditional method [@Johnston2009].
-* It can be applied at continental to global scale using a digital global grid system (DGGS) to provide better sphere coverage.
+* It can be applied at continental to global scale using a digital global grid system (DGGS) to provide better sphere coverage [@Sahr2019].
 
 Because of the dependency of hydrologic processes on watershed characteristics, hexagon grids based watershed hydrology simulations will be improved.
 
-Besides, hexagon grids provide an opportunity in coupling hydrologic models with oceanic models because the latter are usually based on unstructured meshes.
+Besides, hexagon grids provide an opportunity in coupling hydrologic models with oceanic models because the latter are usually based on unstructured meshes [@Ringler2013].
 
-Despite these advantages and practical needs, such a software specifically designed for watershed delineation on the hexagon grids is not available.
+Despite these advantages and practical needs, such a software specifically designed for watershed delineation on the hexagon grids is not available [@Liao2020].
+In this study, we developed the HexWatershed model, a watershed delineation model based on hexagon mesh grid. 
 
 # Algorithms and implementation
 
@@ -62,10 +63,6 @@ This design is to consider a fully unstructured mesh which includes not only hex
 To remove the local depression within the hexagon DEM, a depression filling algorithm was implemented based on the priority-flood algorithm. This is also the first implementation of the priority-flood algorithm on a D6 connectivity grid \autoref{fig:depression_filling} [@Barnes2014]. 
 
 ![Illustration of the priority-flood depression filling on the hexagon mesh. Light blue grids represent the initial default state; red grids represent the boundary; green grids represent the to-be-removed grid from the queue; orange grids represent the to-be-added grids into the queue; and purple grids are finished grids. Numbers within each grid represent its global ID and elevation (in parentheses, unit: m), respectively. The algorithm gradually ``floods" the domain using a boundary queue (red). If a to-be-added grid has equal or smaller elevation than a to-be-removed grid, its elevation is increased. \label{fig:depression_filling}](https://github.com/pnnl/hexwatershed/blob/master/algorithm/depression_filling.png?raw=true)
-
-* Flow direction
-
-In HexWatershed 1.0, only the single flow direction is supported, which is defined as from the hexagon center to one of its neighbors which has the lowest elevation.
 
 * Flow accumulation
 
@@ -116,8 +113,6 @@ Most model outputs are in shapefile format and can be visulized using a Geograph
 * Subbasin boundary
 
 ![The spatial distribtuion of subbasin boundary. \label{fig:Subbasin}](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_subbasin_90_full.png?raw=true)
-
-
 
 
 # Acknowledgement
