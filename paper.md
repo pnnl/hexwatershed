@@ -76,7 +76,7 @@ The flow accumulation algorithm was developed based on the concept from ArcGIS f
 
 * Stream segment
 
-Unlike most traditional methods, HexWatershed defines stream segment reversely from the watershed outlet to maintain an ascending order of stream indices using the following steps:
+Unlike traditional methods, HexWatershed defines stream segment reversely from the watershed outlet to maintain an ascending order of stream indices using the following steps:
 
 1. Start from the outlet, set the current stream segment as the maximum segment (N);
 2. Search upstream and assign all the stream grids as segment N until it reaches a stream confluence;
