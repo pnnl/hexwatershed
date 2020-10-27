@@ -53,9 +53,9 @@ In Hexwatershed 1.0, the elevation of each hexagon is extracted and assigned by 
 
 In tradtional methods, the neighbors of a grid can be referred by moving its indices up and down. However, in unstructured grids such as hexagon grids, a specifically designed index system is required to manage neighborhood information. In HexWatershed 1.0, the neighborhood information of each hexagon is defined using the following steps:
 
-    1. A global ID is assigned to each hexagon;
-    2. Loop through each hexagon and find its neighbors using shared vertices and edges;
-    3. Save the neighborhood information in a lookup table.
+1. A global ID is assigned to each hexagon;
+2. Loop through each hexagon and find its neighbors using shared vertices and edges;
+3. Save the neighborhood information in a lookup table.
 
 This design is to consider a fully unstructured mesh which includes not only hexagon, but also pentagon and other polygons.
   
@@ -75,19 +75,19 @@ In HexWatershed 1.0, only the single flow direction is supported, which is defin
 
 The flow accumulation algorithm was developed based on the concept from ArcGIS flow accumulation. The new algorithm runs in the following steps:
 
-    1. Assign flow accumulation of each hexagon as 1;
-    2. Assign an initial flag to each hexagon as untreated (FALSE);
-    3. Set all hexagon grid as treated (TRUE) if it has no upslope;
-    4. Loop through all hexagon grids, if it is untreated (FALSE) and all of its upslope grids are treated (TRUE), then sum up its flow accumulation and set it as treated (TRUE);
-    5. Repeat step 4 until all grids are treated.
+1. Assign flow accumulation of each hexagon as 1;
+2. Assign an initial flag to each hexagon as untreated (FALSE);
+3. Set all hexagon grid as treated (TRUE) if it has no upslope;
+4. Loop through all hexagon grids, if it is untreated (FALSE) and all of its upslope grids are treated (TRUE), then sum up its flow accumulation and set it as treated (TRUE);
+5. Repeat step 4 until all grids are treated.
 
 * Stream segment
 Unlike most traditional methods, HexWatershed defines stream segment reversely from the watershed outlet to maintain an ascending order of stream indices using the following steps:
 
-    1. Start from the outlet, set the current stream segment as the maximum segment (N);
-    2. Search upstream and assign all the stream grids as segment N until it reaches a stream confluence;
-    3. The current stream segment becomes N-1, then search all the upstreams of this stream confluence;
-    4. Repeat step 2 until N = 1.
+1. Start from the outlet, set the current stream segment as the maximum segment (N);
+2. Search upstream and assign all the stream grids as segment N until it reaches a stream confluence;
+3. The current stream segment becomes N-1, then search all the upstreams of this stream confluence;
+4. Repeat step 2 until N = 1.
 
 The maximum segment N is calculated based on stream confluence topology.
 
