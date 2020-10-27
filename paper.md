@@ -32,13 +32,13 @@ Our recent study shows that watershed delineation on hexagon grids has several a
 
 * It represents adjacency uniformly because it has only one type of connectivity [@DeSousa2006].
 * It elminates the island effect and diagonal travel path issues, which often occur in the traditional method [@Johnston2009].
-* It can be potentially applied at the global scale using a digital global grid system (DGGS) to provide better sphere coverage.
+* It can be applied at continental to global scale using a digital global grid system (DGGS) to provide better sphere coverage.
 
 Because of the dependency of hydrologic processes on watershed characteristics, hexagon grids based watershed hydrology simulations may also be improved.
 
-Besides, in order to couple hydrology models with oceanic models, it is imperative to develope a flow routing model based on unstructed grids (hexagon grids, etc.), which oceanic models often use.
+Besides, in order to couple hydrologic models with oceanic models, it is imperative to develope a flow routing model based on unstructed grids (hexagon grids, etc.), which oceanic models often use.
 
-Despite of these advantages and needs, such a software speficially designed for watershed delineation on the hexagon grids is not available.
+Despite these advantages and practical needs, such a software specifically designed for watershed delineation on the hexagon grids is not available.
 In this study, we present HexWatershed, the first watershed delineation model based on the hexagon grids.
 
 # Algorithms and implementation
