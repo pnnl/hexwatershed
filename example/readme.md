@@ -1,6 +1,7 @@
 # Overview
 
 An instruction to run a HexWatershed model simulation with the example provided in the repository.
+If you haven't built the model yet, please go to https://github.com/pnnl/hexwatershed/tree/master/install.
 
 # Data structure
 

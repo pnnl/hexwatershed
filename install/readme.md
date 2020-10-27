@@ -82,3 +82,5 @@ This script should generates some results as follow:
 ![Installation output](https://github.com/pnnl/hexwatershed/blob/master/install/figure/final.png?raw=true)
 
 Congratulations, you have successfully built the HexWatershed model!
+
+Now you can test the model with the example following this instruction: https://github.com/pnnl/hexwatershed/tree/master/example
