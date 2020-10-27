@@ -23,8 +23,8 @@ bibliography: paper.bib
 
 # Summary
 
-For decades, watershed delineation has been widely viewed as the first and most important step in wastershed hydrology simulations. While most studies focus on the physical processes in hydrologic simulations, less attentions have been paid to the underlying spatial discretization, the mesh grid, and its potential limitations.  
-HexWatershed is the first watershed delineation model that aims to resolve these limitations through the use of hexagon mesh grid. It also provides an oppotunity for coupled land-river-ocean simulations.
+For decades, watershed delineation has been widely viewed as the first and most important step in watershed hydrology simulations. While most studies focus on the physical processes in hydrologic simulations, less attentions have been paid to the underlying spatial discretization, the mesh grid, and its potential limitations.  
+HexWatershed is the first watershed delineation model that aims to resolve these limitations through the use of hexagon mesh grid. It also provides an opportunity for coupled land-river-ocean simulations.
 
 # Statement of need
 
@@ -34,7 +34,7 @@ From now on, we will use "traditional methods" to represent all the numerical me
 Recent study demonstrates that watershed delineation on hexagon grids has several advantages compared with the traditional methods:
 
 * It represents adjacency uniformly because it has only one type of connectivity [@DeSousa2006].
-* It elminates the island effect and diagonal travel path issues, which often occur in the traditional method [@Johnston2009].
+* It eliminates the island effect and diagonal travel path issues, which often occur in the traditional method [@Johnston2009].
 * It can be applied at continental to global scale using a digital global grid system (DGGS) to provide better sphere coverage [@Sahr2019].
 
 Because of the dependency of hydrologic processes on watershed characteristics, hexagon grids based watershed hydrology simulations will be improved.
@@ -50,7 +50,7 @@ HexWatershed was developed based on existing algorithms and philosophies from tr
 
 * Neighborhood definition
 
-In tradtional methods, the neighbors of a grid can be referred by moving its indices up and down. However, in unstructured grids such as hexagon grids, a specifically designed index system is required to manage neighborhood information. In HexWatershed 1.0, the neighborhood information of each hexagon is defined using the following steps:
+In traditional methods, the neighbors of a grid can be referred by moving its indices up and down. However, in unstructured grids such as hexagon grids, a specifically designed index system is required to manage neighborhood information. In HexWatershed 1.0, the neighborhood information of each hexagon is defined using the following steps:
 
 1. A global ID is assigned to each hexagon;
 2. Loop through each hexagon and find its neighbors using shared vertices and edges;
@@ -91,28 +91,28 @@ Similar to stream segment, HexWatershed defines subbasin reversely. The subbasin
 
 # Example results
 
-HexWatershed produces all the watershed characteristics including stream networks and watershed boudnary.
-Most model outputs are in shapefile format and can be visulized using a Geographic Information System (GIS) application. These outputs can also be converted or imported into other hydrologic models.
+HexWatershed produces all the watershed characteristics including stream networks and watershed boundary.
+Most model outputs are in Shapefile format and can be visualized using a Geographic Information System (GIS) application. These outputs can also be converted or imported into other hydrologic models.
 
 * Flow direction
 
-![The spatial distribtuion of flow direction. \label{fig:direction}](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_direction_90_full.png?raw=true)
+![The spatial distribution of flow direction. \label{fig:direction}](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_direction_90_full.png?raw=true)
 
 
 
 * Flow accumulation
 
-![The spatial distribtuion of flow accumulation. \label{fig:accumulation}](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_accumulation_90_full.png?raw=true)
+![The spatial distribution of flow accumulation. \label{fig:accumulation}](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_accumulation_90_full.png?raw=true)
 
 
 * Stream order
 
-![The spatial distribtuion of stream order. \label{fig:streamorder}](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_stream_order_90_full.png?raw=true)
+![The spatial distribution of stream order. \label{fig:streamorder}](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_stream_order_90_full.png?raw=true)
 
 
 * Subbasin boundary
 
-![The spatial distribtuion of subbasin boundary. \label{fig:Subbasin}](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_subbasin_90_full.png?raw=true)
+![The spatial distribution of subbasin boundary. \label{fig:Subbasin}](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_subbasin_90_full.png?raw=true)
 
 
 # Acknowledgement

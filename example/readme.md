@@ -1,4 +1,5 @@
 # Overview
+
 This document provides the instruction to run a HexWatershed model simulation.
 
 # Data structure
@@ -19,7 +20,7 @@ The program retrieves these information and defines all the model inputs using a
 |  sWorkspace_data |  The parent directory of input data |
 | sWorkspace_output  |  The output directory |
 |  sFilename_hexagon_polygon_shapefile |  The file name of the hexagon mesh |
-| sFilename_elevation_raster | The file name of the DEM raster in geotiff format|
+| sFilename_elevation_raster | The file name of the DEM raster in Geotiff format|
 |iCase| The case index|
 |dAccumulation_threshold| The threshold to define stream grid |
 
@@ -32,18 +33,20 @@ You need to strictly follow the file system tree structure when preparing your o
 In HexWatershed 1.0, the dAccumulation_threshold is the flow accumulation threshold (https://pro.arcgis.com/en/pro-app/tool-reference/spatial-analyst/identifying-stream-networks.htm).
 
 # Data preparation
-In HexWatershed 1.0, only the DEM raster and hexagon mesh shapefile are needed as input files.
 
-The DEM raster and mesh shapefile must have the same spatial projection and spatial extent.
+In HexWatershed 1.0, only the DEM raster and hexagon mesh Shapefile are needed as input files.
+
+The DEM raster and mesh Shapefile must have the same spatial projection and spatial extent.
 This can be done using the following steps:
-1. Download a watershed boundary shapefile of the study area.
+
+1. Download a watershed boundary Shapefile of the study area.
 If your study area is in the USA, you can use the USGS Watershed Boundary Datasets (WBD). (https://www.usgs.gov/core-science-systems/ngp/national-hydrography/watershed-boundary-dataset?qt-science_support_page_related_con=4#qt-science_support_page_related_con)
 
-2. Create a buffer zone around the boundary shapefile. This can be done using either ArcGIS program (https://desktop.arcgis.com/en/arcmap/10.3/manage-data/creating-new-features/creating-a-buffer-around-a-feature.htm) or QGIS (https://docs.qgis.org/2.8/en/docs/gentle_gis_introduction/vector_spatial_analysis_buffers.html).
+2. Create a buffer zone around the boundary Shapefile. This can be done using either ArcGIS program (https://desktop.arcgis.com/en/arcmap/10.3/manage-data/creating-new-features/creating-a-buffer-around-a-feature.htm) or QGIS (https://docs.qgis.org/2.8/en/docs/gentle_gis_introduction/vector_spatial_analysis_buffers.html).
 
 3. Download the DEM raster covering the entire study area buffer zone. Re-project the raster and convert it to Geotiff format if necessary.
 
-4. Extract the DEM raster geotiff file with the buffer zone shapefile.
+4. Extract the DEM raster Geotiff file with the buffer zone Shapefile.
 
 5. Generate the hexagon mesh using the MMQGIS plugin and the extracted DEM as spatial extent
 (http://michaelminn.com/linux/mmqgis/). The resolution of the hexagon should be defined using its area instead of edge length. 
@@ -69,7 +72,7 @@ By then, you should have a successful hexWatershed simulation.
 
 # Simulation results
 
-After the simulation is finished, you should see a list of shapefiles within the output directory.
+After the simulation is finished, you should see a list of Shapefiles within the output directory.
 1. hexagon DEM
 2. flow direction
 3. flow accumulation
@@ -79,14 +82,18 @@ After the simulation is finished, you should see a list of shapefiles within the
 7. watershed boundary
 ![List of results](https://github.com/pnnl/hexwatershed/blob/master/example/figure/result_list.png?raw=true)
 
-You can use any GIS tools (ArcGIS, ENVI, and QGIS, etc.) to visulize the results.
+You can use any GIS tools (ArcGIS, ENVI, and QGIS, etc.) to visualize the results.
 
 Below are some example outputs from this example:
+
 * Flow direction
 ![Flow direction](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_direction_90_full.png?raw=true)
+
 * Flow accumulation
 ![Flow accumulation](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_accumulation_90_full.png?raw=true)
+
 * Stream order
 ![Stream order](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_stream_order_90_full.png?raw=true)
+
 * Subbasin
 ![Subbasin](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_subbasin_90_full.png?raw=true)
