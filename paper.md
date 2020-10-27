@@ -74,19 +74,19 @@ Similar to stream segment, HexWatershed define subbasin reversely. The subbasin 
 
 # Results
 
-1. Flow direction
+* Flow direction
 
 ![The spatial distribtuion of flow direction.](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_direction_90_full.png?raw=true)
 
-2. Flow accumulation
+* Flow accumulation
 
 ![The spatial distribtuion of flow accumulation.](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_accumulation_90_full.png?raw=true)
 
-3. Stream order
+* Stream order
 
 ![The spatial distribtuion of stream order.](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_stream_order_90_full.png?raw=true)
 
-4. Subbasin boundary
+* Subbasin boundary
 
 ![The spatial distribtuion of subbasin boundary.](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_subbasin_90_full.png?raw=true)
 
