@@ -47,19 +47,21 @@ HexWatershed was developed based on existing algorithms and philosophies from tr
 
 * Hexagon DEM
 
-In Hexwatershed 1.0, the elevation of each hexagon is assigned by its location and high resolution tradition DEM due to data availability.
+In Hexwatershed 1.0, the elevation of each hexagon is extracted and assigned by its location from the high resolution tradition DEM. Advanced spatial resampling methods will be used in new versions.
 
 * Neighborhood definition
 
-In tradtional methods, the neighbors of a grid can be referred by moving its indices up and down. However, in an unstructured mesh such as hexagon grid, a specially designed index system is required. In HexWatershed 1.0, the neighborhood information of each hexagon is defined using the following steps:
+In tradtional methods, the neighbors of a grid can be referred by moving its indices up and down. However, in unstructured grids such as hexagon grids, a specifically designed index system is required to manage neighborhood information. In HexWatershed 1.0, the neighborhood information of each hexagon is defined using the following steps:
 
     1. A global ID is assigned to each hexagon;
     2. Loop through each hexagon and find its neighbors using shared vertices and edges;
     3. Save the neighborhood information in a lookup table.
+
+This design is to consider a fully unstructured mesh which includes not only hexagon, but also pentagon and other polygons.
   
 * Depression filling
 
-To remove the local depression, aka, ``pit'', within the hexagon DEM, a depression filling algorithm was implemented based on the priority-flood algorithm, which is the first implementation of the priority-flood algorithm on a D6 grid [@Barnes2014]. 
+To remove the local depression within the hexagon DEM, a depression filling algorithm was implemented based on the priority-flood algorithm. This is also the first implementation of the priority-flood algorithm on a D6 connectivity grid [@Barnes2014]. 
 
 ![Illustration of the priority-flood depression filling on the hexagon mesh.](https://github.com/pnnl/hexwatershed/blob/master/algorithm/depression_filling.png?raw=true)
 
