@@ -23,11 +23,12 @@ bibliography: paper.bib
 
 # Summary
 
-For decades, watershed delineation has been widely viewed as the first and most important step in wastershed hydrology simulations. While most studies focus on the physical processes in hydrologic simulations, less attentions have been paid to the underlying spatial discretization, the mesh grid.  HexWatershed is the first watershed delineation model that uses a hexagon mesh grid spatial discretization to resolve several limitations in current generation watershed delineation models.
+For decades, watershed delineation has been widely viewed as the first and most important step in wastershed hydrology simulations. While most studies focus on the physical processes in hydrologic simulations, less attentions have been paid to the underlying spatial discretization, the mesh grid, and its potential limitations.  
+HexWatershed is the first watershed delineation model that aims to resolve these limitations through the use of hexagon mesh grid. It also provides an oppotunity for coupled land-river-ocean simulations.
 
 # Statement of need
 
-Watershed delineation is the first and yet most critical step in most watershed hydrology simulations. Currently, this process often requires a raster digital elevation model (DEM) dataset as input, which is based on the square grids. 
+Watershed delineation is the first and yet most critical step in watershed hydrology simulations. Currently, this process requires a raster digital elevation model (DEM) dataset as input, which is based on the square grids. 
 From now on, we will use "traditional methods" to represent all the numerical methods based on square grids unless otherwise stated.
 
 Recent study demonstrates that watershed delineation on hexagon grids has several advantages compared with the traditional methods:
@@ -41,15 +42,10 @@ Because of the dependency of hydrologic processes on watershed characteristics, 
 Besides, hexagon grids provide an opportunity in coupling hydrologic models with oceanic models because the latter are usually based on unstructured meshes.
 
 Despite these advantages and practical needs, such a software specifically designed for watershed delineation on the hexagon grids is not available.
-In this study, we present HexWatershed, the first watershed delineation model based on the hexagon grids.
 
 # Algorithms and implementation
 
-HexWatershed was developed based on existing algorithms and philosophies from traditional watershed delineation models. However, due to the fundamental differences in mesh grid, significant changes are made in model design and implementation. Below we only provide information on algorithms that are significantly different from their corresponding traditional algorithms.
-
-* Hexagon DEM
-
-In Hexwatershed 1.0, the elevation of each hexagon is extracted and assigned by its location from the high resolution tradition DEM. Advanced spatial resampling methods will be used in new versions.
+HexWatershed was developed based on existing algorithms and philosophies from traditional watershed delineation models. However, due to the fundamental differences in mesh grid, significant changes were made in model design and implementation. Below we only provide information on algorithms that are significantly different from their corresponding traditional algorithms.
 
 * Neighborhood definition
 
@@ -63,11 +59,9 @@ This design is to consider a fully unstructured mesh which includes not only hex
   
 * Depression filling
 
-To remove the local depression within the hexagon DEM, a depression filling algorithm was implemented based on the priority-flood algorithm. This is also the first implementation of the priority-flood algorithm on a D6 connectivity grid [@Barnes2014]. 
+To remove the local depression within the hexagon DEM, a depression filling algorithm was implemented based on the priority-flood algorithm. This is also the first implementation of the priority-flood algorithm on a D6 connectivity grid \autoref{fig:depression_filling} [@Barnes2014]. 
 
-![Illustration of the priority-flood depression filling on the hexagon mesh.](https://github.com/pnnl/hexwatershed/blob/master/algorithm/depression_filling.png?raw=true)
-
-Figure 1. Illustration of the priority-flood depression filling on the hexagon mesh. Light blue grids represent the initial default state; red grids represent the boundary; green grids represent the to-be-removed grid from the queue; orange grids represent the to-be-added grids into the queue; and purple grids are finished grids. Numbers within each grid represent its global ID and elevation (in parentheses, unit: m), respectively. The algorithm gradually ``floods" the domain using a boundary queue (red). If a to-be-added grid has equal or smaller elevation than a to-be-removed grid, its elevation is increased. 
+![Illustration of the priority-flood depression filling on the hexagon mesh. Light blue grids represent the initial default state; red grids represent the boundary; green grids represent the to-be-removed grid from the queue; orange grids represent the to-be-added grids into the queue; and purple grids are finished grids. Numbers within each grid represent its global ID and elevation (in parentheses, unit: m), respectively. The algorithm gradually ``floods" the domain using a boundary queue (red). If a to-be-added grid has equal or smaller elevation than a to-be-removed grid, its elevation is increased. \label{fig:depression_filling}](https://github.com/pnnl/hexwatershed/blob/master/algorithm/depression_filling.png?raw=true)
 
 * Flow direction
 
@@ -103,27 +97,27 @@ Most model outputs are in shapefile format and can be visulized using a Geograph
 
 * Flow direction
 
-![The spatial distribtuion of flow direction.](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_direction_90_full.png?raw=true)
+![The spatial distribtuion of flow direction. \label{fig:direction}](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_direction_90_full.png?raw=true)
 
-Figure 2. The spatial distribtuion of flow direction.
+
 
 * Flow accumulation
 
-![The spatial distribtuion of flow accumulation.](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_accumulation_90_full.png?raw=true)
+![The spatial distribtuion of flow accumulation. \label{fig:accumulation}](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_flow_accumulation_90_full.png?raw=true)
 
-Figure 3. The spatial distribtuion of flow accumulation.
+
 
 * Stream order
 
-![The spatial distribtuion of stream order.](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_stream_order_90_full.png?raw=true)
+![The spatial distribtuion of stream order. \label{fig:streamorder}](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_stream_order_90_full.png?raw=true)
 
-Figure 4. The spatial distribtuion of stream order.
+
 
 * Subbasin boundary
 
-![The spatial distribtuion of subbasin boundary.](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_subbasin_90_full.png?raw=true)
+![The spatial distribtuion of subbasin boundary. \label{fig:Subbasin}](https://github.com/pnnl/hexwatershed/blob/master/example/columbia_basin_flat/output/cbf_subbasin_90_full.png?raw=true)
 
-Figure 5. The spatial distribtuion of subbasin boundary.
+
 
 
 # Acknowledgement
