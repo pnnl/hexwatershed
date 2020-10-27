@@ -65,7 +65,7 @@ To remove the local depression within the hexagon DEM, a depression filling algo
 
 ![Illustration of the priority-flood depression filling on the hexagon mesh.](https://github.com/pnnl/hexwatershed/blob/master/algorithm/depression_filling.png?raw=true)
 
-Figure 1. Illustration of the priority-flood depression filling on the hexagon mesh. 
+Figure 1. Illustration of the priority-flood depression filling on the hexagon mesh. Light blue grids represent the initial default state; red grids represent the boundary; green grids represent the to-be-removed grid from the queue; orange grids represent the to-be-added grids into the queue; and purple grids are finished grids. Numbers within each grid represent its global ID and elevation (in parentheses, unit: m), respectively. The algorithm gradually ``floods" the domain using a boundary queue (red). If a to-be-added grid has equal or smaller elevation than a to-be-removed grid, its elevation is increased. 
 
 * Flow direction
 
