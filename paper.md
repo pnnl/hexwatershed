@@ -43,7 +43,7 @@ In this study, we present HexWatershed, the first watershed delineation model ba
 
 # Algorithms and implementation
 
-HexWatershed was developed based on existing algorithms and philosophies from the traditional methods. However, due to the differences in mesh grid, significant changes are made in model design and implementation. Below we only provide information if the algorithm is significantly different from traditional methods.
+HexWatershed was developed based on existing algorithms and philosophies from traditional watershed delineation models. However, due to the fundamental differences in mesh grid, significant changes are made in model design and implementation. Below we only provide information on algorithms that are significantly different from their corresponding traditional algorithms.
 
 * Hexagon DEM
 In Hexwatershed 1.0, the elevation of each hexagon is assigned by its location and high resolution tradition DEM due to data availability.
