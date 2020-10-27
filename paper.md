@@ -65,7 +65,7 @@ To remove the local depression within the hexagon DEM, a depression filling algo
 
 ![Illustration of the priority-flood depression filling on the hexagon mesh.](https://github.com/pnnl/hexwatershed/blob/master/algorithm/depression_filling.png?raw=true)
 
-*Figure 1. Illustration of the priority-flood depression filling on the hexagon mesh. *
+Figure 1. Illustration of the priority-flood depression filling on the hexagon mesh. 
 
 * Flow direction
 
