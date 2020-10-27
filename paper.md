@@ -40,25 +40,25 @@ In this study, we present HexWatershed, the first watershed delineation model ba
 
 HexWatershed was developed based on existing algorithms and philosophies from the traditional methods. However, due to the differences in mesh grid, significant changes are made in model design and implementation. Below we only provide information if the algorithm is significantly different from traditional methods.
 
-1. Hexagon DEM
+* Hexagon DEM
 In Hexwatershed 1.0, the elevation of each hexagon is assigned by its location and high resolution tradition DEM due to data availability.
 
-2. Neighborhood definition
+* Neighborhood definition
 In tradtional methods, the neighbors of a grid can be referred by moving its indices up and down. However, in an unstructured mesh such as hexagon grid, a specially designed index system is required. In HexWatershed 1.0, the neighborhood information of each hexagon is defined using the following steps:
 
     1. A global ID is assigned to each hexagon;
     2. Loop through each hexagon and find its neighbors using shared vertices and edges;
     3. Save the neighborhood information in a lookup table.
   
-3. Depression filling
+* Depression filling
 To remove the local depression, aka, ``pit'', within the hexagon DEM, a depression filling algorithm was implemented based on the priority-flood algorithm, which is the first implementation of the priority-flood algorithm on a D6 grid [@Barnes2014]. 
 
 ![Illustration of the priority-flood depression filling on the hexagon mesh.](https://github.com/pnnl/hexwatershed/blob/master/algorithm/depression_filling.png?raw=true)
 
-4. Flow direction
+* Flow direction
 In HexWatershed 1.0, only the single flow direction is supported, which is defined as from the hexagon center to one of its neighbors which has the lowest elevation.
 
-5. Flow accumulation
+* Flow accumulation
 The flow accumulation algorithm was developed based on the concept from ArcGIS flow accumulation. The algorithm runs in the following steps:
 
     1. Assign each hexagon flow accumulation as 1;
@@ -66,10 +66,10 @@ The flow accumulation algorithm was developed based on the concept from ArcGIS f
     3. Loop through all hexagon grid, if it is untreated and all of its upslope grids are treated, then sum up it flow accumulation and set its flag as treated (TRUE);
     4. Exit until all grids are treated.
 
-6. Stream segment
+* Stream segment
 Unlike most traditional methods, HexWatershed defines stream segment reversely from the watershed outlet to maintain an ascending order of stream indices.
 
-7. Subbasin boundary
+* Subbasin boundary
 Similar to stream segment, HexWatershed define subbasin reversely. The subbasin indices are the same with corresponding stream segments.
 
 # Results
