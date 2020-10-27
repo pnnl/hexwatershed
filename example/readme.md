@@ -41,11 +41,11 @@ If your study area is in the USA, you can use the USGS Watershed Boundary Datase
 
 2. Create a buffer zone around the boundary shapefile. This can be done using either ArcGIS program (https://desktop.arcgis.com/en/arcmap/10.3/manage-data/creating-new-features/creating-a-buffer-around-a-feature.htm) or QGIS (https://docs.qgis.org/2.8/en/docs/gentle_gis_introduction/vector_spatial_analysis_buffers.html).
 
-3. Download the DEM raster covering the entire study area buffer one. Re-project the raster and convert to Geotiff format accordingly.
+3. Download the DEM raster covering the entire study area buffer zone. Re-project the raster and convert it to Geotiff format if necessary.
 
 4. Extract the DEM raster geotiff file with the buffer zone shapefile.
 
-5. Generate the hexaon mesh using the MMQGIS plugin and the extracted DEM as spatial extent
+5. Generate the hexagon mesh using the MMQGIS plugin and the extracted DEM as spatial extent
 (http://michaelminn.com/linux/mmqgis/). The resolution of the hexagon should be defined using its area instead of edge length. 
 
 # Model simulation
