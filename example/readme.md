@@ -39,7 +39,7 @@ This can be done using the following steps:
 1. Download a watershed boundary shapefile of the study area.
 If your study area is in the USA, you can use the USGS Watershed Boundary Datasets (WBD). (https://www.usgs.gov/core-science-systems/ngp/national-hydrography/watershed-boundary-dataset?qt-science_support_page_related_con=4#qt-science_support_page_related_con)
 
-2. Creating a buffer zone around the boundary shapefile. This can be done using either ArcGIS program (https://desktop.arcgis.com/en/arcmap/10.3/manage-data/creating-new-features/creating-a-buffer-around-a-feature.htm) or QGIS (https://docs.qgis.org/2.8/en/docs/gentle_gis_introduction/vector_spatial_analysis_buffers.html).
+2. Create a buffer zone around the boundary shapefile. This can be done using either ArcGIS program (https://desktop.arcgis.com/en/arcmap/10.3/manage-data/creating-new-features/creating-a-buffer-around-a-feature.htm) or QGIS (https://docs.qgis.org/2.8/en/docs/gentle_gis_introduction/vector_spatial_analysis_buffers.html).
 
 3. Download the DEM raster covering the entire study area buffer one. Re-project the raster and convert to Geotiff format accordingly.
 
