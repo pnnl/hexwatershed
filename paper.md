@@ -61,10 +61,10 @@ In HexWatershed 1.0, only the single flow direction is supported, which is defin
 5. Flow accumulation
 The flow accumulation algorithm was developed based on the concept from ArcGIS flow accumulation. The algorithm runs in the following steps:
 
-  1. Assign each hexagon flow accumulation as 1;
-  2. Assign a flag (FALSE) to each hexagon as untreated;
-  3. Loop through all hexagon grid, if it is untreated and all of its upslope grids are treated, then sum up it flow accumulation and set its flag as treated (TRUE);
-  4. Exit until all grids are treated.
+    1. Assign each hexagon flow accumulation as 1;
+    2. Assign a flag (FALSE) to each hexagon as untreated;
+    3. Loop through all hexagon grid, if it is untreated and all of its upslope grids are treated, then sum up it flow accumulation and set its flag as treated (TRUE);
+    4. Exit until all grids are treated.
 
 6. Stream segment
 Unlike most traditional methods, HexWatershed defines stream segment reversely from the watershed outlet to maintain an ascending order of stream indices.
