@@ -64,6 +64,7 @@ This design is to consider a fully unstructured mesh which includes not only hex
 To remove the local depression within the hexagon DEM, a depression filling algorithm was implemented based on the priority-flood algorithm. This is also the first implementation of the priority-flood algorithm on a D6 connectivity grid [@Barnes2014]. 
 
 ![Illustration of the priority-flood depression filling on the hexagon mesh.](https://github.com/pnnl/hexwatershed/blob/master/algorithm/depression_filling.png?raw=true)
+*Figure 1. Illustration of the priority-flood depression filling on the hexagon mesh.*
 
 * Flow direction
 
