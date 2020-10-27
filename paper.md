@@ -46,9 +46,11 @@ In this study, we present HexWatershed, the first watershed delineation model ba
 HexWatershed was developed based on existing algorithms and philosophies from traditional watershed delineation models. However, due to the fundamental differences in mesh grid, significant changes are made in model design and implementation. Below we only provide information on algorithms that are significantly different from their corresponding traditional algorithms.
 
 * Hexagon DEM
+
 In Hexwatershed 1.0, the elevation of each hexagon is assigned by its location and high resolution tradition DEM due to data availability.
 
 * Neighborhood definition
+
 In tradtional methods, the neighbors of a grid can be referred by moving its indices up and down. However, in an unstructured mesh such as hexagon grid, a specially designed index system is required. In HexWatershed 1.0, the neighborhood information of each hexagon is defined using the following steps:
 
     1. A global ID is assigned to each hexagon;
@@ -56,14 +58,17 @@ In tradtional methods, the neighbors of a grid can be referred by moving its ind
     3. Save the neighborhood information in a lookup table.
   
 * Depression filling
+
 To remove the local depression, aka, ``pit'', within the hexagon DEM, a depression filling algorithm was implemented based on the priority-flood algorithm, which is the first implementation of the priority-flood algorithm on a D6 grid [@Barnes2014]. 
 
 ![Illustration of the priority-flood depression filling on the hexagon mesh.](https://github.com/pnnl/hexwatershed/blob/master/algorithm/depression_filling.png?raw=true)
 
 * Flow direction
+
 In HexWatershed 1.0, only the single flow direction is supported, which is defined as from the hexagon center to one of its neighbors which has the lowest elevation.
 
 * Flow accumulation
+
 The flow accumulation algorithm was developed based on the concept from ArcGIS flow accumulation. The algorithm runs in the following steps:
 
     1. Assign each hexagon flow accumulation as 1;
