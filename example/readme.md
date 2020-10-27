@@ -27,6 +27,7 @@ The program combines file name and directory to obtain the full path of actual f
 ```
 sFilename_elevation_raster = sWorkspace_data + slash + "raster" + slash + sFilename_elevation_raster;
 ```
+You need to strictly follow the file system tree structure when preparing your own simulation cases.
 
 In HexWatershed 1.0, the dAccumulation_threshold is the flow accumulation threshold (https://pro.arcgis.com/en/pro-app/tool-reference/spatial-analyst/identifying-stream-networks.htm).
 
