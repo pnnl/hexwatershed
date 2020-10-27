@@ -1,6 +1,6 @@
 # Overview
 
-This document provides the instruction to run a HexWatershed model simulation.
+An instruction to run a HexWatershed model simulation with the example provided in the repository.
 
 # Data structure
 
