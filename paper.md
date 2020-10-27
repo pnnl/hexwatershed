@@ -35,7 +35,7 @@ Recent study demonstrates that watershed delineation on hexagon grids has severa
 
 * It represents adjacency uniformly because it has only one type of connectivity [@DeSousa2006].
 * It eliminates the island effect and diagonal travel path issues, which often occur in the traditional method [@Johnston2009].
-* It can be applied at continental to global scale using a digital global grid system (DGGS) to provide better sphere coverage [@Sahr2019].
+* It can be applied at continental to global scale using a digital global grid system (DGGS) to provide better sphere coverage such as https://youtu.be/t86fTpJX9Es [@Sahr2019].
 
 Because of the dependency of hydrologic processes on watershed characteristics, hexagon grids based watershed hydrology simulations will be improved.
 
