@@ -28,7 +28,8 @@ Liao, C., Tesfa, T., Duan, Z., & Leung, L. R. (2020). Watershed delineation on a
 
 # Contact
 
-* Please submit Issue (https://github.com/pnnl/hexwatershed/issues) for Q&A.
+* Please submit Issue (https://github.com/pnnl/hexwatershed/issues) for Q&A and bug report.
+* Join the Slack community: https://hexwatershed.slack.com/
 * For more information about HexWatershed, please go to (https://www.hexwatershed.org)
 * For other types of questions, please contact Chang Liao (chang.liao@pnnl.gov).
 
