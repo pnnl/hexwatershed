@@ -29,6 +29,6 @@ Liao, C., Tesfa, T., Duan, Z., & Leung, L. R. (2020). Watershed delineation on a
 # Contact
 
 * Please submit Issue (https://github.com/pnnl/hexwatershed/issues) for Q&A and bug report.
-* Join the Slack community: https://hexwatershed.slack.com/? Please fill out the form: https://forms.gle/kuXDS4LkJUaAQvH7A
+* Join the Slack community: https://hexwatershed.slack.com/? Please fill out the form: https://forms.gle/kuXDS4LkJUaAQvH7A. If you have trouble opening the Google Form, please send an email to changliao.climate@gmail.com with Subject "Join HexWatershed Slack", and please provide Name, Preferred Email, and Affiliation.
 * For more information about HexWatershed, please go to (https://www.hexwatershed.org)
 

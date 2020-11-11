@@ -87,6 +87,7 @@ public:
   
   double missing_value;
 
+  std::string sRegion;
   std::string sWorkspace_data;
   std::string sWorkspace_output;
   std::string sFilename_configuration;

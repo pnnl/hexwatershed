@@ -58,6 +58,7 @@ domain::domain(std::string sFilename_configuration_in)
   sExtension_header = ".hdr";
   sExtension_envi = ".dat";
   sExtension_text = ".txt";
+  sRegion = "user";
 }
 
 /**
@@ -67,6 +68,8 @@ domain::domain(std::string sFilename_configuration_in)
 int domain::domain_setup_model()
 {
   int error_code = 1;
+  mParameter.insert(std::pair<std::string, std::string>("sRegion",
+                                                        sRegion)); //where most global data is stored
   mParameter.insert(std::pair<std::string, std::string>("sWorkspace_data",
                                                         sWorkspace_data)); //where most global data is stored
 
@@ -180,18 +183,18 @@ int domain::domain_read_configuration_file()
         continue;
       }
       //split the sLine
-      vTokens = split_string_by_space(sLine);
+      vTokens = split_string_by_delimiter(sLine, ',');
       //test the size of the vector
       iVector_size = vTokens.size();
       if (iVector_size == 2)
       {
-        sKey = vTokens[0];   //sKey holds the sKey(address)!
-        sValue = vTokens[1]; //the real sValue of the sKey.
+        sKey = trim(vTokens[0]);   //sKey holds the sKey(address)!
+        sValue = trim(vTokens[1]); //the real sValue of the sKey.
       }
       else
       {
-        sKey = vTokens[0]; //sKey holds the sKey(address)!
-        sValue = sKey;
+        sKey = trim(vTokens[0]); //sKey holds the sKey(address)!
+        sValue = trim(sKey);
       }
       //50==================================================
       //check the completeness of the sLine
@@ -241,6 +244,14 @@ int domain::domain_retrieve_user_input()
   {
     this->sWorkspace_data = search->second;
   }
+
+sKey = "sRegion";
+  search = mParameter.find(sKey);
+  if (search != mParameter.end())
+  {
+    this->sRegion = search->second;
+  }
+
   sKey = "sWorkspace_output";
   search = mParameter.find(sKey);
   if (search != mParameter.end())
