@@ -64,8 +64,13 @@ public:
   int iFlag_hexagon_point;   //user provided point hexagon
   int iFlag_hexagon_polygon; //user provided polygon hexagon
 
+  int iMesh_type; //1: qgis; 2: dggrid; 3: MPAS
+
   int nColumn_elevation;
   int nRow_elevation;
+  int nColumn_mesh;
+  int nRow_mesh;
+
   int nSegment;
   int iSegment_current;
   int iCase;

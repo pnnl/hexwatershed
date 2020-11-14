@@ -34,7 +34,7 @@
 using namespace std;
 //50==================================================
 
-
+const std::string WHITESPACE = " \n\r\t\f\v";
 
 //50==================================================
 //unit conversion
