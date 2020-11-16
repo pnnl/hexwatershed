@@ -24,25 +24,24 @@ bibliography: paper.bib
 # Summary
 
 For decades, watershed delineation has been widely viewed as the first and most important step in watershed hydrology simulations. While most studies focus on the physical processes in hydrologic simulations, less attentions have been paid to the underlying spatial discretization, the mesh grid, and its potential limitations.  
-HexWatershed is the first watershed delineation model that aims to resolve these limitations through the use of hexagon mesh grid. It also provides an opportunity for coupled land-river-ocean simulations.
+HexWatershed is the first watershed delineation model that aims to resolve several limitations through the use of hexagon mesh grid. It also provides an opportunity for coupled land-river-ocean simulations.
 
 # Statement of need
 
 Watershed delineation is the first and yet most critical step in watershed hydrology simulations. Currently, this process requires a raster digital elevation model (DEM) dataset as input, which is based on the square grids [@Tarboton1991]. 
 From now on, we will use "traditional methods" to represent all the numerical methods based on square grids unless otherwise stated.
 
-Recent study demonstrates that watershed delineation on hexagon grids has several advantages compared with the traditional methods:
+Our recent study demonstrates that watershed delineation on hexagon grids has several advantages over the traditional methods [@Liao2020]:
 
 * It represents adjacency uniformly because it has only one type of connectivity [@DeSousa2006].
 * It eliminates the island effect and diagonal travel path issues, which often occur in the traditional method [@Johnston2009].
-* It can be applied at continental to global scale using a digital global grid system (DGGS) to provide better sphere coverage such as https://youtu.be/t86fTpJX9Es [@Sahr2019].
+* It can be applied at continental to global scale using a digital global grid system (DGGS) to provide better sphere coverage [@Sahr2019].
 
-Because of the dependency of hydrologic processes on watershed characteristics, hexagon grids based watershed hydrology simulations will be improved.
+Because of the dependency of hydrologic processes on watershed characteristics, hexagon grids based watershed hydrology simulations could be improved.
 
 Besides, hexagon grids provide an opportunity in coupling hydrologic models with oceanic models because the latter are usually based on unstructured meshes [@Ringler2013].
 
-Despite these advantages and practical needs, such a software specifically designed for watershed delineation on the hexagon grids is not available [@Liao2020].
-In this study, we developed the HexWatershed model, a watershed delineation model based on hexagon mesh grid. 
+Despite these advantages and practical needs, such a software specifically designed for watershed delineation on the hexagon grids is not available. Therefore, in this study, we developed the HexWatershed model, a watershed delineation model based on hexagon mesh grid. 
 
 # Algorithms and implementation
 
@@ -56,11 +55,11 @@ In traditional methods, the neighbors of a grid can be referred by moving its in
 2. Loop through each hexagon and find its neighbors using shared vertices and edges;
 3. Save the neighborhood information in a lookup table.
 
-This design is to consider a fully unstructured mesh which includes not only hexagon, but also pentagon and other polygons.
+This design is to consider a fully unstructured mesh which includes not only hexagon, but also pentagon and other types of polygons.
   
 * Depression filling
 
-To remove the local depression within the hexagon DEM, a depression filling algorithm was implemented based on the priority-flood algorithm. This is also the first implementation of the priority-flood algorithm on a D6 connectivity grid \autoref{fig:depression_filling} [@Barnes2014]. 
+To remove the local depression within the hexagon DEM, a depression filling algorithm was implemented based on the priority-flood algorithm. This is also the first implementation of the priority-flood algorithm on a D6 connectivity grid \autoref{fig:depression_filling} [@Barnes2014]. Priority-flood is an efficient algorithm to fill DEM depressions by sequentially ``flooding" the domain from the boundary inward to adjust elevations to assure that surface will drain.
 
 ![Illustration of the priority-flood depression filling on the hexagon mesh. Light blue grids represent the initial default state; red grids represent the boundary; green grids represent the to-be-removed grid from the queue; orange grids represent the to-be-added grids into the queue; and purple grids are finished grids. Numbers within each grid represent its global ID and elevation (in parentheses, unit: m), respectively. The algorithm gradually ``floods" the domain using a boundary queue (red). If a to-be-added grid has equal or smaller elevation than a to-be-removed grid, its elevation is increased. \label{fig:depression_filling}](https://github.com/pnnl/hexwatershed/blob/master/algorithm/depression_filling.png?raw=true)
 
@@ -68,9 +67,9 @@ To remove the local depression within the hexagon DEM, a depression filling algo
 
 The flow accumulation algorithm was developed based on the concept from ArcGIS flow accumulation. The new algorithm runs in the following steps:
 
-1. Assign flow accumulation of each hexagon as 1;
+1. Assign flow accumulation of each hexagon as 0;
 2. Assign an initial flag to each hexagon as untreated (FALSE);
-3. Set all hexagon grid as treated (TRUE) if it has no upslope;
+3. Set all hexagon grids as treated (TRUE) if it has no upslope;
 4. Loop through all hexagon grids, if it is untreated (FALSE) and all of its upslope grids are treated (TRUE), then sum up its flow accumulation and set it as treated (TRUE);
 5. Repeat step 4 until all grids are treated.
 
@@ -83,6 +82,7 @@ Unlike traditional methods, HexWatershed defines stream segment reversely from t
 3. The current stream segment becomes N-1, then search all the upstreams of this stream confluence;
 4. Repeat step 2 until N = 1.
 
+The outlet is defined as the grid which has the largest flow accumulation.
 The maximum segment N is calculated based on stream confluence topology.
 
 * Subbasin boundary
