@@ -56,5 +56,6 @@
         "mutex": "cpp",
         "thread": "cpp",
         "cinttypes": "cpp"
-    }
+    },
+    "restructuredtext.confPath": "${workspaceFolder}/doc"
 }
