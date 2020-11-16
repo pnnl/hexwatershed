@@ -44,9 +44,88 @@
             
   <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<p>Install the package with pip:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install read-the-docs-template
-</pre></div>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This document provides the instruction to build the HexWatershed model.</p>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to build the HexWatershed on Linux/Mac/Windows as long as your system has the following libraries:</p>
+<ul class="simple">
+<li><p>cmake 3.1.0 and above</p></li>
+<li><p>GCC 5.2.0 and above</p></li>
+<li><p>GDAL 2.3.1</p></li>
+</ul>
+</div>
+<div class="section" id="cmake">
+<h2>CMake<a class="headerlink" href="#cmake" title="Permalink to this headline">¶</a></h2>
+<p>cmake is the tool used to generate the makefile.</p>
+<p>cmake can be installed through a package manager. If you are on a Linux HPC, you administration should have already installed in most cases.</p>
+<p>If you are on a Mac computer, cmake can be installed through Homebrew (<a class="reference external" href="https://brew.sh/">https://brew.sh/</a>).</p>
+</div>
+<div class="section" id="gcc">
+<h2>GCC<a class="headerlink" href="#gcc" title="Permalink to this headline">¶</a></h2>
+<p>GCC is the compiler used to compile the source code.</p>
+<p>Similar to cmake, you can install GCC on linux or Mac.</p>
+</div>
+<div class="section" id="geospatial-data-abstraction-library-gdal">
+<h2>Geospatial Data Abstraction Library (GDAL)<a class="headerlink" href="#geospatial-data-abstraction-library-gdal" title="Permalink to this headline">¶</a></h2>
+<p>HexWatershed relies on GDAL C++ API (<a class="reference external" href="https://gdal.org/">https://gdal.org/</a>) to operate on Shapefile and other spatial datasets.
+In this version, I only tested GDAL version 2.3.1.</p>
+<p>In this instruction, I only use a Linux machine as an example. For other platforms, you need to change several files:</p>
+<ul class="simple">
+<li><p>CMakeLists.txt</p></li>
+<li><p>cmake.sh (Optional)</p></li>
+<li><p>make.sh (Optional)</p></li>
+</ul>
+<p>There are several outdated CMakeLists.txt files in this directory for different platforms such as Mac OS, you can use it as a template. I use two bash scripts to simplify the process of setting environmental variables. For your own platform and application, you may use different approach.</p>
+<p>Figures are provided for illustration when needed.</p>
+</div>
+<div class="section" id="instruction-step-by-step">
+<h2>Instruction step by step<a class="headerlink" href="#instruction-step-by-step" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>In the terminal, create a folder for this project</p></li>
+</ol>
+<p>2. Clone the repository into the folder with
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">git</span> <span class="pre">clone</span> <span class="pre">git&#64;github.com:pnnl/hexwatershed.git</span>
+<span class="pre">`</span></code>
+3. Create a folder outside the hexwatershed repository
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">mkdir</span> <span class="pre">CMake</span>
+<span class="pre">`</span></code>
+4. Go into the CMake folder and copy the CMakeLists.txt file from the repository into the CMake folder
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">cp</span> <span class="pre">../hexwatershed/install/CMakeLists.txt</span>&#160; <span class="pre">./</span>
+<span class="pre">cp</span> <span class="pre">../hexwatershed/install/cmake.sh</span>&#160; <span class="pre">./</span>
+<span class="pre">cp</span> <span class="pre">../hexwatershed/install/make.sh</span>&#160; <span class="pre">./</span>
+<span class="pre">`</span></code>
+You should also change the permission of the bash files.
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">chmod</span> <span class="pre">755</span> <span class="pre">cmake.sh</span>
+<span class="pre">chmod</span> <span class="pre">755</span> <span class="pre">make.sh</span>
+<span class="pre">`</span></code>
+5. Open the CMakeLists.txt file and edit the path of gdal based on your system with your preferred editor.
+The highlight rectangle is where you can change the gdal library.
+![CMakeLists file](<a class="reference external" href="https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmakelists.png?raw=true">https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmakelists.png?raw=true</a>)
+6. Run the cmake bash script to load modules and run the cmake command
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">./cmake.sh</span>
+<span class="pre">`</span></code>
+![Run cmake](<a class="reference external" href="https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmake.png?raw=true">https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmake.png?raw=true</a>)
+This script should generates some results as follow:
+![Run make](<a class="reference external" href="https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmake_result.png?raw=true">https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmake_result.png?raw=true</a>)
+7. Run the make bash file
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">./make.sh</span>
+<span class="pre">`</span></code>
+![Run make](<a class="reference external" href="https://github.com/pnnl/hexwatershed/blob/master/install/figure/make.png?raw=true">https://github.com/pnnl/hexwatershed/blob/master/install/figure/make.png?raw=true</a>)
+This script should generates some results as follow:
+![Run make](<a class="reference external" href="https://github.com/pnnl/hexwatershed/blob/master/install/figure/make_result.png?raw=true">https://github.com/pnnl/hexwatershed/blob/master/install/figure/make_result.png?raw=true</a>)
+8. By now, your build should be successful if you receive no errors. And you will see the binary file in the CMake folder and another one within the repository as well.
+![Installation output](<a class="reference external" href="https://github.com/pnnl/hexwatershed/blob/master/install/figure/final.png?raw=true">https://github.com/pnnl/hexwatershed/blob/master/install/figure/final.png?raw=true</a>)</p>
+<p>Congratulations, you have successfully built the HexWatershed model!</p>
+<p>Now you can test the model with the example following this instruction: <a class="reference external" href="https://github.com/pnnl/hexwatershed/tree/master/example">https://github.com/pnnl/hexwatershed/tree/master/example</a></p>
 </div>
 </div>
 
@@ -57,6 +136,19 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#cmake">CMake</a></li>
+<li><a class="reference internal" href="#gcc">GCC</a></li>
+<li><a class="reference internal" href="#geospatial-data-abstraction-library-gdal">Geospatial Data Abstraction Library (GDAL)</a></li>
+<li><a class="reference internal" href="#instruction-step-by-step">Instruction step by step</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="history.html"
                         title="previous chapter">History</a></p>
