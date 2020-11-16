@@ -78,6 +78,7 @@ The highlight rectangle is where you can change the gdal library.
 .. image:: ../install/figure/cmakelists.png
     :width: 800px
     :align: center
+    :height: 1000px
     :alt: CMakeLists file
 
 - Run the cmake bash script to load modules and run the cmake command::
@@ -87,13 +88,13 @@ The highlight rectangle is where you can change the gdal library.
 .. image:: ../install/figure/cmake.png
     :width: 800px
     :align: center
-    :height: 600px
+    :height: 400px
     :alt: Run cmake
 
 .. image:: ../install/figure/cmake_result.png
     :width: 800px
     :align: center
-    :height: 600px
+    :height: 500px
     :alt: Run cmake
 
 This script should generates some results as follow:
@@ -105,7 +106,7 @@ This script should generates some results as follow:
 .. image:: ../install/figure/make.png
     :width: 800px
     :align: center
-    :height: 600px
+    :height: 300px
     :alt: Make
 
 
@@ -115,7 +116,7 @@ This script should generates some results as follow:
 .. image:: ../install/figure/make_result.png
     :width: 800px
     :align: center
-    :height: 600px
+    :height: 400px
     :alt: Make results
 
 - By now, your build should be successful if you receive no errors. And you will see the binary file in the CMake folder and another one within the repository as well.
@@ -123,7 +124,7 @@ This script should generates some results as follow:
 .. image:: ../install/figure/final.png
     :width: 800px
     :align: center
-    :height: 600px
+    :height: 400px
     :alt: Installation output
 
 Congratulations, you have successfully built the HexWatershed model!
