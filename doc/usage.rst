@@ -40,6 +40,7 @@ The DEM raster and mesh Shapefile must have the same spatial projection and spat
 This can be done using the following steps:
 
 - Download a watershed boundary Shapefile of the study area.
+
 If your study area is in the USA, you can use the USGS Watershed Boundary Datasets (WBD). (https://www.usgs.gov/core-science-systems/ngp/national-hydrography/watershed-boundary-dataset?qt-science_support_page_related_con=4#qt-science_support_page_related_con)
 
 - Create a buffer zone around the boundary Shapefile. This can be done using either ArcGIS program (https://desktop.arcgis.com/en/arcmap/10.3/manage-data/creating-new-features/creating-a-buffer-around-a-feature.htm) or QGIS (https://docs.qgis.org/2.8/en/docs/gentle_gis_introduction/vector_spatial_analysis_buffers.html).
@@ -48,7 +49,8 @@ If your study area is in the USA, you can use the USGS Watershed Boundary Datase
 
 - Extract the DEM raster Geotiff file with the buffer zone Shapefile.
 
-- Generate the hexagon mesh using the MMQGIS plugin and the extracted DEM as spatial extent
+- Generate the hexagon mesh using the MMQGIS plugin and the extracted DEM as spatial extent.
+
 (http://michaelminn.com/linux/mmqgis/). The resolution of the hexagon should be defined using its area instead of edge length. 
 
 Model simulation
