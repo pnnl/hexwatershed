@@ -79,7 +79,7 @@ The highlight rectangle is where you can change the gdal library.
     :width: 200px
     :align: center
     :height: 100px
-    :alt: alternate text
+    :alt: CMakeLists file
 
 - Run the cmake bash script to load modules and run the cmake command::
  
