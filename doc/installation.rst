@@ -78,7 +78,6 @@ The highlight rectangle is where you can change the gdal library.
 .. image:: ../install/figure/cmakelists.png
     :width: 800px
     :align: center
-    :height: 600px
     :alt: CMakeLists file
 
 - Run the cmake bash script to load modules and run the cmake command::
