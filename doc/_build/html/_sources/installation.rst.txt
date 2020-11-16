@@ -75,7 +75,7 @@ You should also change the permission of the bash files::
 
 The highlight rectangle is where you can change the gdal library.
 
-.. image:: https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmakelists.png
+.. image:: ../install/figure/cmakelists.png
     :width: 200px
     :align: center
     :height: 100px
