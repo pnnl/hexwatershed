@@ -83,47 +83,41 @@ In this version, I only tested GDAL version 2.3.1.</p>
 </div>
 <div class="section" id="instruction-step-by-step">
 <h2>Instruction step by step<a class="headerlink" href="#instruction-step-by-step" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
+<ul class="simple">
 <li><p>In the terminal, create a folder for this project</p></li>
-</ol>
-<p>2. Clone the repository into the folder with
-<code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">git</span> <span class="pre">clone</span> <span class="pre">git&#64;github.com:pnnl/hexwatershed.git</span>
-<span class="pre">`</span></code>
-3. Create a folder outside the hexwatershed repository
-<code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">mkdir</span> <span class="pre">CMake</span>
-<span class="pre">`</span></code>
-4. Go into the CMake folder and copy the CMakeLists.txt file from the repository into the CMake folder
-<code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">cp</span> <span class="pre">../hexwatershed/install/CMakeLists.txt</span>&#160; <span class="pre">./</span>
-<span class="pre">cp</span> <span class="pre">../hexwatershed/install/cmake.sh</span>&#160; <span class="pre">./</span>
-<span class="pre">cp</span> <span class="pre">../hexwatershed/install/make.sh</span>&#160; <span class="pre">./</span>
-<span class="pre">`</span></code>
-You should also change the permission of the bash files.
-<code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">chmod</span> <span class="pre">755</span> <span class="pre">cmake.sh</span>
-<span class="pre">chmod</span> <span class="pre">755</span> <span class="pre">make.sh</span>
-<span class="pre">`</span></code>
-5. Open the CMakeLists.txt file and edit the path of gdal based on your system with your preferred editor.
-The highlight rectangle is where you can change the gdal library.
-![CMakeLists file](<a class="reference external" href="https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmakelists.png?raw=true">https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmakelists.png?raw=true</a>)
-6. Run the cmake bash script to load modules and run the cmake command
-<code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">./cmake.sh</span>
-<span class="pre">`</span></code>
-![Run cmake](<a class="reference external" href="https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmake.png?raw=true">https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmake.png?raw=true</a>)
-This script should generates some results as follow:
-![Run make](<a class="reference external" href="https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmake_result.png?raw=true">https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmake_result.png?raw=true</a>)
-7. Run the make bash file
-<code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">./make.sh</span>
-<span class="pre">`</span></code>
-![Run make](<a class="reference external" href="https://github.com/pnnl/hexwatershed/blob/master/install/figure/make.png?raw=true">https://github.com/pnnl/hexwatershed/blob/master/install/figure/make.png?raw=true</a>)
-This script should generates some results as follow:
-![Run make](<a class="reference external" href="https://github.com/pnnl/hexwatershed/blob/master/install/figure/make_result.png?raw=true">https://github.com/pnnl/hexwatershed/blob/master/install/figure/make_result.png?raw=true</a>)
-8. By now, your build should be successful if you receive no errors. And you will see the binary file in the CMake folder and another one within the repository as well.
-![Installation output](<a class="reference external" href="https://github.com/pnnl/hexwatershed/blob/master/install/figure/final.png?raw=true">https://github.com/pnnl/hexwatershed/blob/master/install/figure/final.png?raw=true</a>)</p>
+<li><p>Clone the repository into the folder with</p></li>
+</ul>
+<p>git clone <a class="reference external" href="mailto:git&#37;&#52;&#48;github&#46;com">git<span>&#64;</span>github<span>&#46;</span>com</a>:pnnl/hexwatershed.git</p>
+<ul class="simple">
+<li><p>Create a folder outside the hexwatershed repository</p></li>
+</ul>
+<p>mkdir CMake</p>
+<ul class="simple">
+<li><p>Go into the CMake folder and copy the CMakeLists.txt file from the repository into the CMake folder</p></li>
+</ul>
+<p>cp ../hexwatershed/install/CMakeLists.txt  ./
+cp ../hexwatershed/install/cmake.sh  ./
+cp ../hexwatershed/install/make.sh  ./</p>
+<p>You should also change the permission of the bash files.</p>
+<p>chmod 755 cmake.sh
+chmod 755 make.sh</p>
+<ul class="simple">
+<li><p>Open the CMakeLists.txt file and edit the path of gdal based on your system with your preferred editor.</p></li>
+</ul>
+<p>The highlight rectangle is where you can change the gdal library.</p>
+<ul class="simple">
+<li><p>Run the cmake bash script to load modules and run the cmake command</p></li>
+</ul>
+<p>./cmake.sh</p>
+<p>This script should generates some results as follow:</p>
+<ul class="simple">
+<li><p>Run the make bash file</p></li>
+</ul>
+<p>./make.sh</p>
+<p>This script should generates some results as follow:</p>
+<ul class="simple">
+<li><p>By now, your build should be successful if you receive no errors. And you will see the binary file in the CMake folder and another one within the repository as well.</p></li>
+</ul>
 <p>Congratulations, you have successfully built the HexWatershed model!</p>
 <p>Now you can test the model with the example following this instruction: <a class="reference external" href="https://github.com/pnnl/hexwatershed/tree/master/example">https://github.com/pnnl/hexwatershed/tree/master/example</a></p>
 </div>
