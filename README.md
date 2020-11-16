@@ -10,6 +10,8 @@ https://github.com/pnnl/hexwatershed/tree/master/install
 Please refer the example documentation for details.
 https://github.com/pnnl/hexwatershed/tree/master/example
 
+# Documentation
+For full documentation, please go to: https://hexwatershed.readthedocs.io/
 
 # Acknowledgement
 The model described in this repository was supported by
