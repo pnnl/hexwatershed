@@ -20,7 +20,7 @@ The content of this text file is as follow:
 .. image:: ../example/figure/cbfmeta.png
     :width: 800px
     :align: center
-    :height: 600px
+    :height: 300px
     :alt: Model input
 
 
@@ -70,7 +70,7 @@ Then you can prepare another bash script similar to:
 .. image:: ../example/figure/run.png
     :width: 800px
     :align: center
-    :height: 600px
+    :height: 300px
     :alt: Run bash
 
 
@@ -83,7 +83,7 @@ Then you may run the simulation by typing in the terminal::
 .. image:: ../example/figure/run_log.png
     :width: 800px
     :align: center
-    :height: 600px
+    :height: 500px
     :alt: Run log
 
 The terminal will prints some model information directly:
@@ -106,7 +106,7 @@ After the simulation is finished, you should see a list of Shapefiles within the
 .. image:: ../example/figure/result_list.png
     :width: 800px
     :align: center
-    :height: 600px
+    :height: 300px
     :alt: List of results
 
 

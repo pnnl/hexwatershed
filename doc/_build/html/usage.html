@@ -51,7 +51,7 @@ If you haven’t built the model yet, please go to <a class="reference external"
 Within this text file, each line represents a model configuration.
 An example of such a text file is provided here: <a class="reference external" href="https://github.com/pnnl/hexwatershed/tree/master/example/columbia_basin_flat/input/cbf.meta">https://github.com/pnnl/hexwatershed/tree/master/example/columbia_basin_flat/input/cbf.meta</a></p>
 <p>The content of this text file is as follow:</p>
-<a class="reference internal image-reference" href="_images/cbfmeta.png"><img alt="Model input" class="align-center" src="_images/cbfmeta.png" style="width: 800px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/cbfmeta.png"><img alt="Model input" class="align-center" src="_images/cbfmeta.png" style="width: 800px; height: 300px;" /></a>
 <p>At each line, the configuration parameter is defined using a key-value pair, which is separated by a comma “,”.</p>
 <p>The program retrieves these information and defines all the model inputs using a look-up table.</p>
 <p>The program combines file name and directory to obtain the full path of actual file. For example, the actual DEM file will be constructed as:</p>
@@ -80,13 +80,13 @@ This can be done using the following steps:</p>
 <h2>Model simulation<a class="headerlink" href="#model-simulation" title="Permalink to this headline">¶</a></h2>
 <p>After all the input files are prepared, you can update the text file as the model input parameter.</p>
 <p>Then you can prepare another bash script similar to:</p>
-<a class="reference internal image-reference" href="_images/run.png"><img alt="Run bash" class="align-center" src="_images/run.png" style="width: 800px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/run.png"><img alt="Run bash" class="align-center" src="_images/run.png" style="width: 800px; height: 300px;" /></a>
 <p>Then you may run the simulation by typing in the terminal:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chmod</span> <span class="mi">755</span> <span class="n">run</span><span class="o">.</span><span class="n">sh</span>
 <span class="o">./</span><span class="n">run</span><span class="o">.</span><span class="n">sh</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/run_log.png"><img alt="Run log" class="align-center" src="_images/run_log.png" style="width: 800px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/run_log.png"><img alt="Run log" class="align-center" src="_images/run_log.png" style="width: 800px; height: 500px;" /></a>
 <p>The terminal will prints some model information directly:</p>
 <p>By then, you should have a successful hexWatershed simulation.</p>
 </div>
@@ -100,7 +100,7 @@ This can be done using the following steps:</p>
 - stream order
 - subbasin boundary
 - watershed boundary</p>
-<a class="reference internal image-reference" href="_images/result_list.png"><img alt="List of results" class="align-center" src="_images/result_list.png" style="width: 800px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/result_list.png"><img alt="List of results" class="align-center" src="_images/result_list.png" style="width: 800px; height: 300px;" /></a>
 <p>You can use any GIS tools (ArcGIS, ENVI, and QGIS, etc.) to visualize the results.</p>
 <p>Below are some example outputs from this example:</p>
 <ul class="simple">
