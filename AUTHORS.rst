@@ -1,5 +1,6 @@
+=======
 Authors
--------
+=======
 
 * Chang Liao
 * Teklu Tesfa

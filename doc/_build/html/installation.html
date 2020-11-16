@@ -83,37 +83,50 @@ In this version, I only tested GDAL version 2.3.1.</p>
 </div>
 <div class="section" id="instruction-step-by-step">
 <h2>Instruction step by step<a class="headerlink" href="#instruction-step-by-step" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
+<ul>
 <li><p>In the terminal, create a folder for this project</p></li>
-<li><p>Clone the repository into the folder with</p></li>
-</ul>
-<p>git clone <a class="reference external" href="mailto:git&#37;&#52;&#48;github&#46;com">git<span>&#64;</span>github<span>&#46;</span>com</a>:pnnl/hexwatershed.git</p>
-<ul class="simple">
+<li><p>Clone the repository into the folder with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">pnnl</span><span class="o">/</span><span class="n">hexwatershed</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+</li>
 <li><p>Create a folder outside the hexwatershed repository</p></li>
 </ul>
 <p>mkdir CMake</p>
-<ul class="simple">
-<li><p>Go into the CMake folder and copy the CMakeLists.txt file from the repository into the CMake folder</p></li>
+<ul>
+<li><p>Go into the CMake folder and copy the CMakeLists.txt file from the repository into the CMake folder:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">../</span><span class="n">hexwatershed</span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">CMakeLists</span><span class="o">.</span><span class="n">txt</span>  <span class="o">./</span>
+<span class="n">cp</span> <span class="o">../</span><span class="n">hexwatershed</span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">cmake</span><span class="o">.</span><span class="n">sh</span>  <span class="o">./</span>
+<span class="n">cp</span> <span class="o">../</span><span class="n">hexwatershed</span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">make</span><span class="o">.</span><span class="n">sh</span>  <span class="o">./</span>
+</pre></div>
+</div>
+</li>
 </ul>
-<p>cp ../hexwatershed/install/CMakeLists.txt  ./
-cp ../hexwatershed/install/cmake.sh  ./
-cp ../hexwatershed/install/make.sh  ./</p>
-<p>You should also change the permission of the bash files.</p>
-<p>chmod 755 cmake.sh
-chmod 755 make.sh</p>
+<p>You should also change the permission of the bash files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chmod</span> <span class="mi">755</span> <span class="n">cmake</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">chmod</span> <span class="mi">755</span> <span class="n">make</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
 <ul class="simple">
 <li><p>Open the CMakeLists.txt file and edit the path of gdal based on your system with your preferred editor.</p></li>
 </ul>
 <p>The highlight rectangle is where you can change the gdal library.</p>
-<ul class="simple">
-<li><p>Run the cmake bash script to load modules and run the cmake command</p></li>
+<a class="reference internal image-reference" href="https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmakelists.png"><img alt="alternate text" class="align-center" src="https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmakelists.png" style="width: 200px; height: 100px;" /></a>
+<ul>
+<li><p>Run the cmake bash script to load modules and run the cmake command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">cmake</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</li>
 </ul>
-<p>./cmake.sh</p>
 <p>This script should generates some results as follow:</p>
-<ul class="simple">
-<li><p>Run the make bash file</p></li>
+<ul>
+<li><p>Run the make bash file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">make</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</li>
 </ul>
-<p>./make.sh</p>
 <p>This script should generates some results as follow:</p>
 <ul class="simple">
 <li><p>By now, your build should be successful if you receive no errors. And you will see the binary file in the CMake folder and another one within the repository as well.</p></li>

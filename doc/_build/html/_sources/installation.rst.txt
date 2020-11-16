@@ -52,39 +52,45 @@ Instruction step by step
 ------------------------
 
 - In the terminal, create a folder for this project
-- Clone the repository into the folder with 
+- Clone the repository into the folder with::
 
-git clone git@github.com:pnnl/hexwatershed.git
+    git clone git@github.com:pnnl/hexwatershed.git
  
 - Create a folder outside the hexwatershed repository
  
 mkdir CMake
  
-- Go into the CMake folder and copy the CMakeLists.txt file from the repository into the CMake folder
+- Go into the CMake folder and copy the CMakeLists.txt file from the repository into the CMake folder::
  
-cp ../hexwatershed/install/CMakeLists.txt  ./
-cp ../hexwatershed/install/cmake.sh  ./
-cp ../hexwatershed/install/make.sh  ./
+    cp ../hexwatershed/install/CMakeLists.txt  ./
+    cp ../hexwatershed/install/cmake.sh  ./
+    cp ../hexwatershed/install/make.sh  ./
  
-You should also change the permission of the bash files.
+You should also change the permission of the bash files::
  
-chmod 755 cmake.sh
-chmod 755 make.sh
+    chmod 755 cmake.sh
+    chmod 755 make.sh
  
 - Open the CMakeLists.txt file and edit the path of gdal based on your system with your preferred editor.
 
 The highlight rectangle is where you can change the gdal library.
 
-- Run the cmake bash script to load modules and run the cmake command
+.. image:: https://github.com/pnnl/hexwatershed/blob/master/install/figure/cmakelists.png
+    :width: 200px
+    :align: center
+    :height: 100px
+    :alt: alternate text
+
+- Run the cmake bash script to load modules and run the cmake command::
  
-./cmake.sh
+    ./cmake.sh
  
 
 This script should generates some results as follow:
 
-- Run the make bash file 
+- Run the make bash file::
  
-./make.sh
+    ./make.sh
  
 
 This script should generates some results as follow:
