@@ -2980,7 +2980,7 @@ but because we will not change any member variable here, it should be safe to pa
   int domain::find_all_neighbors()
   {
     int error_code = 1;
-    int iOption = 3;
+    int iOption = 2;
     double dX, dY;
     double dX_dummy, dY_dummy;
     double dX_self;
@@ -3145,7 +3145,7 @@ but because we will not change any member variable here, it should be safe to pa
             {
               lColumn_index2 = 2;
               lRow_index2 = 3;
-              if ()
+              if (lRow_index2 > 0)
               {
                 //add it               
                 (vCell_active.at(lIndex_self)).vNeighbor.push_back((vCell_active.at(lIndex_search)).lID);
