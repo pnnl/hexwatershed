@@ -76,27 +76,56 @@ You should also change the permission of the bash files::
 The highlight rectangle is where you can change the gdal library.
 
 .. image:: ../install/figure/cmakelists.png
-    :width: 200px
+    :width: 800px
     :align: center
-    :height: 100px
+    :height: 600px
     :alt: CMakeLists file
 
 - Run the cmake bash script to load modules and run the cmake command::
  
     ./cmake.sh
  
+.. image:: ../install/figure/cmake.png
+    :width: 800px
+    :align: center
+    :height: 600px
+    :alt: Run cmake
+
+.. image:: ../install/figure/cmake_result.png
+    :width: 800px
+    :align: center
+    :height: 600px
+    :alt: Run cmake
 
 This script should generates some results as follow:
 
 - Run the make bash file::
  
     ./make.sh
- 
+
+.. image:: ../install/figure/make.png
+    :width: 800px
+    :align: center
+    :height: 600px
+    :alt: Make
+
+
 
 This script should generates some results as follow:
 
+.. image:: ../install/figure/make_result.png
+    :width: 800px
+    :align: center
+    :height: 600px
+    :alt: Make results
+
 - By now, your build should be successful if you receive no errors. And you will see the binary file in the CMake folder and another one within the repository as well.
 
+.. image:: ../install/figure/final.png
+    :width: 800px
+    :align: center
+    :height: 600px
+    :alt: Installation output
 
 Congratulations, you have successfully built the HexWatershed model!
 

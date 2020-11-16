@@ -17,6 +17,13 @@ An example of such a text file is provided here: https://github.com/pnnl/hexwate
 
 The content of this text file is as follow:
 
+.. image:: ../example/figure/cbfmeta.png
+    :width: 800px
+    :align: center
+    :height: 600px
+    :alt: Model input
+
+
 At each line, the configuration parameter is defined using a key-value pair, which is separated by a comma ",".
 
 The program retrieves these information and defines all the model inputs using a look-up table.
@@ -60,12 +67,24 @@ After all the input files are prepared, you can update the text file as the mode
 
 Then you can prepare another bash script similar to:
 
+.. image:: ../example/figure/run.png
+    :width: 800px
+    :align: center
+    :height: 600px
+    :alt: Run bash
 
-Then you may run the simulation by typing in the terminal:
+
+Then you may run the simulation by typing in the terminal::
   
-chmod 755 run.sh
-./run.sh
+    chmod 755 run.sh
+    ./run.sh
   
+
+.. image:: ../example/figure/run_log.png
+    :width: 800px
+    :align: center
+    :height: 600px
+    :alt: Run log
 
 The terminal will prints some model information directly:
 
@@ -76,20 +95,25 @@ Simulation results
 ------------------
 
 After the simulation is finished, you should see a list of Shapefiles within the output directory.
-1. hexagon DEM
-2. flow direction
-3. flow accumulation
-4. stream segment
-5. stream order
-6. subbasin boundary
-7. watershed boundary
+- hexagon DEM
+- flow direction
+- flow accumulation
+- stream segment
+- stream order
+- subbasin boundary
+- watershed boundary
+
+.. image:: ../example/figure/result_list.png
+    :width: 800px
+    :align: center
+    :height: 600px
+    :alt: List of results
+
 
 You can use any GIS tools (ArcGIS, ENVI, and QGIS, etc.) to visualize the results.
 
 Below are some example outputs from this example:
 
--- Flow direction
-
--- Flow accumulation
-
--- Subbasin
+- Flow direction
+- Flow accumulation
+- Subbasin
