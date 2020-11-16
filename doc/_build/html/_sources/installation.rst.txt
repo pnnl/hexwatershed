@@ -88,13 +88,13 @@ The highlight rectangle is where you can change the gdal library.
 .. image:: ../install/figure/cmake.png
     :width: 800px
     :align: center
-    :height: 400px
+    :height: 300px
     :alt: Run cmake
 
 .. image:: ../install/figure/cmake_result.png
     :width: 800px
     :align: center
-    :height: 500px
+    :height: 400px
     :alt: Run cmake
 
 This script should generates some results as follow:
@@ -116,7 +116,7 @@ This script should generates some results as follow:
 .. image:: ../install/figure/make_result.png
     :width: 800px
     :align: center
-    :height: 400px
+    :height: 250px
     :alt: Make results
 
 - By now, your build should be successful if you receive no errors. And you will see the binary file in the CMake folder and another one within the repository as well.
