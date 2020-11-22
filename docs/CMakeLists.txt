@@ -6,12 +6,15 @@ message("Doxygen")
 get_target_property(HexWatershed_PUBLIC_HEADER_DIR hexwatershed INTERFACE_INCLUDE_DIRECTORIES)
 message("HexWatershed_PUBLIC_HEADER_DIR = ${HexWatershed_PUBLIC_HEADER_DIR}")
 file(GLOB_RECURSE HexWatershed_PUBLIC_HEADERS ${HexWatershed_PUBLIC_HEADER_DIR}/*.h)
-
+message("PROJECT_SOURCE_DIR = ${PROJECT_SOURCE_DIR}")
 set(DOXYGEN_INPUT_DIR ${PROJECT_SOURCE_DIR}/src)
-set(DOXYGEN_OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/doxygen)
+set(DOXYGEN_OUTPUT_DIR ${PROJECT_SOURCE_DIR}/docs/doxygen)
 set(DOXYGEN_INDEX_FILE ${DOXYGEN_OUTPUT_DIR}/xml/index.xml)
 set(DOXYFILE_IN ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in)
 set(DOXYFILE_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+message("CMAKE_CURRENT_SOURCE_DIR = ${CMAKE_CURRENT_SOURCE_DIR}")
+
+message("DOXYGEN_OUTPUT_DIR = ${DOXYGEN_OUTPUT_DIR}")
 
 #Replace variables inside @@ with the current values
 configure_file(${DOXYFILE_IN} ${DOXYFILE_OUT} @ONLY)
@@ -19,8 +22,6 @@ configure_file(${DOXYFILE_IN} ${DOXYFILE_OUT} @ONLY)
 # Doxygen won't create this for us
 file(MAKE_DIRECTORY ${DOXYGEN_OUTPUT_DIR})
 
-#This will be the main output of our command
-set(DOXYGEN_INDEX_FILE ${CMAKE_CURRENT_SOURCE_DIR}/html/index.html)
 
 # Only regenerate Doxygen when the Doxyfile or public headers change
 add_custom_command(OUTPUT ${DOXYGEN_INDEX_FILE}
@@ -59,6 +60,7 @@ add_custom_command(OUTPUT ${SPHINX_INDEX_FILE}
 add_custom_target(Sphinx ALL DEPENDS ${SPHINX_INDEX_FILE})
 
 # Add an install target to install the docs
-include(GNUInstallDirs)
-install(DIRECTORY ${SPHINX_BUILD}
-DESTINATION ${CMAKE_INSTALL_DOCDIR})
+message("SPHINX_BUILD = ${SPHINX_BUILD}")
+message("CMAKE_INSTALL_DOCDIR = ${CMAKE_INSTALL_DOCDIR}")
+
+#install(DIRECTORY ${SPHINX_BUILD} DESTINATION ${CMAKE_INSTALL_DOCDIR})

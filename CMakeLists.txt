@@ -4,6 +4,9 @@ project(hexwatershed CXX)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
+#set(CMAKE_INSTALL_PREFIX ./bin)
+#set(CMAKE_INSTALL_LOCAL_ONLY TRUE)
+
 
 # Add the cmake folder so the FindSphinx module is found
 message("PROJECT_SOURCE_DIR = ${PROJECT_SOURCE_DIR}")
