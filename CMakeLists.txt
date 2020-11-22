@@ -4,7 +4,11 @@ project(hexwatershed CXX)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
-Include_directories(../hexwatershed/src)
+
+# Add the cmake folder so the FindSphinx module is found
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+Include_directories(./hexwatershed/src)
+Include_directories (./docs)
 
 file(GLOB hexwatershed_srcs ../hexwatershed/src/conversion.cpp
         ../hexwatershed/src/conversion.h

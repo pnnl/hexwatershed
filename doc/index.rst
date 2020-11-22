@@ -16,6 +16,13 @@ Contents:
 
 
 
+Docs
+====
+
+.. doxygenstruct:: cat
+   :members:
+
+
 Indices and tables
 ==================
 
