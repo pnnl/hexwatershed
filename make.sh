@@ -1,5 +1,8 @@
 #!/bin/bash
-module load cmake/3.12.3
-module load gcc/5.2.0
+module load anaconda3/2019.03
+source /share/apps/anaconda3/2019.03/etc/profile.d/conda.sh
+conda activate sphinx
+module load cmake
+module load gcc/8.1.0
 module load gdal/2.3.1
 make install
