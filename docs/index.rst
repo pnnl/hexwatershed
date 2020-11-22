@@ -19,7 +19,7 @@ Contents:
 Docs
 ====
 
-.. doxygenclass:: domain
+.. doxygenclass:: hexwatershed::domain
    :members:
 
 
