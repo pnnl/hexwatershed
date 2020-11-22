@@ -35,7 +35,7 @@ file(GLOB hexwatershed_srcs ./src/conversion.cpp
         ./src/watershed.h)
 
 add_executable(hexwatershed ${hexwatershed_srcs})
-
+add_subdirectory ("docs")
 set(default_build_type Debug)
 if(EXISTS "${CMAKE_SOURCE_DIR}/.git")
     set(default_build_type Release)
@@ -73,4 +73,4 @@ message("GDAL_LIBRARY = ${GDAL_LIBRARY}")
 
 target_link_libraries(hexwatershed ${GDAL_LIBRARY} -std=c++11)
 
-add_subdirectory ("docs")
+

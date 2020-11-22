@@ -62,9 +62,9 @@ mkdir CMake
  
 - Go into the CMake folder and copy the CMakeLists.txt file from the repository into the CMake folder::
  
-    cp ../hexwatershed/install/CMakeLists.txt  ./
-    cp ../hexwatershed/install/cmake.sh  ./
-    cp ../hexwatershed/install/make.sh  ./
+    cp ./installation/figure/CMakeLists.txt  ./
+    cp ./installation/figure/cmake.sh  ./
+    cp ./installation/figure/make.sh  ./
  
 You should also change the permission of the bash files::
  
@@ -75,7 +75,7 @@ You should also change the permission of the bash files::
 
 The highlight rectangle is where you can change the gdal library.
 
-.. image:: ../install/figure/cmakelists.png
+.. image:: ./installation/figure/cmakelists.png
     :width: 800px
     :align: center
     :height: 1000px
@@ -85,13 +85,13 @@ The highlight rectangle is where you can change the gdal library.
  
     ./cmake.sh
  
-.. image:: ../install/figure/cmake.png
+.. image:: ./installation/figure/cmake.png
     :width: 800px
     :align: center
     :height: 300px
     :alt: Run cmake
 
-.. image:: ../install/figure/cmake_result.png
+.. image:: ./installation/figure/cmake_result.png
     :width: 800px
     :align: center
     :height: 400px
@@ -103,7 +103,7 @@ This script should generates some results as follow:
  
     ./make.sh
 
-.. image:: ../install/figure/make.png
+.. image:: ./installation/figure/make.png
     :width: 800px
     :align: center
     :height: 300px
@@ -113,7 +113,7 @@ This script should generates some results as follow:
 
 This script should generates some results as follow:
 
-.. image:: ../install/figure/make_result.png
+.. image:: ./installation/figure/make_result.png
     :width: 800px
     :align: center
     :height: 250px
@@ -121,7 +121,7 @@ This script should generates some results as follow:
 
 - By now, your build should be successful if you receive no errors. And you will see the binary file in the CMake folder and another one within the repository as well.
 
-.. image:: ../install/figure/final.png
+.. image:: ./installation/figure/final.png
     :width: 800px
     :align: center
     :height: 400px
