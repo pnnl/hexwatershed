@@ -19,7 +19,7 @@ Contents:
 Docs
 ====
 
-.. doxygenstruct:: cat
+.. doxygenclass:: domian
    :members:
 
 
