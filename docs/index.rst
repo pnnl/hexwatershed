@@ -22,11 +22,6 @@ Contents:
 
 
 
-   
-
-
-
-
 Indices and tables
 ==================
 
