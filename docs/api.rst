@@ -11,7 +11,7 @@ C++ class
 
 Data
 ^^^^^^
-.. doxygenclass:: dats
+.. doxygenclass:: data
    :members:
 
 Depression
