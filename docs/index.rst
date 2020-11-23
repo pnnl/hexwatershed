@@ -13,9 +13,10 @@ Contents:
    
    readme
    authors
-   installation
-   usage
-   api
+   installation/installation
+   application/application
+   algorithm/algorithm
+   api/api
    history
    contributing
 
