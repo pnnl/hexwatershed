@@ -9,18 +9,12 @@ Welcome to HexWatershed's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :glob:
 
    *
 
 
-
-Docs
-====
-
-.. doxygenclass:: hexwatershed::domain
-   :members:
 
 
 Indices and tables
