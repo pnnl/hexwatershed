@@ -11,12 +11,12 @@ C++ class
 
 Data
 ^^^^^^
-.. doxygenclass:: domain
+.. doxygenclass:: dats
    :members:
 
 Depression
 ^^^^^^
-.. doxygenclass:: hexwatershed::Depression
+.. doxygenclass:: hexwatershed::depression
    :members:
 
 Domain

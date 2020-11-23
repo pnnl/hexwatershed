@@ -10,9 +10,18 @@ Contents:
 
 .. toctree::
    :maxdepth: 3
-   :glob:
+   
+   readme
+   authors
+   installation
+   usage
+   api
+   history
+   contributing
 
-   *
+
+
+   
 
 
 
