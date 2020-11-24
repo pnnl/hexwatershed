@@ -10,11 +10,11 @@ HexWatershed was developed and maintainced by
 
 
 
-If you are interested in contributing, join the Slack community: https://hexwatershed.slack.com/_.
+If you are interested in contributing, join the Slack community: Slack_.
 
 .. _Slack: https://hexwatershed.slack.com/
 
-Please fill out the form_.
+Please fill out the Form_.
 
 .. _Form: https://forms.gle/kuXDS4LkJUaAQvH7A.
 
