@@ -2,13 +2,15 @@
 Installation
 ============
 
+********
 Overview
---------
+********
 
 This document provides the instruction to build the HexWatershed model.
 
+************
 Requirements
-------------
+************
 
 It is possible to build the HexWatershed on Linux/Mac/Windows as long as your system has the following libraries:
 
@@ -16,6 +18,7 @@ It is possible to build the HexWatershed on Linux/Mac/Windows as long as your sy
 * GCC 5.2.0 and above
 * GDAL 2.3.1
 
+-----
 CMake
 -----
 
@@ -25,6 +28,7 @@ cmake can be installed through a package manager. If you are on a Linux HPC, you
 
 If you are on a Mac computer, cmake can be installed through Homebrew (https://brew.sh/).
 
+---
 GCC
 ---
 
@@ -32,6 +36,7 @@ GCC is the compiler used to compile the source code.
 
 Similar to cmake, you can install GCC on linux or Mac.
 
+------------------------------------------
 Geospatial Data Abstraction Library (GDAL)
 ------------------------------------------
 
@@ -48,8 +53,9 @@ There are several outdated CMakeLists.txt files in this directory for different 
 
 Figures are provided for illustration when needed.
 
-Instruction step by step
-------------------------
+-----------
+Instruction 
+-----------
 
 - In the terminal, create a folder for this project
 - Clone the repository into the folder with::
