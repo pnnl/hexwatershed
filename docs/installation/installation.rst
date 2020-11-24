@@ -53,9 +53,9 @@ There are several outdated CMakeLists.txt files in this directory for different 
 
 Figures are provided for illustration when needed.
 
------------
+***********
 Instruction 
------------
+***********
 
 - In the terminal, create a folder for this project
 - Clone the repository into the folder with::
