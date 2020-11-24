@@ -1,9 +1,15 @@
+.. _apis:
+
 =============
 API Reference
 =============
 
 
-./cplus/cplus
+.. toctree::
+   :maxdepth: 2
+   :numbered:
 
-./python/python
+   cplus/cplus.rst
+
+   python/python.rst
 
