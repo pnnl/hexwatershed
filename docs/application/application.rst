@@ -18,11 +18,7 @@ An example of such a text file is provided here: https://github.com/pnnl/hexwate
 
 The content of this text file is as follow:
 
-.. image:: ../example/figure/cbfmeta.png
-    :width: 800px
-    :align: center
-    :height: 300px
-    :alt: Model input
+
 
 
 At each line, the configuration parameter is defined using a key-value pair, which is separated by a comma ",".
@@ -68,11 +64,7 @@ After all the input files are prepared, you can update the text file as the mode
 
 Then you can prepare another bash script similar to:
 
-.. image:: ../example/figure/run.png
-    :width: 800px
-    :align: center
-    :height: 200px
-    :alt: Run bash
+
 
 
 Then you may run the simulation by typing in the terminal::
@@ -81,11 +73,7 @@ Then you may run the simulation by typing in the terminal::
     ./run.sh
   
 
-.. image:: ../example/figure/run_log.png
-    :width: 800px
-    :align: center
-    :height: 400px
-    :alt: Run log
+
 
 The terminal will prints some model information directly:
 
@@ -104,11 +92,7 @@ After the simulation is finished, you should see a list of Shapefiles within the
 - subbasin boundary
 - watershed boundary
 
-.. image:: ../example/figure/result_list.png
-    :width: 800px
-    :align: center
-    :height: 200px
-    :alt: List of results
+
 
 
 You can use any GIS tools (ArcGIS, ENVI, and QGIS, etc.) to visualize the results.
