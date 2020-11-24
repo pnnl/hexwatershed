@@ -1,8 +1,24 @@
+=====================
+What is HexWatershed?
+=====================
 
-========
+*********
 Overview
-========
+*********
 
-This is the documentation of HexWatershed model.
-From here you can find all the related resources about HexWatershed.
 
+
+HexWatershed is a hydrologic routing model based on the hexagon alike mesh framework.
+
+
+Overview
+--------
+
+
+***********
+Development
+***********
+
+HexWatershed is developed in an open-source, public repository hosted under Pacific Northwest National Laboratory (PNNL) organization on Github_:
+
+.. _Github: https://github.com/pnnl/hexwatershed

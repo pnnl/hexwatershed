@@ -6,21 +6,25 @@
 Welcome to HexWatershed's documentation!
 ==================================================
 
-Contents:
+Table of contents:
 
 .. toctree::
    :maxdepth: 3
    
    readme
-   authors
    installation/installation
    application/application
    algorithm/algorithm
    api/api
    history
-   contributing
+   contribution
 
 
+Addendum
+
+.. toctree::
+   :maxdepth: 3
+   glossary
 
 Indices and tables
 ==================
