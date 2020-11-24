@@ -3,10 +3,10 @@ C++ API Docs
 ************
 
 Overview
---------
+========
 
 C++ class
----------
+=========
 
 Data
 ^^^^
@@ -39,4 +39,4 @@ Watershed
    :members:
 
 C++ function
-------------
+============

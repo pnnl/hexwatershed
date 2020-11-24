@@ -1,7 +1,7 @@
 
-************
+############
 Contribution
-************
+############
 
 
 HexWatershed was developed and maintainced by
