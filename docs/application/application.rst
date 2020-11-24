@@ -11,8 +11,10 @@ Overview
 An instruction to run a HexWatershed model simulation with the example provided in the repository.
 If you haven't built the model yet, please go to https://github.com/pnnl/hexwatershed/tree/master/install.
 
+
+**************
 Data structure
---------------
+**************
 
 HexWatershed uses a text based file as model input.
 Within this text file, each line represents a model configuration.
@@ -37,8 +39,10 @@ You need to strictly follow the file system tree structure when preparing your o
 
 In HexWatershed 1.0, the dAccumulation_threshold is the flow accumulation threshold (https://pro.arcgis.com/en/pro-app/tool-reference/spatial-analyst/identifying-stream-networks.htm).
 
+
+****************
 Data preparation
-----------------
+****************
 
 In HexWatershed 1.0, only the DEM raster and hexagon mesh Shapefile are needed as input files.
 
@@ -59,8 +63,9 @@ If your study area is in the USA, you can use the USGS Watershed Boundary Datase
 
 (http://michaelminn.com/linux/mmqgis/). The resolution of the hexagon should be defined using its area instead of edge length. 
 
+****************
 Model simulation
-----------------
+****************
 
 After all the input files are prepared, you can update the text file as the model input parameter. 
 
@@ -82,8 +87,10 @@ The terminal will prints some model information directly:
 
 By then, you should have a successful hexWatershed simulation. 
 
+
+******************
 Simulation results
-------------------
+******************
 
 After the simulation is finished, you should see a list of Shapefiles within the output directory.
 - hexagon DEM
