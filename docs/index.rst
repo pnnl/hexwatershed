@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to HexWatershed's documentation!
-==================================================
+HexWatershed's documentation!
+=============================
 
 Table of contents:
 
@@ -17,8 +17,8 @@ Table of contents:
    algorithm/algorithm
    api/api
    history
+   support
    contribution
-
 
 Addendum
 

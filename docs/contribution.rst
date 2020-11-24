@@ -1,19 +1,18 @@
-=======
-Authors
-=======
+
+************
+Contribution
+************
+
+
+HexWatershed was developed and maintainced by
 
 * Chang Liao (Pacific Northwest National Laboratory)
 
 
-============
-Contribution
-============
 
-Please join the Slack channel for details.
+If you are interested in contributing, join the Slack community: https://hexwatershed.slack.com/_.
 
-Join the Slack community: https://hexwatershed.slack.com/_.
-
-.. _CNN: https://hexwatershed.slack.com/
+.. _Slack: https://hexwatershed.slack.com/
 
 Please fill out the form_.
 
