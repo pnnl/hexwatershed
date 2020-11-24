@@ -2,6 +2,10 @@
 Installation
 ############
 
+.. toctree::
+   :maxdepth: 2
+   :numbered:
+
 ********
 Overview
 ********
@@ -37,7 +41,7 @@ GCC is the compiler used to compile the source code.
 Similar to cmake, you can install GCC on linux or Mac.
 
 ==========================================
-Geospatial Data Abstraction Library (GDAL)
+GDAL
 ==========================================
 
 HexWatershed relies on GDAL C++ API (https://gdal.org/) to operate on Shapefile and other spatial datasets.
