@@ -2,9 +2,6 @@
 Installation
 ############
 
-.. toctree::
-   :maxdepth: 2
-   :numbered:
 
 ********
 Overview

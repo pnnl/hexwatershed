@@ -10,6 +10,7 @@ Table of contents:
 
 .. toctree::
    :maxdepth: 3
+   :numbered:
    
    readme
    installation/installation
@@ -24,6 +25,8 @@ Addendum
 
 .. toctree::
    :maxdepth: 3
+   :numbered:
+   
    glossary
 
 Indices and tables
