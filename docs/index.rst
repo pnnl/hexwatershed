@@ -6,7 +6,8 @@
 HexWatershed's documentation!
 =============================
 
-Table of contents:
+Table of contents
+-----------------
 
 .. toctree::
    :maxdepth: 3
@@ -22,15 +23,15 @@ Table of contents:
    contribution
 
 Addendum
+--------
 
 .. toctree::
    :maxdepth: 3
-   :numbered:
-   
+
    glossary
 
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`
