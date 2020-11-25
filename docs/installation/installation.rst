@@ -63,9 +63,9 @@ Instruction
 
     git clone git@github.com:pnnl/hexwatershed.git
  
-- Create a folder outside the hexwatershed repository
+- Create a folder outside the hexwatershed repository::
  
-mkdir CMake
+    mkdir CMake
  
 - Go into the CMake folder and copy the CMakeLists.txt file from the repository into the CMake folder::
  
