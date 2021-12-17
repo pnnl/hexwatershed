@@ -17,7 +17,7 @@ It is possible to build the HexWatershed on Linux/Mac/Windows as long as your sy
 
 * cmake 3.1.0 and above
 * GCC 5.2.0 and above
-* GDAL 2.3.1
+
 
 =====
 CMake
@@ -41,8 +41,6 @@ Similar to cmake, you can install GCC on linux or Mac.
 GDAL
 ==========================================
 
-HexWatershed relies on GDAL C++ API (https://gdal.org/) to operate on Shapefile and other spatial datasets.
-In this version, I only tested GDAL version 2.3.1.
 
 In this instruction, I only use a Linux machine as an example. For other platforms, you need to change several files:
 
