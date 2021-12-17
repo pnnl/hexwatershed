@@ -37,9 +37,6 @@ GCC is the compiler used to compile the source code.
 
 Similar to cmake, you can install GCC on linux or Mac.
 
-==========================================
-GDAL
-==========================================
 
 
 In this instruction, I only use a Linux machine as an example. For other platforms, you need to change several files:
