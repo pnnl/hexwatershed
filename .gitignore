@@ -141,3 +141,6 @@ unused/
 *.off
 *.obj
 *.stl
+
+# Mac thumbnail database
+.DS_Store
