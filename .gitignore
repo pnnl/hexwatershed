@@ -1,7 +1,6 @@
 core.*
 .idea/
 .vscode/
-build/
 bin/
 cmake-build-debug/
 unused/
