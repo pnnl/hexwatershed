@@ -3,6 +3,7 @@ core.*
 .vscode/
 bin/
 cmake-build-debug/
+build
 unused/
 tmp/
 *.h~

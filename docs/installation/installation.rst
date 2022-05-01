@@ -7,18 +7,21 @@ Installation
 Overview
 ********
 
-This document provides the instruction to build the HexWatershed model.
+HexWatershed was originally released in C++ 11.
+
+Since HexWatershed v3.0, it was redesigned using a Hybrid Python and C++ approach. Only the HexWatershed v3.0 will be maintained and supported.
 
 ************
 Requirements
 ************
 
-It is possible to build the HexWatershed on Linux/Mac/Windows as long as your system has the following libraries:
+It is possible to build the HexWatershed on Linux/Mac/Windows if your system can support both the C++ and Python environments:
 
 * cmake 3.1.0 and above
 * GCC 5.2.0 and above
 
-
+C++ Requirements
+########
 =====
 CMake
 =====
@@ -46,6 +49,9 @@ In this instruction, I only use a Linux machine as an example. For other platfor
 - make.sh (Optional)
 
 There are several outdated CMakeLists.txt files in this directory for different platforms such as Mac OS, you can use it as a template. I use two bash scripts to simplify the process of setting environmental variables. For your own platform and application, you may use different approach.
+
+Python Requirements
+###################
 
 Figures are provided for illustration when needed.
 
