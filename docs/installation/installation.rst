@@ -17,43 +17,46 @@ Requirements
 
 It is possible to build the HexWatershed on Linux/Mac/Windows if your system can support both the C++ and Python environments:
 
-* cmake 3.1.0 and above
-* GCC 5.2.0 and above
+
 
 C++ Requirements
-########
+################
+
 =====
 CMake
 =====
 
-cmake is the tool used to generate the makefile.
+cmake (v3.1.0 and above) is used to generate the makefile.
 
-cmake can be installed through a package manager. If you are on a Linux HPC, you administration should have already installed in most cases.
+- Linux: cmake can be installed through a package manager. If you are on a Linux HPC, you administration should have already installed in most cases.
 
-If you are on a Mac computer, cmake can be installed through Homebrew (https://brew.sh/).
+- Mac: cmake can be installed through Homebrew (https://brew.sh/): https://formulae.brew.sh/formula/cmake
+
+- Windows: cmake can be installed following the instruction from hexwatershed (https://cmake.org/download/).
+
 
 ===
 GCC
 ===
 
-GCC is the compiler used to compile the source code.
+GCC (v8.1.0 and above) is used to compile the C++ source code.
 
 Similar to cmake, you can install GCC on linux or Mac.
 
+- Linux: gcc can be installed through a package manager.
 
+- Mac: gcc can be installed through Homebrew (https://formulae.brew.sh/formula/gcc).
 
-In this instruction, I only use a Linux machine as an example. For other platforms, you need to change several files:
+- Windows: gcc can be installed using either Cygwin or MinGW (https://gcc.gnu.org/install/binaries.html).
 
-- CMakeLists.txt
-- cmake.sh (Optional)
-- make.sh (Optional)
+A Linux version CMakeLists file is provided as an example. Two optional bash scripts are provided to assist this process.
 
-There are several outdated CMakeLists.txt files in this directory for different platforms such as Mac OS, you can use it as a template. I use two bash scripts to simplify the process of setting environmental variables. For your own platform and application, you may use different approach.
 
 Python Requirements
 ###################
-
-Figures are provided for illustration when needed.
+=====
+CMake
+=====
 
 ***********
 Instruction 
