@@ -7,9 +7,16 @@ Installation
 Overview
 ********
 
+
+
 HexWatershed was originally released in C++ 11.
 
-Since HexWatershed v3.0, it was redesigned using a Hybrid Python and C++ approach. Only the HexWatershed v3.0 will be maintained and supported.
+Since HexWatershed v3.0, it was redesigned using a Hybrid Python (front-end) and C++ (back-end) approach. 
+Only the HexWatershed v3.0 will be maintained and supported.
+
+The Python front-end is used to generate the mesh, build the topological relationship, and a list of other pre and post-processing algorithms.
+
+The C++ back-end is used to run the core HexWatershed model.
 
 ************
 Requirements
@@ -17,10 +24,9 @@ Requirements
 
 It is possible to build the HexWatershed on Linux/Mac/Windows if your system can support both the C++ and Python environments:
 
-
-
 C++ Requirements
 ################
+
 
 =====
 CMake
@@ -54,9 +60,11 @@ A Linux version CMakeLists file is provided as an example. Two optional bash scr
 
 Python Requirements
 ###################
+
 =====
-CMake
+Conda
 =====
+The Python 
 
 ***********
 Instruction 
