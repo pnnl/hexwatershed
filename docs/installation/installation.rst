@@ -36,9 +36,9 @@ cmake (v3.1.0 and above) is used to generate the makefile.
 
 - Linux: cmake can be installed through a package manager. If you are on a Linux HPC, you administration should have already installed in most cases.
 
-- Mac: cmake can be installed through Homebrew (https://brew.sh/): https://formulae.brew.sh/formula/cmake
+- Mac: cmake can be installed through Homebrew (`<https://brew.sh/>`_): `<https://formulae.brew.sh/formula/cmake/>`_
 
-- Windows: cmake can be installed following the instruction from hexwatershed (https://cmake.org/download/).
+- Windows: cmake can be installed following the instruction from hexwatershed (`<https://cmake.org/download/>`_).
 
 
 ===
@@ -78,30 +78,33 @@ Step by step instruction
 
 Only an exmaple on Mac is provided below:
 
-- Open the terminal, cd to a desired directory and create a folder for this project
+- Open the terminal, cd to a desired directory and create a folder for this project::
     
     mkdir hexwatershed_tutorial
+
     cd hexwatershed_tutorial
 
-- Clone the repository into the current folder and go inside it
+- Clone the repository into the current folder and go inside it::
 
-    git clone git@github.com:changliao1025/hexwatershed.git 
+    git clone git@github.com:changliao1025/hexwatershed.git
+
     cd hexwatershed
  
-- Go into the build folder and run cmake
+- Go into the build folder and run cmake::
 
     cd build
+
     cmake CMakeLists.txt  
  
-- Build and install the HexWatershed C++ program
+- Build and install the HexWatershed C++ program::
 
     make install
 
-- Install the dependency Python package pyflowline
+- Install the dependency Python package pyflowline::
 
     conda install -c conda-forge pyflowline
 
-- Install the Python package using pip
+- Install the Python package using pip::
 
     pip install hexwatershed
 
@@ -109,4 +112,6 @@ Only an exmaple on Mac is provided below:
 By now, your should have installed both the C++ and Python components of the HexWatershed model.
 
 Next, you can test the model with the example following this instruction.
-https://github.com/changliao1025/pyhexwatershed/tree/main/example
+`<https://github.com/changliao1025/pyhexwatershed/>`_
+
+
