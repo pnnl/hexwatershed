@@ -11,6 +11,10 @@ HexWatershed includes major classicial watershed delineation algorithms with mod
 
 These algorithms are implemented within both the Python front-end and the C++ back-end.
 
+**********
+Algorithms
+**********
+
 
 Flowline simplication
 #####################
@@ -67,41 +71,58 @@ In the zonal mean resampling, the model defines the cell elevation in the follow
 
 
 Stream burning
-#######################################
+##############
 
-A topological relationship-based stream burning algorithm is implemented in HexWatershed v3.0.
+A topological relationship-based stream burning algorithm is implemented in HexWatershed v3.0. 
 
 Depression filling
-#######################################
+##################
 
 In general, the depression filling algorithm is similar to that in the HexWatershed v1.0.
 
 The major difference is related to the stream burning algorithm.
 
 
-
 Flow direction
-#######################################
+##############
+
+The flow direction is defined based on elevation differences and distances.
+
+Currently, only the deepest slope is used to define the single flow direction.
+
+Multi-flow directions will be supported in future versions.
 
 
 Flow accumulation
-#######################################
+#################
+
+The actual drainage area is used instead of flow accumulation cell number. This is because each cell may have different cell area.
 
 Stream grid
-############################
+###########
+
+The flow accumulation threshold is used to define the stream grid.
 
 
-Stream confluence
-############################
+River confluence
+#################
+
+If a stream grid has more than one upstream, this stream grid is defined as a river confluence.
 
 
 Stream segment
-############################
+##############
+
+Each individual stream line between headwater-confluence is defined as a stream segment
 
 
 Subbasin
-############################
+########
+
+All the cells that contributes to a stream segment are used to define a subbasin.
 
 
 Watershed
-############################
+#########
+
+All the cells that contributes to a river outlet are used to define a watershed.
