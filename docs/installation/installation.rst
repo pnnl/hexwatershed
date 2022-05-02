@@ -64,18 +64,24 @@ Python requirements
 =====
 Conda
 =====
-
 The **Conda** platform is recommended to install the dependency Python package.
 Conda can be installed throught either `<https://docs.conda.io/en/latest/miniconda.html>`_
 or 
 `<https://anaconda.org/>`_.
 
+
+======
+Python
+======
+**Python** (3.8 and above) is required to run the Python package.
+It can be installed using the conda tool.
+
 ===
 Pip
 ===
-
 The Python **pip** is used to install the HexWatershed Python package.
 Pip is installed along with the Python.
+
 
 Step by step instruction 
 ########################
