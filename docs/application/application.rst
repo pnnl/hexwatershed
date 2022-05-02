@@ -88,3 +88,9 @@ These files are saved using the GeoJSON file format.
 You can use any GIS tools (ArcGIS, ENVI, and QGIS, etc.) to visualize the results.
 
 
+
+********
+Tutorial
+********
+
+A full tutorial is provide at `<https://github.com/changliao1025/hexwatershed_tutorial>`_
