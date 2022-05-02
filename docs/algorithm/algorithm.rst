@@ -16,11 +16,25 @@ Algorithms
 **********
 
 
-Flowline simplication
-#####################
+Distance
+########
+
+Distance is calculated using the great-circle distance, orthodromic distance, or spherical distance is the distance along a great circle.
+
+Area
+####
+
+A closed geometric figure on the surface of a sphere which is formed by the arcs of great circles.
+
+Angle
+#####
+
+A spherical angle is a particular dihedral angle; it is the angle between two intersecting arcs of great circles on a sphere.
+
+Flow simplication
+#################
 
 Flowline simplication is achieved through the PyFlowline Python package (`<https://anaconda.org/conda-forge/pyflowline>`_)
-
 
 
 Mesh generation
