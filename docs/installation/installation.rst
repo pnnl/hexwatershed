@@ -51,9 +51,9 @@ Similar to cmake, you can install GCC on linux or Mac.
 
 - Linux: gcc can be installed through a package manager.
 
-- Mac: gcc can be installed through Homebrew (https://formulae.brew.sh/formula/gcc).
+- Mac: gcc can be installed through Homebrew (`<https://formulae.brew.sh/formula/gcc>`_`).
 
-- Windows: gcc can be installed using either Cygwin or MinGW (https://gcc.gnu.org/install/binaries.html).
+- Windows: gcc can be installed using either Cygwin or MinGW (`<https://gcc.gnu.org/install/binaries.html>`_`).
 
 A Linux version CMakeLists file is provided as an example. Two optional bash scripts are provided to assist this process.
 
@@ -67,11 +67,19 @@ Conda
 
 The Conda platform is recommended to install the dependency Python package.
 
+Conda can be installed throught either `<https://docs.conda.io/en/latest/miniconda.html>`_
+
+or 
+
+`<https://anaconda.org/>`_
+
 ===
 Pip
 ===
 
 The Python pip is used to install the HexWatershed Python package.
+
+Pip is installed along with the Python.
 
 Step by step instruction 
 ########################
@@ -86,7 +94,7 @@ Only an exmaple on Mac is provided below:
 
 - Clone the repository into the current folder and go inside it::
 
-    git clone git@github.com:changliao1025/hexwatershed.git
+    git clone https://github.com/changliao1025/hexwatershed.git
 
     cd hexwatershed
  
@@ -100,6 +108,12 @@ Only an exmaple on Mac is provided below:
 
     make install
 
+- Create the conda environment for the HexWatershed and activate it::
+
+    conda create --name hexwatershed python=3.8
+
+    conda activate hexwatershed
+
 - Install the dependency Python package pyflowline::
 
     conda install -c conda-forge pyflowline
@@ -107,7 +121,6 @@ Only an exmaple on Mac is provided below:
 - Install the Python package using pip::
 
     pip install hexwatershed
-
 
 By now, your should have installed both the C++ and Python components of the HexWatershed model.
 
