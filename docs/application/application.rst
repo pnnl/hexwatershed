@@ -8,22 +8,19 @@ Application
 Overview
 ********
 
-An instruction to run a HexWatershed model simulation with the example provided in the repository.
-If you haven't built the model yet, please go to https://github.com/pnnl/hexwatershed/tree/master/install.
+The recommended way to run a HexWatershed simulation is through the Python package interface.
+
+
+
+
 
 
 **************
 Data structure
 **************
 
-HexWatershed uses a text based file as model input.
-Within this text file, each line represents a model configuration.
-An example of such a text file is provided here: https://github.com/pnnl/hexwatershed/tree/master/example/columbia_basin_flat/input/cbf.meta
 
 The content of this text file is as follow:
-
-
-
 
 At each line, the configuration parameter is defined using a key-value pair, which is separated by a comma ",".
 
@@ -37,7 +34,6 @@ sFilename_elevation_raster = sWorkspace_data + slash + "raster" + slash + sFilen
   
 You need to strictly follow the file system tree structure when preparing your own simulation cases.
 
-In HexWatershed 1.0, the dAccumulation_threshold is the flow accumulation threshold (https://pro.arcgis.com/en/pro-app/tool-reference/spatial-analyst/identifying-stream-networks.htm).
 
 
 ****************

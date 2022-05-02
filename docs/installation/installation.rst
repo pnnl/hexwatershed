@@ -58,67 +58,55 @@ Similar to cmake, you can install GCC on linux or Mac.
 A Linux version CMakeLists file is provided as an example. Two optional bash scripts are provided to assist this process.
 
 
-Python Requirements
+Python requirements
 ###################
 
 =====
 Conda
 =====
-The Python 
 
-***********
-Instruction 
-***********
+The Conda platform is recommended to install the dependency Python package.
 
-- In the terminal, create a folder for this project
-- Clone the repository into the folder with::
+===
+Pip
+===
 
-    git clone git@github.com:pnnl/hexwatershed.git
+The Python pip is used to install the HexWatershed Python package.
+
+Step by step instruction 
+########################
+
+Only an exmaple on Mac is provided below:
+
+- Open the terminal, cd to a desired directory and create a folder for this project
+    
+    mkdir hexwatershed_tutorial
+    cd hexwatershed_tutorial
+
+- Clone the repository into the current folder and go inside it
+
+    git clone git@github.com:changliao1025/hexwatershed.git 
+    cd hexwatershed
  
-- Create a folder outside the hexwatershed repository::
+- Go into the build folder and run cmake
+
+    cd build
+    cmake CMakeLists.txt  
  
-    mkdir CMake
- 
-- Go into the CMake folder and copy the CMakeLists.txt file from the repository into the CMake folder::
- 
-    cp ./installation/figure/CMakeLists.txt  ./
-    cp ./installation/figure/cmake.sh  ./
-    cp ./installation/figure/make.sh  ./
- 
-You should also change the permission of the bash files::
- 
-    chmod 755 cmake.sh
-    chmod 755 make.sh
- 
-- Open the CMakeLists.txt file and edit the path of gdal based on your system with your preferred editor.
+- Build and install the HexWatershed C++ program
 
-The highlight rectangle is where you can change the gdal library.
+    make install
+
+- Install the dependency Python package pyflowline
+
+    conda install -c conda-forge pyflowline
+
+- Install the Python package using pip
+
+    pip install hexwatershed
 
 
+By now, your should have installed both the C++ and Python components of the HexWatershed model.
 
-- Run the cmake bash script to load modules and run the cmake command::
- 
-    ./cmake.sh
- 
-
-
-This script should generates some results as follow:
-
-- Run the make bash file::
- 
-    ./make.sh
-
-
-
-
-This script should generates some results as follow:
-
-
-
-- By now, your build should be successful if you receive no errors. And you will see the binary file in the CMake folder and another one within the repository as well.
-
-
-
-Congratulations, you have successfully built the HexWatershed model!
-
-Now you can test the model with the example following this instruction: https://github.com/pnnl/hexwatershed/tree/master/example
+Next, you can test the model with the example following this instruction.
+https://github.com/changliao1025/pyhexwatershed/tree/main/example
