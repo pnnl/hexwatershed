@@ -9,9 +9,9 @@ Overview
 
 
 
-HexWatershed was originally released in C++ 11.
+**HexWatershed** was originally released in C++ 11.
 
-Since HexWatershed v3.0, it was redesigned using a Hybrid Python (front-end) and C++ (back-end) approach. 
+Since HexWatershed v3.0, it was redesigned using a **hybrid** Python (front-end) and C++ (back-end) approach. 
 Only the HexWatershed v3.0 will be maintained and supported.
 
 The Python front-end is used to generate the mesh, build the topological relationship, and a list of other pre and post-processing algorithms.
@@ -32,7 +32,7 @@ C++ Requirements
 CMake
 =====
 
-cmake (v3.1.0 and above) is used to generate the makefile.
+**cmake** (v3.1.0 and above) is used to generate the makefile.
 
 - Linux: cmake can be installed through a package manager. If you are on a Linux HPC, you administration should have already installed in most cases.
 
@@ -45,15 +45,15 @@ cmake (v3.1.0 and above) is used to generate the makefile.
 GCC
 ===
 
-GCC (v8.1.0 and above) is used to compile the C++ source code.
+**GCC** (v8.1.0 and above) is used to compile the C++ source code.
 
 Similar to cmake, you can install GCC on linux or Mac.
 
 - Linux: gcc can be installed through a package manager.
 
-- Mac: gcc can be installed through Homebrew (`<https://formulae.brew.sh/formula/gcc>`_`).
+- Mac: gcc can be installed through Homebrew (`<https://formulae.brew.sh/formula/gcc>`_).
 
-- Windows: gcc can be installed using either Cygwin or MinGW (`<https://gcc.gnu.org/install/binaries.html>`_`).
+- Windows: gcc can be installed using either Cygwin or MinGW (`<https://gcc.gnu.org/install/binaries.html>`_).
 
 A Linux version CMakeLists file is provided as an example. Two optional bash scripts are provided to assist this process.
 
@@ -65,20 +65,16 @@ Python requirements
 Conda
 =====
 
-The Conda platform is recommended to install the dependency Python package.
-
+The **Conda** platform is recommended to install the dependency Python package.
 Conda can be installed throught either `<https://docs.conda.io/en/latest/miniconda.html>`_
-
 or 
-
-`<https://anaconda.org/>`_
+`<https://anaconda.org/>`_.
 
 ===
 Pip
 ===
 
-The Python pip is used to install the HexWatershed Python package.
-
+The Python **pip** is used to install the HexWatershed Python package.
 Pip is installed along with the Python.
 
 Step by step instruction 
