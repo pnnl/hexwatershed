@@ -2,12 +2,12 @@
 What is HexWatershed?
 #####################
 
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.6512369.svg
-   :target: https://doi.org/10.5281/zenodo.6512369
-
 *********
 Overview
 *********
+
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.6512369.svg
+   :target: https://doi.org/10.5281/zenodo.6512369
 
 HexWatershed is a mesh independent flow direction model for hydrological models.
 
