@@ -104,7 +104,7 @@ Only an exmaple on Mac is provided below:
 
     cd build
 
-    cmake CMakeLists.txt  
+    cmake CMakeLists.txt -DCMAKE_CXX_COMPILER=g++-10
  
 - Build and install the HexWatershed C++ program::
 
@@ -112,9 +112,9 @@ Only an exmaple on Mac is provided below:
 
 - Create the conda environment for the HexWatershed and activate it::
 
-    conda create --name hexwatershed python=3.8
+    conda create --name hexwatershed_tutorial python=3.8
 
-    conda activate hexwatershed
+    conda activate hexwatershed_tutorial
 
 - Install the dependency Python package pyflowline::
 
@@ -123,6 +123,19 @@ Only an exmaple on Mac is provided below:
 - Install the Python package using pip::
 
     pip install hexwatershed
+
+
+Because the **GDAL** library is used by this project and the **proj** library is often not configured correctly automatically. 
+
+On Linux or Mac, you can set it up like this, .bash_profile as an example:
+
+Anaconda::
+
+    export PROJ_LIB=/people/user/.conda/envs/hexwatershed_tutorial/share/proj
+
+Miniconda::
+
+    export PROJ_LIB=/opt/miniconda3/envs/hexwatershed/share/proj
 
 By now, your should have installed both the C++ and Python components of the HexWatershed model.
 
