@@ -135,7 +135,7 @@ Anaconda::
 
 Miniconda::
 
-    export PROJ_LIB=/opt/miniconda3/envs/hexwatershed/share/proj
+    export PROJ_LIB=/opt/miniconda3/envs/hexwatershed_tutorial/share/proj
 
 By now, your should have installed both the C++ and Python components of the HexWatershed model.
 
