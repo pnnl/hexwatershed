@@ -12,7 +12,7 @@ Overview
 HexWatershed is a mesh independent flow direction model for hydrological models.
 
 ******************************
-WHY DO WE DEVELOP HEXWATERSHED
+Why do we develop HexWatershed
 ******************************
 
 Spatial discretization is the cornerstone of all spatially-distributed numerical simulations including watershed hydrology. Traditional square grid spatial discretization has several limitations:
