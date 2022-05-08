@@ -56,10 +56,11 @@ Model configuration
 
 HexWatershed (as well as its submodule **PyFlowline**) uses two **JSON** files (main and basin) as the configuration files.
 
-
-
 Main configuration
 ##################
+
+The main configuration JSON file contains the domain scale parameters.
+Each domain may contain one or more basins.
 
 .. list-table:: Main configuration JSON file
    :widths: 25 25 25 25
@@ -157,9 +158,76 @@ Main configuration
      - int
      - 1 to 5
      - Mesh type 
+   * - dMissing_value_dem
+     - float
+     - 
+     - The missing value in the DEM
+   * - dBreach_threshold
+     - float
+     - 
+     - The threshold parameter for the hybrid breaching filling algorithm
+   * - dAccumulation_threshold
+     - float
+     - 
+     - The accumulation parameter to define stream cell
+   * - dLongitude_left
+     - float
+     - 0 or 1
+     - The domain left boundary
+   * - dLongitude_right
+     - float
+     - ""
+     - The domain right boundary
+   * - dLatitude_bot
+     - float
+     - 0 or 1
+     - The domain bottom boundary
+   * - dLatitude_top
+     - float
+     - ""
+     - The domain top boundary
+   * - dResolution_degree
+     - float
+     - 0 or 1
+     - Mesh resolution in degree
+   * - dResolution_meter
+     - float
+     - 0 or 1
+     - Mesh resolution in meter
+   * - sDate
+     - string
+     - ""
+     - The date of the simulation
+   * - sMesh_type
+     - string
+     - "hexagon"
+     - The mesh type
+   * - sFilename_hexwatershed
+     - string
+     - ""
+     - The filename of the binary =
+   * - sFilename_spatial_reference
+     - string
+     - 
+     - The spatial reference of the river network 
+   * - sFilename_dem
+     - string
+     - ""
+     - The filename of the DEM
+   * - sFilename_mesh_netcdf
+     - float
+     - 
+     - The filename of the MPAS netcdf file
+   * - sFilename_basins
+     - string
+     - 
+     - The full path of the basin configuration file 
 
 Basin configuration
 ###################
+
+The basin configuration file contains one or more block of JSON basin object. Each block contains the configuration to a unique basin. Different basin may have different parameters.
+
 
 .. list-table:: Basin configuration JSON file
    :widths: 25 25 25 25
@@ -177,11 +245,42 @@ Basin configuration
      - float
      - 0 or 1
      - The outlet longitude 
+   * - dAccumulation_threshold
+     - float
+     - ""
+     - The accumulation parameter to define the stream cell
+   * - dThreshold_small_river
+     - float
+     - 
+     - The threshold parameter to remove small river 
    * - iFlag_dam
      - int
      - 0
      - Reserved for dam burning
-
+   * - iFlag_disconnected
+     - int
+     - 0
+     - Reserved for disconnected flowline
+   * - lBasinID
+     - long
+     - ""
+     - The basin ID
+   * - sFilename_dam
+     - string
+     - 
+     - Reserved for dam burning
+   * - sFilename_flowline_filter
+     - string
+     - 
+     - The filename of the stream vector 
+   * - sFilename_flowline_raw
+     - string
+     - 
+     - The filename of the raw stream vector 
+   * - sFilename_flowline_topo
+     - string
+     - 
+     - Reserved for dam burning
 
 ****************
 Model simulation
