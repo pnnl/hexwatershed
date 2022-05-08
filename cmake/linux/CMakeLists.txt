@@ -4,34 +4,40 @@ project(hexwatershed CXX)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
-Include_directories(../hexwatershed/src)
 
-file(GLOB hexwatershed_srcs ../hexwatershed/src/conversion.cpp
-        ../hexwatershed/src/conversion.h
-        ../hexwatershed/src/data.cpp
-        ../hexwatershed/src/data.h
-        ../hexwatershed/src/depression.cpp
-        ../hexwatershed/src/depression.h
-        ../hexwatershed/src/domain.cpp
-        ../hexwatershed/src/domain.h
-        ../hexwatershed/src/global.cpp
-        ../hexwatershed/src/global.h
-        ../hexwatershed/src/hexagon.cpp
-        ../hexwatershed/src/hexagon.h
-        ../hexwatershed/src/main.cpp
-        ../hexwatershed/src/segment.cpp
-        ../hexwatershed/src/segment.h
-        ../hexwatershed/src/system.cpp
-        ../hexwatershed/src/system.h
-        ../hexwatershed/src/vertex.cpp
-        ../hexwatershed/src/vertex.h
-        ../hexwatershed/src/watershed.cpp
-        ../hexwatershed/src/watershed.h)
+# Add the cmake folder so the FindSphinx module is found
+message("PROJECT_SOURCE_DIR = ${PROJECT_SOURCE_DIR}")
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+message("CMAKE_MODULE_PATH = ${CMAKE_MODULE_PATH}")
+Include_directories(./src)
+
+
+file(GLOB hexwatershed_srcs ./src/conversion.cpp
+        ./src/conversion.h
+        ./src/data.cpp
+        ./src/data.h
+        ./src/depression.cpp
+        ./src/depression.h
+        ./src/domain.cpp
+        ./src/domain.h
+        ./src/global.cpp
+        ./src/global.h
+        ./src/hexagon.cpp
+        ./src/hexagon.h
+        ./src/main.cpp
+        ./src/segment.cpp
+        ./src/segment.h
+        ./src/system.cpp
+        ./src/system.h
+        ./src/vertex.cpp
+        ./src/vertex.h
+        ./src/watershed.cpp
+        ./src/watershed.h)
 
 add_executable(hexwatershed ${hexwatershed_srcs})
-
+add_subdirectory ("docs")
 set(default_build_type Debug)
-if(EXISTS "${CMAKE_SOURCE_DIR}/../hexwatershed/.git")
+if(EXISTS "${CMAKE_SOURCE_DIR}/.git")
     set(default_build_type Release)
 endif()
 
@@ -48,7 +54,7 @@ message("build type = ${default_build_type}")
 
 target_compile_options(hexwatershed PUBLIC -std=c++11)
 
-set(INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../hexwatershed/bin)
+set(INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 install(TARGETS hexwatershed RUNTIME DESTINATION ${INSTALL_DIR})
 
 find_package(OpenMP)
@@ -63,6 +69,12 @@ set(GDAL_LIBRARY "/share/apps/gdal/2.3.1/lib/libgdal.so")
 include_directories(${GDAL_INCLUDE_DIR})
 find_package(GDAL)
 
+set(Anaconda_INCLUDE_DIR "/share/apps/anaconda3/2019.03/lib/")
+set(Anaconda_LIBRARY "/share/apps/anaconda3/2019.03/lib/libuuid.so.1")
+include_directories(${Anaconda_INCLUDE_DIR})
+
 message("GDAL_LIBRARY = ${GDAL_LIBRARY}")
 
-target_link_libraries(hexwatershed ${GDAL_LIBRARY} -std=c++11)
+target_link_libraries(hexwatershed ${GDAL_LIBRARY} ${Anaconda_LIBRARY} -std=c++11)
+
+

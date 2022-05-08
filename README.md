@@ -2,9 +2,9 @@
 
 HexWatershed is a hydrologic routing model based on the hexagon mesh and other unstructured mesh framework.
 
-This repository is for HexWatershed 1.0 only.
+This repository is for HexWatershed v1.0 only.
 
-HexWatershed 3.0 is a Python package and will be available soon.
+HexWatershed v3.0 is a Python package (https://github.com/changliao1025/pyhexwatershed).
 
 # Build
 Please refer the installation documentation for details.
