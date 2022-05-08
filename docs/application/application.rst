@@ -62,7 +62,7 @@ Main configuration
 ##################
 
 .. list-table:: Main configuration JSON file
-   :widths: 25 25 50
+   :widths: 25 25 25 25
    :header-rows: 1
 
    * - Keyword
@@ -162,7 +162,7 @@ Basin configuration
 ###################
 
 .. list-table:: Basin configuration JSON file
-   :widths: 25 25 50
+   :widths: 25 25 25 25
    :header-rows: 1
 
    * - Keyword
