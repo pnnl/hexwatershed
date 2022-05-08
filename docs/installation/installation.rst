@@ -11,12 +11,12 @@ Overview
 
 **HexWatershed** was originally released in C++ 11.
 
-Since HexWatershed v3.0, it was redesigned using a **hybrid** Python (front-end) and C++ (back-end) approach. 
+Since HexWatershed v3.0, it was redesigned using a **hybrid** Python (frontend) and C++ (backend) approach. 
 Only the HexWatershed v3.0 will be maintained and supported.
 
-The Python front-end is used to generate the mesh, build the topological relationship, and a list of other pre and post-processing algorithms.
+The Python frontend is used to generate the mesh, build the topological relationship, and a list of other pre and post-processing algorithms.
 
-The C++ back-end is used to run the core HexWatershed model.
+The C++ backend is used to run the core HexWatershed model.
 
 ************
 Requirements

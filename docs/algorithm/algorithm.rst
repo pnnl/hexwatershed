@@ -9,7 +9,7 @@ Overview
 
 HexWatershed includes major classicial watershed delineation algorithms with modifications.
 
-These algorithms are implemented within both the Python front-end and the C++ back-end.
+These algorithms are implemented within both the Python frontend and the C++ backend.
 
 **********
 Algorithms

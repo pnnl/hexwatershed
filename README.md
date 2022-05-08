@@ -4,7 +4,7 @@
 
 HexWatershed: a mesh independent flow direction model for hydrologic models.
 
-This is the C++ back-end of the HexWatershed Python package (https://github.com/changliao1025/pyhexwatershed). 
+This is the C++ backend of the HexWatershed Python package (https://github.com/changliao1025/pyhexwatershed). 
 
 The HexWatershed Version v1.0 has been moved under the PNNL Github account at:
 https://github.com/pnnl/hexwatershed
