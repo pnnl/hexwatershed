@@ -72,7 +72,7 @@ Each domain may contain one or more basins.
      - Description
    * - sFilename_model_configuration
      - string
-     - ""
+     - 
      - The full path to the main configuration file
    * - sModel
      - string
@@ -80,23 +80,23 @@ Each domain may contain one or more basins.
      - The model name
    * - sRegion
      - string
-     - ""
+     - 
      - The study region
    * - sWorkspace_bin
      - string
-     - ""
+     - 
      - The directory of the complied HexWatershed binary
    * - sWorkspace_input
      - string
-     - ""
+     - 
      - The directory of the input
    * - sWorkspace_output
      - string
-     - ""
+     - 
      - The directory of the output
    * - sJob
      - string
-     - ""
+     - 
      - The job name for HPC   
    * - iFlag_create_mesh
      - int
@@ -176,43 +176,43 @@ Each domain may contain one or more basins.
      - The domain left boundary
    * - dLongitude_right
      - float
-     - ""
+     - 
      - The domain right boundary
    * - dLatitude_bot
      - float
-     - 0 or 1
+     - 
      - The domain bottom boundary
    * - dLatitude_top
      - float
-     - ""
+     - 
      - The domain top boundary
    * - dResolution_degree
      - float
-     - 0 or 1
+     - 
      - Mesh resolution in degree
    * - dResolution_meter
      - float
-     - 0 or 1
+     - 
      - Mesh resolution in meter
    * - sDate
      - string
-     - ""
+     - 
      - The date of the simulation
    * - sMesh_type
      - string
-     - "hexagon"
+     - hexagon
      - The mesh type
    * - sFilename_hexwatershed
      - string
-     - ""
-     - The filename of the binary =
+     - 
+     - The filename of the binary 
    * - sFilename_spatial_reference
      - string
      - 
      - The spatial reference of the river network 
    * - sFilename_dem
      - string
-     - ""
+     - 
      - The filename of the DEM
    * - sFilename_mesh_netcdf
      - float
@@ -239,7 +239,7 @@ The basin configuration file contains one or more block of JSON basin object. Ea
      - Description
    * - dLatitude_outlet_degree
      - float
-     - ""
+     - 
      - The outlet latitude
    * - dLongitude_outlet_degree
      - float
@@ -247,7 +247,7 @@ The basin configuration file contains one or more block of JSON basin object. Ea
      - The outlet longitude 
    * - dAccumulation_threshold
      - float
-     - ""
+     - 
      - The accumulation parameter to define the stream cell
    * - dThreshold_small_river
      - float
@@ -263,7 +263,7 @@ The basin configuration file contains one or more block of JSON basin object. Ea
      - Reserved for disconnected flowline
    * - lBasinID
      - long
-     - ""
+     - 
      - The basin ID
    * - sFilename_dam
      - string
