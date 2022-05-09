@@ -112,18 +112,15 @@ Only an exmaple on Mac is provided below:
 
 - Create the conda environment for the HexWatershed and activate it::
 
+    conda config --set channel_priority strict
+
     conda create --name hexwatershed_tutorial python=3.8
 
     conda activate hexwatershed_tutorial
 
-- Install the dependency Python package pyflowline::
+- Install the package through the conda-forge channel ::
 
-    conda install -c conda-forge pyflowline
-
-- Install the Python package using pip::
-
-    pip install hexwatershed
-
+    conda install -c conda-forge hexwatershed
 
 Because the **GDAL** library is used by this project and the **proj** library is often not configured correctly automatically. 
 
