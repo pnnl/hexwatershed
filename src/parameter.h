@@ -26,7 +26,7 @@ namespace hexwatershed
     int iFlag_global;
     int iFlag_multiple_outlet; //multiple outlet in one simulation
     int iFlag_resample_method;
-    int iFlag_flowline;
+    int iFlag_flowline; //has stream burning or not
     int iFlag_stream_burning_topology;//whethet to use topology for stream burning
 
     int iFlag_slope_provided;

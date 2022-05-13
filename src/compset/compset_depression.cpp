@@ -291,6 +291,7 @@ namespace hexwatershed
               }
             else
               {
+                //pure elevation based, single watershed
                 iFlag_finished = compset_check_digital_elevation_model_depression(vCell_active);
                 if (iFlag_finished == 1)
                   {
