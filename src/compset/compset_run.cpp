@@ -140,38 +140,75 @@ namespace hexwatershed
 
     //in watershed hydrology, a threshold is usually used to define the network
     //here we use similar method
-    float  dAccumulation_threshold;
+    float dAccumulation_max = 0.0;
+    float dAccumulation_threshold;
     long lCellID_outlet ;
 
     long lCellIndex_outlet ;
     std::vector<hexagon>::iterator iIterator_self;
 
     int iFlag_global = cParameter.iFlag_global;
+    int iFlag_flowline = cParameter.iFlag_flowline;
     int iFlag_multiple_outlet = cParameter.iFlag_multiple_outlet;
     if (iFlag_global != 1)
       {
-
-        //use outlet id as largest
-        lCellID_outlet =  aBasin.at(0).lCellID_outlet;  
-        lCellIndex_outlet = compset_find_index_by_cellid(lCellID_outlet);
-        dAccumulation_threshold = 0.05 * vCell_active.at(lCellIndex_outlet).dAccumulation;
-
-        //openmp may  not work for std container in earlier C++ 
-//#pragma omp parallel for private(lCellIndex_self)
-        for (lCellIndex_self = 0; lCellIndex_self < vCell_active.size(); lCellIndex_self++)
-          {
-            if ((vCell_active.at(lCellIndex_self)).dAccumulation >= dAccumulation_threshold)
+        if (iFlag_flowline == 1)
+        {
+          //use outlet id as largest
+          lCellID_outlet =  aBasin.at(0).lCellID_outlet;  
+          lCellIndex_outlet = compset_find_index_by_cellid(lCellID_outlet);
+          dAccumulation_threshold = 0.05 * vCell_active.at(lCellIndex_outlet).dAccumulation;
+          //openmp may  not work for std container in earlier C++ 
+          //#pragma omp parallel for private(lCellIndex_self)
+          for (lCellIndex_self = 0; lCellIndex_self < vCell_active.size(); lCellIndex_self++)
+            {
+              if ((vCell_active.at(lCellIndex_self)).dAccumulation >= dAccumulation_threshold)
+                {
+                  (vCell_active.at(lCellIndex_self)).iFlag_stream = 1;  
+                  (vCell_active.at(lCellIndex_self)).dLength_stream_conceptual = (vCell_active.at(lCellIndex_self)).dResolution_effective;
+                }
+              else
+                {
+                  (vCell_active.at(lCellIndex_self)).iFlag_stream = 0;
+                  //we still need its length for MOSART model.    
+                  (vCell_active.at(lCellIndex_self)).dLength_stream_conceptual =  (vCell_active.at(lCellIndex_self)).dResolution_effective;
+                }
+            }
+        }
+        else
+        {
+            //find the maximum accumulation
+            dAccumulation_max = 0.0;
+            for (lCellIndex_self = 0; lCellIndex_self < vCell_active.size(); lCellIndex_self++)
+            {
+              if ((vCell_active.at(lCellIndex_self)).dAccumulation >= dAccumulation_max)
               {
-                (vCell_active.at(lCellIndex_self)).iFlag_stream = 1;  
-                (vCell_active.at(lCellIndex_self)).dLength_stream_conceptual = (vCell_active.at(lCellIndex_self)).dResolution_effective;
+                  dAccumulation_max = (vCell_active.at(lCellIndex_self)).dAccumulation;
+                  lCellIndex_outlet= (vCell_active.at(lCellIndex_self)).lCellIndex;
               }
-            else
-              {
-                (vCell_active.at(lCellIndex_self)).iFlag_stream = 0;
-                //we still need its length for MOSART model.    
-                (vCell_active.at(lCellIndex_self)).dLength_stream_conceptual =  (vCell_active.at(lCellIndex_self)).dResolution_effective;
-              }
-          }
+            }
+            dAccumulation_threshold = 0.05 * vCell_active.at(lCellIndex_outlet).dAccumulation;
+
+            for (lCellIndex_self = 0; lCellIndex_self < vCell_active.size(); lCellIndex_self++)
+            {
+              if ((vCell_active.at(lCellIndex_self)).dAccumulation >= dAccumulation_threshold)
+                {
+                  (vCell_active.at(lCellIndex_self)).iFlag_stream = 1;  
+                  (vCell_active.at(lCellIndex_self)).dLength_stream_conceptual = (vCell_active.at(lCellIndex_self)).dResolution_effective;
+                }
+              else
+                {
+                  (vCell_active.at(lCellIndex_self)).iFlag_stream = 0;
+                  //we still need its length for MOSART model.    
+                  (vCell_active.at(lCellIndex_self)).dLength_stream_conceptual =  (vCell_active.at(lCellIndex_self)).dResolution_effective;
+                }
+            
+
+            }
+
+        }
+
+        
       }
     else
       {

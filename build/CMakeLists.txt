@@ -63,7 +63,7 @@ add_executable(hexwatershed ${hexwatershed_srcs})
 
 set(default_build_type Debug)
 if(EXISTS "${CMAKE_SOURCE_DIR}/../.git")
-    set(default_build_type Release)
+    set(default_build_type Debug)
 endif()
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)

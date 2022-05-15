@@ -36,7 +36,7 @@ namespace hexwatershed
         //compset_save_variable(eV_flow_accumulation);
         //compset_save_variable(eV_wetness_index);
         //close log file
-        //compset_save_watershed_characteristics();
+        compset_save_watershed_characteristics();
 
       }
     else

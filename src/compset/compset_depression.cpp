@@ -224,17 +224,15 @@ namespace hexwatershed
 
     if (iFlag_global==0)
       {
-
         if (iFlag_multiple_outlet == 0)
           {
-            //only one outlet is used
-            lCellID_outlet = aBasin.at(0).lCellID_outlet;
             std::cout<<"This is a local simulation with only one outlet."<<std::endl;
-
             vCell_boundary = compset_obtain_boundary(vCell_active);
             //set initial as true for boundary
             if (iFlag_flowline == 1)
               {
+                //only one outlet is used
+                lCellID_outlet = aBasin.at(0).lCellID_outlet;
                 iFlag_found = 0;
                 for (iIterator = vCell_boundary.begin(); iIterator != vCell_boundary.end(); iIterator++)
                   {
@@ -291,6 +289,7 @@ namespace hexwatershed
               }
             else
               {
+                std::cout<<"This is a pure elevation based depression filling."<<std::endl;
                 //pure elevation based, single watershed
                 iFlag_finished = compset_check_digital_elevation_model_depression(vCell_active);
                 if (iFlag_finished == 1)
