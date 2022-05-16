@@ -13,9 +13,14 @@ Data
 .. doxygenclass:: data
    :members:
 
-Geology
-^^^^^^
-.. doxygenclass:: hexwatershed::geology
+Domain
+^^^^
+.. doxygenclass:: hexwatershed::domain
+   :members:
+
+Compset
+^^^^
+.. doxygenclass:: hexwatershed::compset
    :members:
 
 Edge
