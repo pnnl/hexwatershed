@@ -17,10 +17,10 @@ Table of contents
    installation/installation
    application/application
    algorithm/algorithm
-   api/api
    history
    support
    contribution
+   api/api
 
 Addendum
 --------

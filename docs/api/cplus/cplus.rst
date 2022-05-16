@@ -13,14 +13,19 @@ Data
 .. doxygenclass:: data
    :members:
 
-Depression
-^^^^^^^^^^
-.. doxygenclass:: hexwatershed::depression
+Geology
+^^^^^^
+.. doxygenclass:: hexwatershed::geology
    :members:
 
-Domain
+Edge
 ^^^^^^
-.. doxygenclass:: hexwatershed::domain
+.. doxygenclass:: hexwatershed::edge
+   :members:
+
+Flowline
+^^^^^^
+.. doxygenclass:: hexwatershed::flowline
    :members:
 
 Hexagon
@@ -31,6 +36,11 @@ Hexagon
 Segment
 ^^^^^^^
 .. doxygenclass:: hexwatershed::segment
+   :members:
+
+Subbasin
+^^^^^^^
+.. doxygenclass:: hexwatershed::subbasin
    :members:
 
 Watershed

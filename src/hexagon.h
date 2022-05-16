@@ -130,7 +130,6 @@ namespace hexwatershed
 
     int calculate_average_edge_length();
     int calculate_effective_resolution();
-
     int update_location();
   };
 
