@@ -99,7 +99,7 @@ namespace hexwatershed
         }
         if (untreated > 0)
         {
-          compset_stream_burning_without_topology(lCellIndex_neighbor);
+          compset_stream_burning_without_topology(lCellID_neighbor);
         }
       }
     }
