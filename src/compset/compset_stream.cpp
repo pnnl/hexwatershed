@@ -268,6 +268,13 @@ namespace hexwatershed
             // we may increase the elevation agin in the depression filling step
             vCell_active.at(lCellIndex_neighbor).iFlag_stream_burning_treated = 1;
           }
+          else
+          {
+            if ((dElevation_mean_neighbor - dElevation_mean_center) > dBreach_threshold)
+            {
+              vCell_active[lCellIndex_neighbor].dElevation_mean = dElevation_mean_center + dBreach_threshold;
+            }
+          }
 
           // if elevation profile is turned on
           if (iFlag_elevation_profile == 1)
