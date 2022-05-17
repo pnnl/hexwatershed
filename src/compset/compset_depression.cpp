@@ -266,7 +266,7 @@ namespace hexwatershed
                     else
                       {
                         //topology based stream burning
-                        vCell_active.at(lCellIndex_outlet).dElevation_mean = dElevation_mean_center;
+                        vCell_active.at(lCellIndex_outlet).dElevation_mean = dElevation_mean_center-10;
                         //burn stream first, set flag as well
                         vCell_active.at(lCellIndex_outlet).iFlag_depression_filling_treated = 1;
                         compset_stream_burning_with_topology( vCell_active.at(lCellIndex_outlet).lCellID );
