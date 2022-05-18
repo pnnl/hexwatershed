@@ -6,7 +6,7 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 
 Include_directories(../src)
 
-file(GLOB hexwatershed_srcs 
+file(GLOB hexwatershed_srcs
         ../src/compset/compset_depression.cpp
         ../src/compset/compset_direction.cpp
         ../src/compset/compset_initialize.cpp
@@ -21,21 +21,21 @@ file(GLOB hexwatershed_srcs
         ../src/json/cell.cpp
         ../src/json/cell.h
         ../src/json/mesh.cpp
-        ../src/json/mesh.h        
+        ../src/json/mesh.h
         ../src/json/basin.cpp
         ../src/json/basin.h
         ../src/json/multibasin.cpp
-        ../src/json/multibasin.h   
+        ../src/json/multibasin.h
         ../src/json/JSONBase.cpp
-        ../src/json/JSONBase.h     
+        ../src/json/JSONBase.h
         ../src/conversion.cpp
         ../src/conversion.h
         ../src/data.cpp
-        ../src/data.h         
+        ../src/data.h
         ../src/edge.cpp
-        ../src/edge.h   
+        ../src/edge.h
         ../src/flowline.cpp
-        ../src/flowline.h   
+        ../src/flowline.h
         ../src/geology.cpp
         ../src/geology.h
         ../src/global.cpp
@@ -45,13 +45,13 @@ file(GLOB hexwatershed_srcs
         ../src/main.cpp
         ../src/parameter.cpp
         ../src/parameter.h
-        ../src/segment.cpp        
+        ../src/segment.cpp
         ../src/segment.h
         ../src/subbasin.cpp
         ../src/subbasin.h
-        ../src/system.cpp        
+        ../src/system.cpp
         ../src/system.h
-        ../src/json/vertex.cpp        
+        ../src/json/vertex.cpp
         ../src/json/vertex.h
         ../src/watershed.cpp
         ../src/watershed.h
@@ -60,6 +60,7 @@ file(GLOB hexwatershed_srcs
         )
 
 add_executable(hexwatershed ${hexwatershed_srcs})
+target_compile_options(hexwatershed PRIVATE -Wall -Wextra -pedantic)
 
 set(default_build_type Debug)
 if(EXISTS "${CMAKE_SOURCE_DIR}/../.git")
